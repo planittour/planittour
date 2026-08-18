@@ -71,7 +71,10 @@ h1{font-size:clamp(21px,5.4vw,25px);font-weight:900;letter-spacing:-.9px;line-he
 <body>
 <div class="wrap">
   <div class="card">
-    <img class="logo" src="images/logo.png" alt="PLANITTOUR" onerror="logoFail(this)">
+    <img class="logo" src="images/logo.png" alt="PLANITTOUR" style="display:none"
+       onload="this.style.display='block';var t=this.nextElementSibling;if(t&&t.className==='logotext')t.style.display='none'"
+       onerror="this.remove()">
+  <div class="logotext">PLANITTOUR</div>
 
     <div class="icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
