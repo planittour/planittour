@@ -2604,6 +2604,39 @@ function addLocalAir(){ /* 고객용 파일에서 제거됨 */ return null; }
 function renderPkg(){ /* 고객용 파일에서 제거됨 */ return null; }
 function renderIslandSel(){ /* 고객용 파일에서 제거됨 */ return null; }
 function renderChips(){ /* 고객용 파일에서 제거됨 */ return null; }
+function renderBuilder(){ /* 고객용 파일에서 제거됨 */ return null; }
+
+
+/* ── 견적 내용 없이 열었을 때 ──
+   제작 화면 대신 안내를 보여줍니다. */
+function __custNotice(){
+  var host = document.getElementById('stage') || document.body;
+  var b = document.getElementById('builder');
+  if(b) b.style.display = 'none';
+  host.classList.add('on');
+  host.innerHTML =
+    '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;' +
+    'padding:28px 18px;background:#F2F4F6">' +
+    '<div style="width:100%;max-width:460px;background:#fff;border-radius:22px;' +
+    'padding:42px 30px 34px;text-align:center;box-shadow:0 4px 24px rgba(25,31,40,.06)">' +
+    '<div style="font-size:16px;font-weight:800;letter-spacing:2.2px;color:#1B64DA;' +
+    'margin-bottom:20px">PLANITTOUR</div>' +
+    '<div style="width:56px;height:56px;margin:0 auto 18px;border-radius:50%;background:#E8F3FF;' +
+    'display:flex;align-items:center;justify-content:center;font-size:24px">🔒</div>' +
+    '<div style="font-size:21px;font-weight:900;letter-spacing:-.8px;line-height:1.45;' +
+    'color:#191F28">견적서를 불러오지 못했습니다</div>' +
+    '<p style="margin-top:11px;font-size:15px;color:#6B7684;line-height:1.75">' +
+    '담당자가 보내드린 링크로 다시 접속해 주세요.<br>' +
+    '링크가 중간에 잘렸을 수 있습니다.</p>' +
+    '<a href="tel:0424717742" style="display:block;margin-top:24px;background:#3182F6;' +
+    'color:#fff;text-decoration:none;font-size:16.5px;font-weight:800;padding:16px;' +
+    'border-radius:14px;letter-spacing:-.4px">042-471-7742 문의하기</a>' +
+    '<p style="margin-top:13px;font-size:13px;color:#8B95A1">' +
+    '플래닛투어 PLANITTOUR</p>' +
+    '</div></div>';
+}
+function showBuilder(){ __custNotice(); }
+function renderBuilder(){ __custNotice(); }
 </script>
 </body>
 </html>
