@@ -1,0 +1,2609 @@
+<!DOCTYPE html>
+<!--
+  ══════════════════════════════════════════════════════════════
+  플래닛투어 PLANITTOUR — 하와이 신혼여행 견적 · 안내 시스템
+
+  Copyright (c) 2026 플래닛투어 (PLANITTOUR). All rights reserved.
+
+  본 소프트웨어와 이에 수록된 상품 정보, 요금 데이터, 안내 문안,
+  디자인 및 구조는 플래닛투어의 저작물로서 저작권법의 보호를 받습니다.
+
+  저작권자의 사전 서면 동의 없이 다음 행위를 금합니다.
+    - 전부 또는 일부의 복제, 배포, 전송, 전시, 개작
+    - 소스코드의 추출, 역분석, 2차적 저작물 작성
+    - 상업적 목적의 이용 및 제3자 제공
+
+  위반 시 저작권법에 따라 민사상 손해배상 청구 및
+  형사 고소 등 법적 조치가 취해질 수 있습니다.
+
+  문의  042-471-7742  |  planittour@naver.com
+  ══════════════════════════════════════════════════════════════
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="theme-color" content="#3182F6">
+<meta name="author" content="플래닛투어 PLANITTOUR">
+<meta name="copyright" content="Copyright (c) 2026 플래닛투어 (PLANITTOUR). All rights reserved.">
+<meta name="robots" content="noarchive, noimageindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PLANITTOUR 플래닛투어 · 하와이 신혼여행 안내</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  /* 유럽 시스템과 동일한 색 */
+  --pp:#3182F6; --ppD:#1B64DA; --ppL:#E8F3FF; --ppLL:#F4F9FF; --ppB:#D5E4FA;
+  --hero:#E8F3FF;
+  --blue:#3182F6; --blueL:#F4F9FF;
+  --red:#F04452; --redL:#FEECEE;
+  --amber:#C79A20; --amberL:#FFF8E6;
+  --gold:#E8B931;
+  --g900:#191F28; --g800:#26303B; --g700:#333D4B; --g600:#4E5968;
+  --g500:#6B7684; --g400:#8B95A1; --g300:#B0B8C1;
+  --g200:#E5E8EB; --g100:#F2F4F6; --g50:#F9FAFB; --w:#fff;
+  --font:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',system-ui,sans-serif;
+  --r:16px;
+}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--g100);color:var(--g900);font-family:var(--font);
+  font-size:16px;line-height:1.7;letter-spacing:-.3px;padding-bottom:72px;overflow-x:hidden}
+img,figure,table{max-width:100%}
+button,select,input,textarea{font-family:var(--font)}
+button{min-height:44px;cursor:pointer}
+a{color:var(--pp)}
+
+.wrap{max-width:840px;margin:0 auto;background:var(--w);min-height:100vh}
+@media(min-width:900px){.wrap{max-width:900px}}
+
+/* ── 상단 히어로 ── */
+.hero{background:var(--hero);padding:26px 22px 24px;border-bottom:1px solid var(--ppB)}
+@media(min-width:900px){.hero{padding:32px 36px 30px}}
+.hero .tag{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;background:var(--w);
+  border:1px solid var(--ppB);border-radius:999px;color:var(--g500);font-size:12.5px;font-weight:800;
+  letter-spacing:-.2px}
+.hero h1{margin-top:11px;font-size:clamp(24px,6.4vw,30px);line-height:1.3;font-weight:900;
+  letter-spacing:-1.2px;color:var(--g900)}
+.hero p{margin-top:6px;font-size:14.5px;color:var(--g600);letter-spacing:-.4px}
+.logo{height:28px;width:auto;max-width:170px;object-fit:contain;display:block;margin-bottom:12px}
+.logotext{display:block;font-size:15px;font-weight:800;letter-spacing:1.2px;color:var(--ppD);margin-bottom:12px}
+
+/* ── 섹션 ── */
+.sec{padding:26px 22px 4px}
+@media(min-width:900px){.sec{padding:34px 36px 4px}}
+.sec-h{margin-bottom:14px}
+.sec-h h2{font-size:clamp(19px,5vw,22px);font-weight:900;letter-spacing:-.8px;
+  display:flex;align-items:center;gap:10px}
+.sec-h h2::before{content:'';width:7px;height:20px;background:var(--pp);border-radius:999px;flex:0 0 auto}
+.sec-h p{margin-top:5px;font-size:14px;color:var(--g500);letter-spacing:-.35px;line-height:1.65}
+.eyebrow{font-size:12px;font-weight:800;color:var(--pp);letter-spacing:1px;margin-bottom:3px}
+
+.card{background:var(--w);border:1px solid var(--ppB);border-radius:var(--r);
+  padding:18px 20px;margin-bottom:10px}
+.card.flat{background:var(--ppLL)}
+.note{background:var(--blueL);border:1px solid #DCE8D6;border-radius:16px;padding:13px 15px;
+  font-size:13.5px;color:var(--g700);letter-spacing:-.3px;line-height:1.75;margin-top:10px}
+.note b{color:var(--blue);font-weight:800}
+.warn{background:var(--redL);border-radius:14px;padding:12px 14px;font-size:13.5px;
+  color:#C0353F;letter-spacing:-.3px;line-height:1.7;margin-top:9px}
+.warn strong{font-weight:800}
+
+/* ── 폼 ── */
+.field{margin-bottom:12px}
+.field:last-child{margin-bottom:0}
+.field>label{display:block;font-size:13.5px;font-weight:700;color:var(--g600);
+  margin-bottom:5px;letter-spacing:-.3px}
+.lbnote{font-size:12px;font-weight:500;color:var(--g400);margin-left:6px}
+input[type=text],input[type=number],input[type=date],input[type=time],input[type=email],select,textarea{
+  width:100%;font-size:15px;padding:12px 13px;border-radius:12px;border:1px solid var(--g200);
+  background:var(--w);color:var(--g900);letter-spacing:-.35px}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--pp);outline-offset:-2px;border-color:transparent}
+select{cursor:pointer}
+.field small{display:block;font-size:12.5px;color:var(--g400);margin-top:5px;letter-spacing:-.2px;line-height:1.6}
+.readbox{background:var(--ppL);border-radius:12px;padding:12px 14px;font-size:15px;
+  font-weight:700;color:var(--g900);letter-spacing:-.4px}
+.namerow{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+@media(max-width:480px){.namerow{grid-template-columns:1fr}}
+
+/* 필수 표시 */
+.rq{position:relative;display:block}
+.rq>input,.rq>select{border:2px solid var(--red);background:#FFF7F8}
+.rq::before{content:'필수';position:absolute;top:-8px;left:10px;z-index:2;background:var(--red);
+  color:#fff;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px;line-height:1.5;
+  pointer-events:none}
+.rq.ok>input,.rq.ok>select{border:1.5px solid #2E9E5B;background:#F4FBF6}
+.rq.ok::before{content:'\2713';background:#2E9E5B;width:18px;height:18px;padding:0;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:11px}
+
+/* ── 선택 카드 ── */
+.pickrow{display:grid;gap:8px;grid-template-columns:1fr 1fr}
+@media(max-width:560px){.pickrow{grid-template-columns:1fr}}
+.pickcard{background:var(--w);border:1.5px solid var(--g200);border-radius:16px;padding:15px 16px;
+  cursor:pointer;transition:.15s;display:block}
+.pickcard.on{border-color:var(--pp);background:var(--ppLL);box-shadow:0 3px 14px rgba(110,75,139,.12)}
+.pickcard input{display:none}
+.pickcard b{display:block;font-size:15.5px;font-weight:800;letter-spacing:-.5px;color:var(--g900)}
+.pickcard em{display:block;font-style:normal;font-size:13px;color:var(--g500);margin-top:3px;
+  letter-spacing:-.3px;line-height:1.6}
+.pickcard.on b{color:var(--ppD)}
+
+/* ── 호텔 ── */
+.hotelbar{display:grid;gap:7px;grid-template-columns:1fr 1fr;margin-bottom:9px}
+@media(min-width:640px){.hotelbar{grid-template-columns:repeat(4,1fr)}}
+.hotelbar select{width:100%;min-width:0}
+.filterchips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:11px}
+.chip{font-size:12.5px;font-weight:600;background:var(--w);border:1px solid var(--g200);
+  color:var(--g500);padding:8px 13px;border-radius:100px;cursor:pointer;min-height:0;letter-spacing:-.3px}
+.chip.on{background:var(--ppL);border-color:var(--pp);color:var(--ppD);font-weight:700}
+.htcount{font-size:12.5px;color:var(--g400);margin-bottom:9px;letter-spacing:-.2px}
+.ht-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.ht-tag{font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px;
+  background:var(--g100);color:var(--g500)}
+.ht-tag.ov{background:#E0F2FE;color:#0369A1}
+.ht-tag.zone{background:var(--g100);color:var(--g600)}
+.htlist{display:grid;gap:9px}
+.htcard{border:1.5px solid var(--g200);border-radius:16px;padding:14px 15px;background:var(--w);
+  cursor:pointer;transition:.15s}
+.htcard.on{border-color:var(--pp);background:var(--ppLL);box-shadow:0 3px 14px rgba(110,75,139,.12)}
+.ht-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.ht-h b{font-size:15.5px;font-weight:800;letter-spacing:-.5px}
+.ht-h .en{font-size:12.5px;color:var(--g400);letter-spacing:-.2px}
+.ht-g{font-size:11.5px;font-weight:800;background:var(--g100);color:var(--g600);
+  padding:2px 8px;border-radius:6px}
+.ht-src{font-size:10.5px;font-weight:800;padding:2px 7px;border-radius:5px}
+.ht-src.src-red{background:#FEE2E2;color:#C0353F}
+.ht-src.src-purple{background:#EDE9FE;color:#6D28D9}
+.ht-meta{font-size:13px;color:var(--g500);letter-spacing:-.3px;margin-top:5px;line-height:1.65}
+.ht-meta b{color:var(--g700);font-weight:700}
+.ht-note{font-size:12.5px;color:var(--amber);letter-spacing:-.2px;margin-top:5px;font-weight:600}
+.ht-imgs{display:grid;grid-auto-flow:column;grid-auto-columns:100%;gap:7px;overflow-x:auto;
+  scroll-snap-type:x mandatory;border-radius:12px;margin-top:10px;scrollbar-width:none}
+.ht-imgs::-webkit-scrollbar{display:none}
+@media(min-width:600px){.ht-imgs{grid-auto-flow:row;grid-template-columns:repeat(3,1fr);overflow:visible}}
+.ht-imgs figure{margin:0;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:var(--g100);
+  scroll-snap-align:start}
+.ht-imgs img{width:100%;height:100%;object-fit:cover;display:block}
+.ph{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:var(--g50);border:1.5px dashed var(--g200);border-radius:12px;
+  aspect-ratio:4/3;text-align:center;padding:12px}
+.ph b{font-size:12.5px;font-weight:700;color:var(--pp)}
+.ph span{font-size:11px;color:var(--g400);margin-top:3px;word-break:break-all}
+
+/* ── 옵션 ── */
+.optlist{display:grid;gap:8px}
+.optcard{border:1.5px solid var(--g200);border-radius:16px;padding:14px 15px;background:var(--w);cursor:pointer}
+.optcard.on{border-color:var(--pp);background:var(--ppLL)}
+.opt-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.opt-h b{font-size:15px;font-weight:800;letter-spacing:-.45px}
+.opt-hot{font-size:10.5px;font-weight:800;background:#FEE2E2;color:#C0353F;padding:2px 7px;border-radius:5px}
+.opt-p{margin-left:auto;font-size:15px;font-weight:800;color:var(--ppD)}
+.opt-d{font-size:13px;color:var(--g500);margin-top:5px;letter-spacing:-.3px;line-height:1.65}
+.opt-pre{font-size:10.5px;font-weight:800;background:#FFF3D6;color:#8A6A1E;padding:2px 7px;border-radius:5px}
+.opt-ex{font-size:12px;color:var(--g400);margin-top:5px;letter-spacing:-.2px;line-height:1.6}
+
+/* ── 일정표 ── */
+.dayrow{border:1px solid var(--ppB);border-radius:var(--r);overflow:hidden;margin-bottom:10px;background:var(--w)}
+.day-h{display:flex;align-items:center;gap:10px;padding:10px 14px;flex-wrap:wrap}
+.day-n{background:var(--pp);color:#fff;font-size:15px;font-weight:900;padding:7px 16px;
+  border-radius:999px;flex:0 0 auto}
+.day-t{flex:1;min-width:120px;font-size:16.5px;font-weight:900;letter-spacing:-.5px}
+.day-k{font-size:13.5px;font-weight:800;color:var(--g500)}
+.day-b{display:grid;grid-template-columns:1fr;gap:10px;padding:12px 14px;border-top:1px solid var(--ppB)}
+@media(min-width:640px){.day-b{grid-template-columns:1fr 130px}}
+.day-main{font-size:15px;line-height:1.85;color:var(--g800)}
+.day-main .li{padding-left:12px;position:relative}
+.day-main .li::before{content:'·';position:absolute;left:2px;color:var(--g400)}
+.tourbox{background:#F8F2FF;border:1px solid var(--ppB);border-radius:16px;padding:12px 14px;margin:9px 0}
+.tourbox b{display:block;font-size:15.5px;font-weight:800;margin-bottom:5px}
+.tourbox .li{font-size:14px;line-height:1.8}
+.hotelmark{background:var(--ppL);border:1px solid var(--ppB);border-radius:14px;padding:9px 12px;
+  margin-top:9px;font-size:14.5px;font-weight:800}
+.hotelmark span{color:var(--pp);margin-right:6px}
+.day-meal{font-size:14px;line-height:1.9;color:var(--g800)}
+@media(min-width:640px){.day-meal{border-left:1px solid var(--ppB);padding-left:12px}}
+@media(max-width:639px){.day-meal{border-top:1px solid var(--ppB);padding-top:9px}}
+.day-meal strong{display:block;font-size:15px;font-weight:800;margin-bottom:3px}
+.day-meal em{font-style:normal;color:var(--g500);font-weight:800;margin-right:5px}
+
+/* ── 요약 카드 ── */
+.sumgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(min-width:700px){.sumgrid{grid-template-columns:repeat(4,1fr)}}
+.sumcard{background:var(--ppL);border:1px solid var(--ppB);border-radius:18px;padding:12px 14px}
+.sumcard dt{font-size:12.5px;color:var(--g500);font-weight:800}
+.sumcard dd{margin-top:4px;font-size:15.5px;font-weight:900;letter-spacing:-.4px;line-height:1.4}
+
+/* ── 금액 ── */
+.pricebox{background:linear-gradient(160deg,#14202E 0%,#1B3A63 55%,var(--ppD) 100%);
+  border-radius:var(--r);padding:28px 22px;color:#fff;text-align:center}
+.pricebox>span{font-size:13.5px;color:#8FB4F5;letter-spacing:-.3px}
+.pricebox b{display:block;font-size:clamp(38px,11vw,56px);font-weight:900;letter-spacing:-2.4px;
+  line-height:1.1;margin:6px 0 2px}
+.pricebox .krw{display:block;font-size:12.5px;font-weight:600;color:#7E94AE;letter-spacing:-.2px}
+.pricebox em{display:block;font-style:normal;font-size:14.5px;font-weight:700;color:#8FB4F5;
+  margin-top:12px;letter-spacing:-.35px}
+.pricebox .krw2{display:block;font-size:11.5px;font-weight:500;color:#6B7F96;
+  letter-spacing:-.2px;margin-top:1px}
+.pricebox .fxnote{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.14);
+  font-size:11.5px;color:#6B7F96;line-height:1.65}
+
+/* ── 내부 정산 ── */
+.inner{background:var(--g900);color:#fff;border-radius:var(--r);padding:18px 20px;margin-top:10px}
+.inner h4{font-size:13px;font-weight:800;color:#7E8B9C;letter-spacing:-.2px;margin-bottom:10px}
+.ir{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.09);
+  font-size:14.5px;letter-spacing:-.35px}
+.ir:last-child{border-bottom:0}
+.ir span{color:#7E8B9C}
+.ir b{font-weight:800}
+.ir.big b{font-size:19px;color:#7FB0FF}
+.ir.sub2{padding:3px 0;border-bottom:0}
+.ir.sub2 span{padding-left:8px;font-size:13px;color:#5E6B7C}
+.ir.sub2 b{font-size:13.5px;font-weight:600;color:#8E9CAD}
+
+/* ── 슬라이더 ── */
+.slider{margin-top:4px}
+.slider input[type=range]{width:100%;accent-color:var(--pp);height:34px}
+.slabel{display:flex;justify-content:space-between;font-size:12.5px;color:var(--g400);margin-top:-4px}
+
+/* ── 리스트 ── */
+.list{list-style:none;display:grid;gap:6px}
+.list li{position:relative;padding-left:20px;font-size:14.5px;line-height:1.75;letter-spacing:-.35px}
+.list li::before{position:absolute;left:0;top:0;font-weight:800}
+.list.inc li::before{content:'✓';color:#2E9E5B}
+.list.exc li::before{content:'−';color:var(--g300)}
+.list li b{display:inline-block;min-width:42px;font-weight:800;margin-right:4px}
+.grid.g2{display:grid;gap:9px}
+@media(min-width:720px){.grid.g2{grid-template-columns:1fr 1fr}}
+.card h3{font-size:16px;font-weight:900;margin-bottom:9px;letter-spacing:-.5px}
+
+/* ── 아코디언 ── */
+details{border:1px solid var(--ppB);border-radius:16px;margin-bottom:8px;overflow:hidden;background:var(--w)}
+summary{padding:14px 16px;font-size:15px;font-weight:700;cursor:pointer;list-style:none;
+  display:flex;align-items:center;gap:10px;letter-spacing:-.4px}
+summary::-webkit-details-marker{display:none}
+.sm-lab{flex:1;min-width:0}
+.sm-lab small{display:block;font-size:12.5px;color:var(--g400);font-weight:500;margin-top:2px}
+.chev{width:18px;height:18px;flex:0 0 auto;color:var(--g300);transition:.2s}
+details[open] .chev{transform:rotate(180deg)}
+.dbody{padding:0 16px 16px;font-size:14.5px;line-height:1.8;color:var(--g700)}
+.dbody p{margin-bottom:9px}
+.dbody strong{color:var(--g900);font-weight:800}
+
+/* ── 툴 ── */
+.tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.tools button{font-size:13px;font-weight:600;background:var(--ppL);border:0;color:var(--ppD);
+  padding:10px 14px;border-radius:10px;letter-spacing:-.3px}
+.tools button.ghost{background:var(--g100);color:var(--g500)}
+.cta{display:block;width:100%;font-size:16px;font-weight:800;background:var(--pp);border:0;color:#fff;
+  padding:16px;border-radius:14px;letter-spacing:-.5px;margin-top:10px}
+.cta.ghost{background:var(--w);color:var(--g700);border:1px solid var(--g200)}
+.bottombar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,255,.96);
+  backdrop-filter:blur(10px);border-top:1px solid var(--g200);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.bottombar .in{max-width:840px;margin:0 auto;display:flex;gap:9px;align-items:center}
+.bottombar .st{flex:1;min-width:0;font-size:13px;color:var(--g500);letter-spacing:-.3px}
+.bottombar .st b{color:var(--g900);font-weight:800}
+.bottombar button{flex:0 0 auto;font-size:15px;font-weight:800;background:var(--pp);border:0;color:#fff;
+  padding:13px 22px;border-radius:12px;letter-spacing:-.4px}
+
+/* ── 링크 결과 ── */
+.linkrow{background:var(--ppLL);border:1px solid var(--ppB);border-radius:16px;padding:14px 15px;margin-bottom:8px}
+.linkrow b{display:block;font-size:14.5px;font-weight:800;margin-bottom:5px}
+.linkrow .u{font-size:11.5px;color:var(--g400);word-break:break-all;line-height:1.6;margin-bottom:10px}
+.linkrow .btns{display:flex;gap:6px}
+.linkrow .btns button{flex:1;font-size:13px;font-weight:700;background:var(--pp);border:0;color:#fff;
+  padding:11px;border-radius:10px}
+.linkrow .btns button.ghost{background:var(--w);color:var(--g700);border:1px solid var(--g200)}
+.msg{width:100%;min-height:120px;font-size:13.5px;padding:13px;border-radius:12px;
+  border:1px solid var(--g200);background:var(--g50);line-height:1.7;resize:vertical}
+
+/* ── 토스트 ── */
+.toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%) translateY(14px);
+  background:var(--g900);color:#fff;font-size:14px;font-weight:600;padding:12px 20px;
+  border-radius:12px;opacity:0;pointer-events:none;transition:.24s;z-index:70;
+  max-width:88vw;text-align:center;letter-spacing:-.3px}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── 모달 ── */
+.modal{position:fixed;inset:0;z-index:60;background:rgba(20,16,14,.5);display:none;
+  align-items:flex-end;justify-content:center;padding:0}
+.modal.on{display:flex}
+@media(min-width:600px){.modal{align-items:center;padding:20px}}
+.sheet{background:var(--w);width:100%;max-width:600px;max-height:88vh;overflow-y:auto;
+  border-radius:22px 22px 0 0;padding:22px 20px calc(20px + env(safe-area-inset-bottom))}
+@media(min-width:600px){.sheet{border-radius:22px}}
+.sheet h3{font-size:19px;font-weight:900;letter-spacing:-.7px;margin-bottom:5px}
+.sheet .sub{font-size:13.5px;color:var(--g500);letter-spacing:-.3px;line-height:1.65;margin-bottom:14px}
+.sheet .foot{display:flex;gap:7px;margin-top:16px}
+.sheet .foot button{flex:1;font-size:15px;font-weight:800;padding:14px;border-radius:12px;border:0}
+.sheet .foot .cancel{background:var(--g100);color:var(--g600)}
+.sheet .foot .ok{background:var(--pp);color:#fff}
+.cfkv{display:flex;justify-content:space-between;gap:12px;padding:7px 0;
+  border-bottom:1px solid var(--g100);font-size:14px;letter-spacing:-.35px}
+.cfkv span{color:var(--g500);flex:0 0 auto}
+.cfkv em{font-style:normal;font-weight:700;text-align:right;overflow-wrap:anywhere}
+.errbox{background:var(--redL);border-radius:12px;padding:13px 15px;margin-bottom:11px}
+.errbox b{display:block;font-size:14px;font-weight:800;color:var(--red);margin-bottom:5px}
+.errbox li{font-size:13.5px;color:#C0353F;list-style:none;padding-left:12px;position:relative}
+.errbox li::before{content:'•';position:absolute;left:0}
+.chkbox{background:var(--g50);border-radius:12px;padding:13px 15px;margin-top:12px}
+.chkbox label{display:flex;gap:9px;align-items:center;padding:6px 0;font-size:14px;cursor:pointer}
+.chkbox input{width:19px;height:19px;accent-color:var(--pp);cursor:pointer;flex:0 0 auto}
+
+/* ── 특전 ── */
+.perkbox{background:linear-gradient(160deg,#14202E 0%,#1B3A63 55%,#1B64DA 100%);
+  border-radius:var(--r);padding:24px 20px;color:#fff}
+.perkhead{text-align:center;margin-bottom:18px}
+.perkbadge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:1.4px;
+  background:rgba(255,255,255,.16);color:#BFD9FF;padding:5px 12px;border-radius:100px;margin-bottom:10px}
+.perkhead b{display:block;font-size:clamp(18px,5vw,22px);font-weight:900;letter-spacing:-.8px;line-height:1.4}
+.perkhead p{font-size:13.5px;color:#8FB4F5;margin-top:6px;letter-spacing:-.3px}
+.perkitem{display:flex;gap:11px;align-items:flex-start;background:rgba(255,255,255,.10);
+  border-radius:13px;padding:14px 15px;margin-bottom:8px}
+.pnum{flex:0 0 auto;width:23px;height:23px;border-radius:50%;background:#fff;color:var(--ppD);
+  font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.ptxt{flex:1;min-width:0}
+.ptxt b{display:block;font-size:15px;font-weight:800;letter-spacing:-.45px}
+.ptxt em{display:block;font-style:normal;font-size:12.5px;color:#8FB4F5;margin-top:4px;line-height:1.65}
+
+/* ── 저작권 ── */
+.copybox{background:var(--g50);border:1px solid var(--g200);border-radius:var(--r);padding:18px 20px}
+.copybox>b{display:block;font-size:14px;font-weight:800;color:var(--g700);margin-bottom:8px}
+.copybox p{font-size:13px;color:var(--g500);line-height:1.75}
+.copybox p+p{margin-top:7px}
+.copyline{margin-top:12px;padding-top:11px;border-top:1px solid var(--g200);
+  font-size:12.5px;font-weight:700;color:var(--g600)}
+footer{padding:26px 22px 34px;font-size:13px;color:var(--g400);line-height:1.8;letter-spacing:-.3px}
+@media(min-width:900px){footer{padding:30px 36px 40px}}
+.foot-copy{margin-top:13px;padding-top:12px;border-top:1px solid var(--g200);
+  font-size:12px;color:var(--g300);line-height:1.7}
+
+.empty{background:var(--g50);border:1.5px dashed var(--g200);border-radius:14px;padding:20px;
+  text-align:center;font-size:13.5px;color:var(--g400);letter-spacing:-.3px}
+.hidden{display:none!important}
+
+
+/* ── 만료 안내 ── */
+.expbox{background:var(--g50);border:2px solid var(--g200);border-radius:var(--r);
+  padding:26px 22px;text-align:center}
+.expbox b{display:block;font-size:19px;font-weight:900;color:var(--g700);letter-spacing:-.7px}
+.expbox p{font-size:14px;color:var(--g500);margin-top:9px;line-height:1.75}
+.expbox p strong{color:var(--g700);font-weight:700}
+.expbox .exp-sub{font-size:13px;color:var(--g400);margin-top:12px;padding-top:12px;
+  border-top:1px solid var(--g200)}
+.exp-btn{display:inline-block;margin-top:14px;font-size:15.5px;font-weight:800;
+  background:var(--pp);color:#fff;padding:13px 26px;border-radius:12px;
+  text-decoration:none;letter-spacing:-.4px}
+
+/* ── 견적서 항공료 ── */
+.airbox{background:var(--g50);border:1px solid var(--g200);border-radius:var(--r);
+  padding:18px 20px;margin-top:10px}
+.ab-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.ab-h b{font-size:15px;font-weight:800;color:var(--g700)}
+.ab-h span{margin-left:auto;font-size:22px;font-weight:900;color:var(--g900);letter-spacing:-.9px}
+.ab-d{font-size:13.5px;color:var(--g500);margin-top:3px;text-align:right}
+.ab-s{font-size:12.5px;color:var(--g400);margin-top:4px;text-align:right}
+.ab-n{margin-top:12px;padding-top:11px;border-top:1px solid var(--g200);
+  font-size:12.5px;color:var(--g500);line-height:1.7}
+.ab-n b{color:var(--red);font-weight:700}
+.totalbox{background:var(--ppL);border-radius:var(--r);padding:18px 20px;margin-top:10px;text-align:center}
+.totalbox>span{font-size:13px;color:var(--ppD);font-weight:700}
+.totalbox b{display:block;font-size:clamp(24px,7vw,32px);font-weight:900;color:var(--ppD);
+  letter-spacing:-1.3px;line-height:1.2;margin:4px 0 3px}
+.totalbox em{display:block;font-style:normal;font-size:12.5px;color:var(--g500)}
+.flrow{display:flex;gap:14px;padding:9px 0;border-bottom:1px solid var(--g100);font-size:14.5px}
+.flrow:last-child{border-bottom:0}
+.flrow span{flex:0 0 62px;font-size:13px;color:var(--g400);font-weight:700}
+.flrow em{flex:1;font-style:normal;font-weight:700;letter-spacing:-.4px;line-height:1.65}
+
+/* ── 사이드 메뉴 (PC 전용) ── */
+.sidenav{display:none}
+@media(min-width:1100px){
+  body.builder{padding-left:210px}
+  .sidenav{display:block;position:fixed;left:0;top:0;bottom:0;width:210px;z-index:45;
+    background:var(--g900);color:#fff;overflow-y:auto;padding:20px 0}
+  .nv-brand{padding:0 18px 18px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:14px}
+  .nv-brand b{display:block;font-size:15px;font-weight:900;letter-spacing:1px;color:#7FB0FF}
+  .nv-brand span{display:block;font-size:12px;color:#7E8B9C;margin-top:3px;letter-spacing:-.2px}
+  .nv-list{display:grid;gap:2px;padding:0 10px}
+  .nv-item{display:flex;align-items:center;gap:10px;width:100%;background:none;border:0;
+    color:#A3B0BF;font-size:14px;font-weight:600;padding:11px 12px;border-radius:10px;
+    text-align:left;letter-spacing:-.3px;min-height:0;cursor:pointer;font-family:var(--font)}
+  .nv-item:hover{background:rgba(255,255,255,.06);color:#fff}
+  .nv-item.on{background:var(--pp);color:#fff}
+  .nv-item i{font-style:normal;width:20px;height:20px;border-radius:50%;
+    background:rgba(255,255,255,.1);font-size:11px;font-weight:800;
+    display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .nv-item.on i{background:rgba(255,255,255,.24)}
+  .nv-foot{padding:16px 18px 0;margin-top:14px;border-top:1px solid rgba(255,255,255,.1);
+    font-size:12px;color:#7E8B9C;line-height:1.7}
+  .bottombar .in{max-width:840px;padding-left:0}
+  body.builder .bottombar{left:210px}
+}
+
+/* ── 항공 ── */
+.airrow{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+@media(max-width:560px){.airrow{grid-template-columns:1fr}}
+.airinfo{margin-top:8px;font-size:13px;color:var(--g500);letter-spacing:-.3px;line-height:1.7}
+.airinfo b{color:var(--g700);font-weight:700;margin-right:5px}
+.airinfo:empty{display:none}
+.addbtn{font-size:13.5px;font-weight:700;background:var(--ppL);border:0;color:var(--ppD);
+  padding:0 18px;border-radius:11px;min-height:0;font-family:var(--font)}
+.localrow{background:var(--g50);border-radius:12px;padding:12px 13px;margin-bottom:7px}
+.lr-h{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.lr-h b{font-size:14.5px;font-weight:700;letter-spacing:-.4px}
+.lr-h span{font-size:12.5px;color:var(--g400)}
+.lr-h button{margin-left:auto;width:24px;height:24px;padding:0;min-height:0;border:0;
+  border-radius:7px;background:var(--redL);color:var(--red);font-weight:700;font-family:var(--font)}
+.localrow small{display:block;font-size:11.5px;color:var(--g400);margin-top:5px}
+
+/* ── 하단 바 ── */
+.bottombar .st{line-height:1.45}
+.bt-1{font-size:12.5px;color:var(--g500);letter-spacing:-.3px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bt-2{font-size:13.5px;color:var(--g600);letter-spacing:-.3px;margin-top:1px}
+.bt-2 b{color:var(--g900);font-weight:800}
+.bt-tot{display:inline-block;background:var(--ppL);color:var(--ppD);font-weight:800;
+  font-size:12.5px;padding:2px 9px;border-radius:100px;margin-left:5px}
+@media(max-width:560px){.bt-1{font-size:11.5px}.bt-2{font-size:12.5px}.bt-tot{display:none}}
+
+
+.logrow{background:var(--w);border:1px solid var(--g200);border-radius:14px;padding:14px 16px;margin-bottom:8px}
+.logrow .l1{display:flex;align-items:baseline;gap:10px}
+.logrow .no{font-size:14px;font-weight:800;letter-spacing:-.3px}
+.logrow .amt{margin-left:auto;font-size:16px;font-weight:900;color:var(--ppD);letter-spacing:-.5px}
+.logrow .l2{font-size:13.5px;color:var(--g600);margin-top:4px;letter-spacing:-.3px}
+.logrow .l3{font-size:12.5px;color:var(--g400);margin-top:3px;letter-spacing:-.2px;line-height:1.6}
+.logrow .l4{display:flex;gap:5px;margin-top:9px;padding-top:9px;border-top:1px solid var(--g100);flex-wrap:wrap}
+.logrow .l4 button{font-family:var(--font);font-size:12px;font-weight:700;background:var(--ppL);
+  border:0;color:var(--ppD);padding:7px 12px;border-radius:8px;cursor:pointer;min-height:0}
+.logrow .l4 button.gh{background:var(--g100);color:var(--g500)}
+.filebtn{display:inline-flex;align-items:center;font-size:13px;font-weight:600;background:var(--g100);
+  color:var(--g500);padding:10px 14px;border-radius:10px;cursor:pointer;letter-spacing:-.3px}
+.filebtn input{display:none}
+
+@media print{
+  body{background:#fff;padding:0}
+  .bottombar,.tools,.inner,.modal,.toast,.cta{display:none!important}
+  .wrap{max-width:100%}
+  .dayrow,.htcard,details{break-inside:avoid}
+  .pricebox{background:#fff;color:#000;border:2px solid var(--pp)}
+  .pricebox>span,.pricebox em,.pricebox .krw,.pricebox .fxnote{color:#444}
+  .perkbox{background:#fff;color:#000;border:2px solid var(--pp)}
+  .perkhead p,.ptxt em{color:#444}
+  .perkitem{background:#F7F5FF;border:1px solid var(--ppB)}
+  .pnum{background:var(--pp);color:#fff}
+}
+</style>
+</head>
+<body>
+<nav class="sidenav" id="sidenav"></nav>
+<div class="wrap" id="app"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   ⚠ 이 파일은 고객용입니다.
+
+   원가 · 마진 · 제작 화면이 모두 제거되어 있습니다.
+   견적서와 안내문을 보여주는 기능만 남아 있습니다.
+
+   견적을 만드시려면 회사 컴퓨터의 제작용 파일을 사용하세요.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════════
+   하와이 상품 데이터
+   ⚠ 표시가 있는 항목은 실제 값으로 교체해 주세요.
+   ══════════════════════════════════════════ */
+
+var COMPANY = {
+  name: "플래닛투어", nameEn: "PLANITTOUR", tel: "042-471-7742",
+  email: "planittour@naver.com", site: "www.planittour.kr"
+};
+
+var YEAR = new Date().getFullYear();
+var COPY = {
+  holder: "플래닛투어",
+  line: "\u00A9 " + YEAR + " 플래닛투어 (PLANITTOUR). All rights reserved.",
+  short: "본 자료의 무단 복제 · 배포 · 재가공을 금합니다.",
+  full: "본 견적서와 일정표는 플래닛투어가 작성한 저작물로 저작권법의 보호를 받습니다. " +
+        "사전 서면 동의 없이 전부 또는 일부를 복제 · 배포 · 전송 · 전시 · 개작하거나, " +
+        "타 여행사 견적 비교나 상업적 목적으로 이용하는 행위를 금합니다. " +
+        "위반 시 저작권법에 따라 민사상 손해배상 청구 및 형사 고소 등 법적 조치를 취할 수 있습니다.",
+  law: "저작권법 제136조에 따라 저작재산권을 침해한 자는 5년 이하의 징역 또는 5천만원 이하의 벌금에 처해질 수 있습니다."
+};
+
+/* ══════════════════════════════════════════
+   환율
+   ⚠ 자동 조회가 불가능합니다 (서버 없는 구조).
+      하나은행 최초고시 매매기준율을 확인해 직접 입력하세요.
+      https://www.kebhana.com  →  환율조회
+   ══════════════════════════════════════════ */
+var FX_DEFAULT = 1450;
+var FX_NOTE = "하나은행 최초고시 매매기준율 기준";
+
+/* ══════════════════════════════════════════
+   지상비 · 마진
+   ══════════════════════════════════════════ */
+var LAND_FEE = 0;        /* 1인 지상비 $200 (항상 포함) */
+var MARGIN_MIN = 0;      /* 1인 마진 최소 */
+var MARGIN_MAX = 0;      /* 1인 마진 최대 */
+var MARGIN_DEFAULT = 0;
+var MARGIN_STEP = 1;
+
+var LAND_FEE_INC = [
+  "공항 ↔ 호텔 미팅 · 샌딩 (오아후)",
+  "도착 첫날 오아후 동부해안 및 호놀룰루 다운타운 투어",
+  "VIP 북부 섬 일주 투어 (최대 3쌍)",
+  "허니문 스냅 촬영",
+  "여행자 보험 (최대 3억원 보장)"
+];
+
+
+/* ══════════════════════════════════════════
+   항공 스케줄
+
+   ⚠ 편명과 노선은 확인했으나 시각은 출처마다 달라 참고값입니다.
+      실제 예약 전에 항공사에서 확인해 주세요.
+
+   국제선 인천 ↔ 호놀룰루 — 밤 출발이라 현지 도착은 같은 날 오전입니다
+     (날짜변경선 통과로 출발일과 도착일이 같습니다)
+   주내선 호놀룰루 ↔ 이웃섬 — 하와이안항공이 수시 운항합니다
+   ══════════════════════════════════════════ */
+var FLIGHT_VERIFIED = false;
+
+var FLIGHTS_INTL = [
+  {no:"OZ232", air:"아시아나항공", from:"인천", to:"호놀룰루", dep:"20:20", arr:"09:50", nd:0, days:"1357 · 주5회"},
+  {no:"KE053", air:"대한항공",   from:"인천", to:"호놀룰루", dep:"21:20", arr:"10:30", nd:0, days:"매일"},
+  {no:"HA460", air:"하와이안항공", from:"인천", to:"호놀룰루", dep:"22:00", arr:"11:30", nd:0, days:"주5회"},
+  {no:"KE001", air:"대한항공",   from:"인천", to:"호놀룰루", dep:"", arr:"", nd:0, days:"나리타 경유"},
+
+  {no:"OZ231", air:"아시아나항공", from:"호놀룰루", to:"인천", dep:"11:50", arr:"17:20", nd:1, days:"주5회"},
+  {no:"KE054", air:"대한항공",   from:"호놀룰루", to:"인천", dep:"12:30", arr:"18:00", nd:1, days:"매일"},
+  {no:"HA459", air:"하와이안항공", from:"호놀룰루", to:"인천", dep:"13:30", arr:"19:00", nd:1, days:"주5회"}
+];
+
+/* 주내선 — 하와이안항공이 하루 여러 편 운항합니다.
+   실제 편명과 시각은 예약 시 확정되므로 대표편만 넣었습니다. */
+var FLIGHTS_LOCAL = [
+  {air:"하와이안항공", from:"호놀룰루", to:"코나 (빅아일랜드)",   t:"약 45분", n:"HA1xx 계열 · 하루 10편 이상"},
+  {air:"하와이안항공", from:"호놀룰루", to:"힐로 (빅아일랜드)",   t:"약 50분", n:"HA2xx 계열 · 하루 6편 이상"},
+  {air:"하와이안항공", from:"호놀룰루", to:"카훌루이 (마우이)",   t:"약 35분", n:"HA2xx 계열 · 하루 15편 이상"},
+  {air:"하와이안항공", from:"호놀룰루", to:"리후에 (카우아이)",   t:"약 35분", n:"HA1xx 계열 · 하루 10편 이상"},
+  {air:"하와이안항공", from:"호놀룰루", to:"라나이시티 (라나이)", t:"약 30분", n:"HA6xx 계열 · 하루 2~3편"},
+  {air:"사우스웨스트", from:"호놀룰루", to:"코나 (빅아일랜드)",   t:"약 45분", n:"WN 계열"},
+  {air:"사우스웨스트", from:"호놀룰루", to:"카훌루이 (마우이)",   t:"약 35분", n:"WN 계열"},
+  {air:"모쿨렐레",     from:"호놀룰루", to:"이웃섬 소도시",       t:"", n:"소형기 · 노선별 상이"}
+];
+
+/* 섬 → 주내선 도착지 */
+var ISLAND_AIRPORT = {
+  "빅아일랜드": ["코나 (빅아일랜드)", "힐로 (빅아일랜드)"],
+  "마우이":     ["카훌루이 (마우이)"],
+  "카우아이":   ["리후에 (카우아이)"],
+  "라나이":     ["라나이시티 (라나이)"]
+};
+
+/* ══════════════════════════════════════════
+   섬 목록
+   ══════════════════════════════════════════ */
+var ISLANDS = ["오아후", "마우이", "빅아일랜드", "카우아이", "라나이"];
+
+/* ══════════════════════════════════════════
+   호텔
+   g   등급
+   src 취급 예약처 — 'both' 양쪽 / 'red' 1번 리스트만 / 'purple' 2번 리스트만
+   code 영문 약어 (1번 리스트 기준)
+   loc  위치 · area 지역
+   room 대표 객실 타입과 크기
+   feat 특징
+   note 주의사항
+   ⚠ room · feat 는 검색으로 채운 참고값입니다. 실제 정보로 교체해 주세요.
+   ══════════════════════════════════════════ */
+var HOTELS = {
+  "오아후": [
+    /* ── 3성급 ── */
+    {n:"Holiday Inn Express Waikiki", kr:"홀리데이 인 익스프레스", g:"3성", code:"HIE", src:"both", ov:0, zone:"center",
+     loc:"와이키키 중심 · 쿠히오 애비뉴", room:"스탠다드 약 25㎡",
+     feat:"조식 포함 · 가성비 · 쇼핑가 인접", note:""},
+    {n:"Pagoda Hotel", kr:"파고다 호텔", g:"3성", code:"PGD", src:"red", ov:0, zone:"out",
+     loc:"와이키키 외곽 · 알라모아나 인근", room:"스탠다드 약 24㎡",
+     feat:"잉어 연못 레스토랑 · 조용한 분위기", note:""},
+    {n:"White Sands Hotel", kr:"화이트 샌즈 호텔", g:"3성", code:"WSH", src:"red", ov:0, zone:"center",
+     loc:"와이키키 · 쿠히오 애비뉴", room:"스탠다드 약 22㎡",
+     feat:"부티크 · 야외 수영장", note:""},
+    {n:"Waikiki Resort Hotel", kr:"와이키키 리조트 호텔", g:"3성", code:"WR", src:"both", ov:1, zone:"center",
+     loc:"와이키키 · 해변 도보 3분", room:"스탠다드 약 26㎡",
+     feat:"한국계 운영 · 한식당 인접", note:""},
+    {n:"Outrigger Waikiki Paradise", kr:"아웃리거 와이키키 파라다이스", g:"3성", code:"ORP", src:"red", ov:0, zone:"center",
+     loc:"와이키키", room:"스탠다드 약 24㎡", feat:"", note:""},
+    {n:"Ambassador Hotel of Waikiki", kr:"앰버서더 호텔 오브 와이키키", g:"3성", code:"AHW", src:"red", ov:0, zone:"center",
+     loc:"와이키키 · 쿠히오 애비뉴", room:"스탠다드 약 23㎡", feat:"주방 시설 객실 보유", note:""},
+    {n:"Aston Waikiki Banyan", kr:"애스톤 반얀", g:"3성", code:"ABY", src:"red", ov:1, zone:"out",
+     loc:"와이키키 · 카피올라니 공원 인근", room:"1베드룸 스위트 약 46㎡",
+     feat:"전 객실 주방 · 발코니 · 가족형", note:""},
+    {n:"Aston Waikiki Sunset", kr:"애스톤 선셋", g:"3성", code:"AWS", src:"red", ov:1, zone:"out",
+     loc:"와이키키 동쪽", room:"1베드룸 약 55㎡", feat:"콘도형 · 주방 · 세탁기", note:""},
+    {n:"Waikiki Circle Hotel by Castle", kr:"와이키키 써클 호텔 바이 캐슬", g:"3성", code:"WCH", src:"red", ov:1, zone:"beach",
+     loc:"와이키키 해변 맞은편", room:"오션뷰 약 20㎡", feat:"원형 건물 · 전 객실 발코니", note:""},
+
+    /* ── 3.5성급 ── */
+    {n:"Park Shore Waikiki", kr:"파크쇼어 와이키키", g:"3.5성", code:"APS", src:"both", ov:1, zone:"beach",
+     loc:"와이키키 동쪽 · 다이아몬드헤드 방향", room:"스탠다드 약 26㎡",
+     feat:"카피올라니 공원 · 동물원 인접", note:""},
+    {n:"Illikai Hotel & Luxury Suites", kr:"일리카이 호텔 앤 럭셔리 스위트", g:"3.5성", code:"IHL", src:"red", ov:1, zone:"out",
+     loc:"와이키키 서쪽 · 알라모아나 인근", room:"스튜디오 약 46㎡",
+     feat:"주방 · 요트 하버 전망", note:""},
+    {n:"The Twin Fin", kr:"더 트윈 핀", g:"3.5성", code:"TF", src:"both", ov:1, zone:"beach",
+     loc:"와이키키 · 해변 바로 앞", room:"스탠다드 약 28㎡",
+     feat:"구 애스톤 와이키키 비치 · 오션뷰", note:""},
+    {n:"Courtyard by Marriott Waikiki Beach", kr:"코트야드 바이 메리어트 와이키키 비치", g:"3.5성", code:"CMH", src:"both", ov:1, zone:"center",
+     loc:"와이키키 중심", room:"스탠다드 약 28㎡", feat:"메리어트 계열 · 야외 수영장", note:""},
+    {n:"DoubleTree by Hilton Alana Waikiki", kr:"더블트리 힐튼 알라나", g:"3.5성", code:"DHA", src:"both", ov:0, zone:"out",
+     loc:"와이키키 입구 · 알라모아나 방향", room:"스탠다드 약 27㎡",
+     feat:"힐튼 계열 · 웰컴 쿠키", note:""},
+    {n:"Hyatt Place Waikiki Beach", kr:"하얏트 플레이스", g:"3.5성", code:"HYTP", src:"both", ov:0, zone:"center",
+     loc:"와이키키 · 쿠히오 애비뉴", room:"스탠다드 약 33㎡",
+     feat:"조식 포함 · 넓은 객실", note:""},
+    {n:"Outrigger Waikiki Beachcomber", kr:"아웃리거 와이키키 비치콤보", g:"3.5성", code:"ORB", src:"both", ov:0, zone:"center",
+     loc:"와이키키 중심 · 해변 도보 1분", room:"스탠다드 약 30㎡",
+     feat:"쇼핑가 정면 · 마우이 브루잉 입점", note:""},
+    {n:"Hilton Garden Inn Waikiki Beach", kr:"힐튼 가든 인 와이키키 비치", g:"3.5성", code:"HGI", src:"both", ov:0, zone:"center",
+     loc:"와이키키 · 쿠히오 애비뉴", room:"스탠다드 약 30㎡", feat:"힐튼 계열 · 수영장", note:""},
+    {n:"Hyatt Centric Waikiki Beach", kr:"하얏트 센트릭 와이키키 비치", g:"3.5성", code:"HCW", src:"both", ov:1, zone:"center",
+     loc:"와이키키 중심", room:"스탠다드 약 30㎡", feat:"모던 · 루프탑 수영장", note:""},
+    {n:"Sheraton Princess Kaiulani", kr:"쉐라톤 프린세스 카이울라니", g:"3.5성", code:"SPK", src:"both", ov:1, zone:"center",
+     loc:"와이키키 중심 · 해변 도보 2분", room:"스탠다드 약 28㎡",
+     feat:"대형 수영장 · 로얄하와이안 쇼핑센터 맞은편", note:""},
+    {n:"Waikiki Beachcomber by Outrigger", kr:"와이키키 비치컴버 바이 아웃리거", g:"3.5성", code:"", src:"purple", ov:0, zone:"center",
+     loc:"와이키키 중심", room:"스탠다드 약 30㎡", feat:"", note:""},
+
+    /* ── 4성급 ── */
+    {n:"Prince Waikiki", kr:"프린스 와이키키", g:"4성", code:"HP", src:"both", ov:1, zone:"out",
+     loc:"알라와이 요트하버 전면", room:"오션뷰 약 39㎡",
+     feat:"전 객실 오션뷰 · 인피니티 풀 · 조용함", note:""},
+    {n:"Hilton Waikiki Beach", kr:"힐튼 와이키키 비치", g:"4성", code:"HWB", src:"both", ov:1, zone:"center",
+     loc:"와이키키 · 쿠히오 애비뉴", room:"스탠다드 약 30㎡",
+     feat:"MAC 24/7 레스토랑 · 특가 프로모션 종종", note:""},
+    {n:"Outrigger Reef Waikiki Beach", kr:"아웃리거 리프 와이키키", g:"4성", code:"ORF", src:"both", ov:1, zone:"beach",
+     loc:"와이키키 해변 바로 앞", room:"스탠다드 약 32㎡",
+     feat:"비치프론트 · 카니 카 필라 그릴", note:""},
+    {n:"Outrigger Waikiki Beach Resort", kr:"아웃리거 와이키키 비치", g:"4성", code:"ORW", src:"both", ov:1, zone:"beach",
+     loc:"와이키키 해변 정중앙", room:"스탠다드 약 32㎡",
+     feat:"비치프론트 · 듀크스 와이키키 입점", note:""},
+    {n:"Embassy Suites Waikiki Beach Walk", kr:"엠버시 스위트", g:"4성", code:"ESH", src:"both", ov:1, zone:"center",
+     loc:"와이키키 비치워크", room:"1베드룸 스위트 약 46㎡",
+     feat:"전 객실 스위트 · 조식 포함 · 저녁 리셉션", note:""},
+    {n:"Waikiki Beach Marriott Resort & Spa", kr:"와이키키 비치 메리어트", g:"4성", code:"WBM", src:"both", ov:1, zone:"beach",
+     loc:"와이키키 동쪽 · 해변 맞은편", room:"스탠다드 약 30㎡",
+     feat:"두 개의 타워 · 수영장 2곳", note:""},
+    {n:"Hilton Hawaiian Village", kr:"힐튼 하와이안 빌리지", g:"4성", code:"HHV", src:"both", ov:1, zone:"resort",
+     loc:"와이키키 서쪽 · 넓은 리조트 단지", room:"스탠다드 약 30㎡",
+     feat:"라군 · 5개 수영장 · 금요일 불꽃놀이", note:""},
+    {n:"Hyatt Regency Waikiki Beach", kr:"하얏트 리젠시 와이키키", g:"4성", code:"HRW", src:"both", ov:1, zone:"beach",
+     loc:"와이키키 · 해변 맞은편", room:"스탠다드 약 27㎡",
+     feat:"쌍둥이 타워 · 26년 하반기 요금 수정 예정", note:"26년 하반기 요금 수정"},
+    {n:"Romer House Waikiki", kr:"로머 하우스 와이키키", g:"4성", code:"RHW", src:"both", ov:0, zone:"center",
+     loc:"와이키키", room:"스탠다드 약 28㎡", feat:"부티크 · 성인 친화", note:""},
+    {n:"Moana Surfrider", kr:"모아나 서프라이더", g:"4성", code:"MS", src:"both", ov:1, zone:"beach",
+     loc:"와이키키 해변 정면", room:"스탠다드 약 30㎡",
+     feat:"1901년 개관 · 와이키키 퍼스트레이디 · 반얀트리 코트", note:""},
+    {n:"Aston Waikiki Beach Tower", kr:"애스톤 와이키키 비치 타워", g:"4성", code:"AWT", src:"red", ov:1, zone:"beach",
+     loc:"와이키키 해변 맞은편", room:"1베드룸 약 100㎡",
+     feat:"전 객실 스위트 · 주방 · 넓은 발코니", note:""},
+    {n:"Alohilani Resort Waikiki Beach", kr:"알로힐라니 리조트", g:"4성", code:"AHR", src:"both", ov:1, zone:"beach",
+     loc:"와이키키 · 해변 맞은편", room:"스탠다드 약 30㎡",
+     feat:"28만 리터 수족관 로비 · 인피니티 풀", note:""},
+    {n:"Queen Kapiolani Hotel", kr:"퀸 카피올라니", g:"4성", code:"QK", src:"red", ov:1, zone:"out",
+     loc:"와이키키 동쪽 · 다이아몬드헤드 인근", room:"스탠다드 약 27㎡",
+     feat:"레트로 감성 · 조용한 위치", note:""},
+    {n:"Halepuna Waikiki by Halekulani", kr:"할레푸나 바이 할레쿨라니", g:"4성", code:"HLP", src:"red", ov:1, zone:"center",
+     loc:"와이키키 비치워크", room:"스탠다드 약 33㎡",
+     feat:"할레쿨라니 자매 호텔 · 루프탑 인피니티 풀", note:""},
+
+    /* ── 4.5성급 ── */
+    {n:"Sheraton Waikiki Beach Resort", kr:"쉐라톤 와이키키 비치 리조트", g:"4.5성", code:"SW", src:"both", ov:1, zone:"beach",
+     loc:"와이키키 해변 정면", room:"스탠다드 약 30㎡",
+     feat:"인피니티 풀 · 단기 프로모션 자주 진행", note:"단기 프로모션"},
+
+    /* ── 5성급 ── */
+    {n:"The Royal Hawaiian", kr:"로얄 하와이안", g:"5성", code:"RH", src:"both", ov:1, zone:"beach",
+     loc:"와이키키 해변 정면", room:"스탠다드 약 35㎡",
+     feat:"핑크 팰리스 · 1927년 개관 · 전용 비치", note:""},
+    {n:"Kahala Hotel & Resort", kr:"카할라 리조트", g:"5성", code:"KH", src:"both", ov:1, zone:"resort",
+     loc:"카할라 · 와이키키에서 차로 15분", room:"스탠다드 약 50㎡",
+     feat:"돌고래 라군 · 프라이빗 비치 · 최고급",
+     note:"픽업 또는 샌딩 시 1인 $20 추가"},
+    {n:"Kaimana Beach Hotel", kr:"카이마나 비치 호텔", g:"5성", code:"KWB", src:"red", ov:1, zone:"out",
+     loc:"다이아몬드헤드 인근 · 카이마나 비치", room:"스탠다드 약 28㎡",
+     feat:"조용한 로컬 분위기 · 할레 베일", note:""},
+    {n:"Halekulani", kr:"할레쿨라니", g:"5성", code:"HK", src:"red", ov:1, zone:"beach",
+     loc:"와이키키 해변 정면", room:"스탠다드 약 57㎡",
+     feat:"오키드 풀 · 라 메르 · 하와이 최고급 상징", note:""},
+    {n:"The Ritz-Carlton Residences Waikiki", kr:"리츠칼튼 레지던스", g:"5성", code:"RCW", src:"both", ov:1, zone:"center",
+     loc:"와이키키 비치워크", room:"1베드룸 약 70㎡",
+     feat:"전 객실 주방 · 두 개 타워 · 루프탑 풀", note:""},
+    {n:"Four Seasons Resort Oahu at Ko Olina", kr:"포시즌 오아후 코올리나", g:"5성", code:"FSO", src:"both", ov:1, zone:"resort",
+     loc:"코올리나 · 공항에서 차로 30분", room:"스탠다드 약 60㎡",
+     feat:"프라이빗 라군 · 성인 전용 풀 · 리조트형",
+     note:"픽업 · 샌딩 불가 · 개별 이동"},
+    {n:"Trump International Hotel Waikiki", kr:"트럼프 인터내셔널 (갈라리아 와이키키)", g:"5성", code:"REN", src:"both", ov:1, zone:"center",
+     loc:"와이키키 비치워크", room:"스튜디오 약 46㎡",
+     feat:"전 객실 주방 · 인피니티 풀", note:""},
+    {n:"Espacio The Jewel of Waikiki", kr:"에스파시오 오브 와이키키", g:"5성", code:"EOW", src:"red", ov:1, zone:"beach",
+     loc:"와이키키 해변 맞은편", room:"2베드룸 약 260㎡",
+     feat:"전 9실 · 각 층 1실 · 극소수 럭셔리", note:""},
+    {n:"Turtle Bay Resort", kr:"리츠칼튼 터틀베이", g:"5성", code:"TB", src:"red", ov:1, zone:"resort",
+     loc:"오아후 북부 · 와이키키에서 차로 1시간", room:"오션뷰 약 55㎡",
+     feat:"노스쇼어 · 골프 · 승마 · 한적함", note:"와이키키에서 멀어 렌터카 권장"}
+  ],
+
+  "마우이": [
+    {n:"Maui Beach Hotel", kr:"마우이 비치", g:"3성", code:"MBH", src:"red", ov:1, zone:"kahului",
+     loc:"카훌루이", room:"스탠다드 약 25㎡", feat:"공항 인근 · 경유 숙박용", note:""},
+    {n:"Maui Seaside Hotel", kr:"마우이 씨사이드 호텔", g:"3성", code:"MSH", src:"red", ov:0, zone:"kahului",
+     loc:"카훌루이", room:"스탠다드 약 25㎡", feat:"가성비", note:""},
+    {n:"Hampton Inn & Suites Maui by Hilton", kr:"햄튼 인 & 스위트 마우이", g:"3성", code:"HIM", src:"red", ov:0, zone:"kahului",
+     loc:"카훌루이", room:"스탠다드 약 30㎡", feat:"조식 포함", note:""},
+    {n:"Royal Lahaina Resort", kr:"로얄 라하이나", g:"3.5성", code:"RL", src:"both", ov:1, zone:"kaanapali",
+     loc:"카아나팔리 북쪽", room:"스탠다드 약 30㎡", feat:"넓은 부지 · 코티지 타입 보유", note:""},
+    {n:"Aston Kaanapali Shores", kr:"애스톤 카아나팔리 쇼어", g:"3.5성", code:"AKS", src:"both", ov:1, zone:"kaanapali",
+     loc:"카아나팔리 북쪽 · 비치프론트", room:"스튜디오 약 46㎡", feat:"주방 · 콘도형", note:""},
+    {n:"Residence Inn Maui Wailea", kr:"레지던스 인 마우이 와일레아", g:"3.5성", code:"RMW", src:"both", ov:0, zone:"wailea",
+     loc:"와일레아", room:"스튜디오 약 40㎡", feat:"조식 포함 · 주방", note:""},
+    {n:"Courtyard Maui Kahului Airport", kr:"코트야드 마우이 카훌루이 에어포트", g:"3.5성", code:"CMK", src:"both", ov:0, zone:"kahului",
+     loc:"카훌루이 공항 인근", room:"스탠다드 약 28㎡", feat:"경유 숙박용", note:""},
+    {n:"Outrigger Kaanapali Beach Resort", kr:"아웃리거 카아나팔리 비치 리조트", g:"3.5성", code:"OKB", src:"red", ov:1, zone:"kaanapali",
+     loc:"카아나팔리 비치프론트", room:"스탠다드 약 30㎡", feat:"", note:""},
+    {n:"Wailea Beach Resort - Marriott", kr:"와일레아 비치 리조트 메리어트", g:"4성", code:"WAM", src:"both", ov:1, zone:"wailea",
+     loc:"와일레아 비치프론트", room:"스탠다드 약 40㎡", feat:"성인 전용 풀 · 워터슬라이드", note:""},
+    {n:"Hyatt Regency Maui", kr:"하얏트 리젠시 마우이", g:"4성", code:"HRM", src:"both", ov:1, zone:"kaanapali",
+     loc:"카아나팔리 비치프론트", room:"스탠다드 약 35㎡", feat:"펭귄 · 별관측 프로그램", note:""},
+    {n:"The Westin Maui", kr:"웨스틴 마우이", g:"4성", code:"WM", src:"both", ov:1, zone:"kaanapali",
+     loc:"카아나팔리 비치프론트", room:"스탠다드 약 35㎡", feat:"대형 수영장 · 27년 요금 인상 예정", note:"27년 요금 UP"},
+    {n:"Sheraton Maui Resort & Spa", kr:"쉐라톤 마우이", g:"4성", code:"SM", src:"both", ov:1, zone:"kaanapali",
+     loc:"카아나팔리 블랙록", room:"스탠다드 약 33㎡", feat:"블랙록 스노클링 · 절벽 다이빙 세리머니", note:""},
+    {n:"Hana-Maui Resort", kr:"하나 마우이 리조트", g:"4성", code:"HMR", src:"red", ov:1, zone:"hana",
+     loc:"하나 · 카훌루이에서 차로 2시간", room:"코티지 약 55㎡", feat:"오지 · 프라이빗", note:""},
+    {n:"The Ritz-Carlton Maui Kapalua", kr:"리츠칼튼 마우이 카팔루아", g:"5성", code:"RC", src:"both", ov:1, zone:"kapalua",
+     loc:"카팔루아", room:"스탠다드 약 50㎡", feat:"골프 · 스파 · 최고급", note:""},
+    {n:"Fairmont Kea Lani", kr:"페어몬트 케아라니", g:"5성", code:"FK", src:"both", ov:1, zone:"wailea",
+     loc:"와일레아 비치프론트", room:"1베드룸 스위트 약 80㎡", feat:"전 객실 스위트 · 화이트 외관", note:""},
+    {n:"Andaz Maui at Wailea", kr:"안다즈 마우이", g:"5성", code:"ADZ", src:"both", ov:1, zone:"wailea",
+     loc:"와일레아 비치프론트", room:"스탠다드 약 45㎡", feat:"계단식 인피니티 풀 · 모던", note:"별도 문의"}
+  ],
+
+  "빅아일랜드": [
+    {n:"Pacific 19 Kona", kr:"퍼시픽19", g:"3성", code:"P19", src:"red", ov:0, zone:"kona",
+     loc:"카일루아 코나", room:"스탠다드 약 25㎡", feat:"가성비", note:""},
+    {n:"Royal Kona Resort", kr:"로얄 코나", g:"3.5성", code:"RK", src:"both", ov:1, zone:"kona",
+     loc:"카일루아 코나 비치프론트", room:"스탠다드 약 30㎡", feat:"오션프론트 · 라군 풀", note:""},
+    {n:"Grand Naniloa Hotel Hilo", kr:"그랜드 나닐로아 (힐로)", g:"3.5성", code:"NAN", src:"both", ov:1, zone:"hilo",
+     loc:"힐로 · 화산국립공원 방면", room:"스탠다드 약 28㎡", feat:"힐로 지역 · 화산 접근 편리", note:""},
+    {n:"Courtyard King Kamehameha's Kona Beach", kr:"코트야드 킹 카메하메하 코나 비치", g:"3.5성", code:"CMK", src:"both", ov:1, zone:"kona",
+     loc:"카일루아 코나 중심", room:"스탠다드 약 28㎡", feat:"역사 유적 인접 · 27년 요금 인상 예정", note:"27년 요금 UP"},
+    {n:"Volcano House", kr:"볼케이노 하우스", g:"3.5성", code:"VCH", src:"red", ov:0, zone:"volcano",
+     loc:"화산국립공원 내부", room:"스탠다드 약 25㎡", feat:"분화구 전망 · 공원 내 유일 숙소", note:""},
+    {n:"Waikoloa Beach Marriott Resort", kr:"와이콜로아 메리어트", g:"4성", code:"WMR", src:"both", ov:1, zone:"waikoloa",
+     loc:"와이콜로아 비치프론트", room:"스탠다드 약 33㎡", feat:"아니에호말루 베이 · 루아우 진행", note:""},
+    {n:"Hilton Waikoloa Village", kr:"힐튼 와이콜로아 빌리지", g:"4성", code:"HWV", src:"both", ov:1, zone:"waikoloa",
+     loc:"와이콜로아 · 대형 리조트", room:"스탠다드 약 35㎡",
+     feat:"돌고래 라군 · 모노레일과 보트로 이동", note:""},
+    {n:"Outrigger Kona Resort & Spa", kr:"아웃리거 코나 리조트&스파", g:"4성", code:"OKR", src:"both", ov:1, zone:"kona",
+     loc:"케아우호우 베이", room:"스탠다드 약 35㎡", feat:"만타레이 야간 관찰", note:""},
+    {n:"The Westin Hapuna Beach Resort", kr:"웨스틴 하푸나 비치 리조트", g:"4성", code:"HBP", src:"both", ov:1, zone:"maunalani",
+     loc:"하푸나 비치", room:"스탠다드 약 40㎡", feat:"하와이 최고 백사장 중 하나", note:""},
+    {n:"Fairmont Orchid", kr:"페어몬트 오키드", g:"5성", code:"FO", src:"red", ov:1, zone:"maunalani",
+     loc:"마우나라니", room:"스탠다드 약 50㎡", feat:"프라이빗 라군 · 스파 위드아웃 월", note:""},
+    {n:"Mauna Kea Beach Hotel", kr:"마우나케아 비치 호텔", g:"5성", code:"MKB", src:"red", ov:1, zone:"maunalani",
+     loc:"마우나케아 비치", room:"스탠다드 약 55㎡", feat:"1965년 개관 · 카우나오아 비치", note:""}
+  ],
+
+  "카우아이": [
+    {n:"Sheraton Kauai Coconut Beach Resort", kr:"쉐라톤 카우아이 코코넛 비치 리조트", g:"3.5성", code:"SKC", src:"red", ov:1, zone:"kapaa",
+     loc:"카파아", room:"스탠다드 약 30㎡", feat:"비치프론트 · 루아우 진행", note:""},
+    {n:"Sheraton Kauai Resort", kr:"쉐라톤 카우아이", g:"4성", code:"SKR", src:"red", ov:1, zone:"poipu",
+     loc:"포이푸 비치", room:"스탠다드 약 33㎡", feat:"남부 해안 · 선셋 명소", note:""},
+    {n:"Grand Hyatt Kauai Resort & Spa", kr:"그랜드 하얏트 카우아이", g:"5성", code:"GHK", src:"red", ov:1, zone:"poipu",
+     loc:"포이푸", room:"스탠다드 약 45㎡", feat:"솔트워터 라군 · 리버풀 워터슬라이드", note:""}
+  ],
+
+  "라나이": [
+    {n:"Four Seasons Resort Lanai", kr:"포시즌 라나이", g:"5성", code:"FS", src:"red", ov:1, zone:"lanai",
+     loc:"훌로포에 베이", room:"스탠다드 약 60㎡", feat:"프라이빗 아일랜드 · 최고급", note:""}
+  ]
+};
+
+/* 예약처 표시 */
+var SRC_LABEL = {both:"", red:"투어넷", purple:"퍼플"};
+
+/* 섬별 위치 구분 — 숙소를 잡는 지역 기준
+   ⚠ 제가 판단해 넣은 참고값입니다. 실제 정보로 확인해 주세요. */
+var ZONE_BY_ISLAND = {
+  "오아후":     {beach:"와이키키 해변 앞", center:"와이키키 중심", out:"와이키키 외곽", resort:"리조트 지역"},
+  "마우이":     {kaanapali:"카아나팔리", wailea:"와일레아", kapalua:"카팔루아",
+                kahului:"카훌루이 공항 인근", hana:"하나"},
+  "빅아일랜드": {kona:"카일루아 코나", waikoloa:"와이콜로아", hilo:"힐로",
+                maunalani:"마우나라니 · 하푸나", volcano:"화산국립공원"},
+  "카우아이":   {poipu:"포이푸", kapaa:"카파아"},
+  "라나이":     {lanai:"훌로포에 베이"}
+};
+function zoneLabel(island, z){
+  var m = ZONE_BY_ISLAND[island] || {};
+  return m[z] || z || '';
+}
+function zoneList(island){
+  var m = ZONE_BY_ISLAND[island] || {};
+  return Object.keys(m);
+}
+var SRC_COLOR = {both:"", red:"src-red", purple:"src-purple"};
+
+/* ══════════════════════════════════════════
+   유료 옵션 투어
+   ⚠ 요금은 임시값입니다. 실제 원가로 교체해 주세요.
+   ══════════════════════════════════════════ */
+var OPTIONS = [
+  {n:"돌핀 왓칭 & 거북이 스노클링", p:0, hot:true, pre:false,
+   d:"하와이 최고 인기 해양스포츠. 야생 돌고래 왓칭과 거북이 스노클링을 함께 즐깁니다.",
+   detail:"야생 돌고래 · 터틀 왓칭 · 스노클링 · 수중 씨두 스쿠터 · 스탠드업 패들 · 카약 · 해양 전문 가이드 진행",
+   inc:"왕복 차량 픽업, 구명 조끼, 수경, 스낵 & 음료", exc:"", note:"", img:"dolphin"},
+
+  {n:"선셋 디너 크루즈 · 퍼시픽 스타 (뷔페 디너)", p:0, hot:true, pre:true,
+   d:"STAR OF HONOLULU 선셋 디너 크루즈. 퍼시픽 림 디너 뷔페와 마이타이 1잔이 포함됩니다.",
+   detail:"승선 16:45 · 출항 17:30 · 도착 19:30 · 총 4~5시간",
+   inc:"크루즈 탑승, 퍼시픽 림 디너 뷔페, 마이타이 1잔",
+   exc:"셀러브레이션 1인 $35 (윈도우 테이블 · 사진첩 커플당 1개) · 금요일 불꽃놀이 1인 $19 (개런티 불가)",
+   note:"사전예약 필수 · 출발 2개월 전까지 요청 · 미운영 1/1, 11/28, 12/8, 12/25", img:"cruise"},
+
+  {n:"선셋 디너 크루즈 · 3스타 (5코스 디너)", p:0, hot:false, pre:true,
+   d:"랍스터와 스테이크가 포함된 5코스 디너 크루즈입니다.",
+   detail:"승선 16:45 · 출항 17:30 · 도착 19:30 · 총 4~5시간",
+   inc:"크루즈 탑승, 5코스 디너(랍스터 · 스테이크), 샴페인과 프리미엄 음료 2잔",
+   exc:"셀러브레이션 1인 $35 · 금요일 불꽃놀이 1인 $19",
+   note:"사전예약 필수 · 미운영 1/1, 11/28, 12/8, 12/25", img:"cruise"},
+
+  {n:"선셋 디너 크루즈 · 5스타 (5코스 디너)", p:0, hot:false, pre:true,
+   d:"프라임 스테이크와 슈퍼 프리미엄 음료가 포함된 최상급 코스입니다.",
+   detail:"승선 16:45 · 출항 17:30 · 도착 19:30 · 총 4~5시간",
+   inc:"크루즈 탑승, 5코스 디너(랍스터 · 프라임 스테이크), 코나 커피 & 차, 샴페인과 슈퍼 프리미엄 음료 2잔",
+   exc:"셀러브레이션 1인 $35 · 금요일 불꽃놀이 1인 $19",
+   note:"사전예약 필수 · 미운영 1/1, 11/28, 12/8, 12/25", img:"cruise"},
+
+  {n:"오아후섬 섬일주 투어", p:0, hot:false, pre:false,
+   d:"오아후섬 주요 명소를 하루에 둘러보는 투어입니다.",
+   detail:"다이아몬드헤드 · 카할라 주택가 · 한국지도마을 · 블로우홀 · 마카푸 포인트 · 마카푸 비치 · 마카데미아넛 농장 · 중국인 모자섬 · 쿠알로아랜치 · 선셋비치 · 와이메아비치 · 거북이비치 · 할레이바 타운 · 돌 파인애플 농장",
+   inc:"카후쿠 새우요리 & 음료", exc:"가이드 팁 1인 $10", note:"", img:"oahutour"},
+
+  {n:"스카이 다이빙 (14,000피트)", p:0, hot:false, pre:true,
+   d:"하와이의 파란 하늘과 태평양을 온몸으로 느끼는 가장 익사이팅한 체험입니다.",
+   detail:"베테랑 강사와 탠덤 점프 · 다이빙 시 개인 액션캠 · 카메라 · 휴대폰 소지 금지",
+   inc:"장비, 강사 동행",
+   exc:"차량 픽업 불포함(직접 이동) · 강사 팁 1인 $25 직접 지불 · 유류할증료 $25 현장 결제",
+   note:"사전예약 필수 · 화 · 수 · 목 휴무", img:"skydiving"},
+
+  {n:"쿠알로아랜치 · 무비사이트 투어 (90분)", p:0, hot:false, pre:true,
+   d:"쥬라기공원 등 영화 촬영지를 둘러보는 투어입니다.",
+   detail:"1850년 설립된 목장 · 영화 촬영지 투어",
+   inc:"투어 진행", exc:"차량 픽업 불포함(직접 이동)",
+   note:"사전예약 필수", img:"kualoa"},
+
+  {n:"쿠알로아랜치 · 정글탐험 투어", p:0, hot:false, pre:true,
+   d:"목장의 정글 지대를 탐험하는 투어입니다.",
+   detail:"정글 탐험 · 자연 테마파크",
+   inc:"투어 진행", exc:"차량 픽업 불포함(직접 이동)",
+   note:"사전예약 필수 · 허리가 안 좋으신 분 또는 임산부는 참여를 권하지 않습니다", img:"kualoa"},
+
+  {n:"쿠알로아랜치 · 승마 투어 (2시간)", p:0, hot:false, pre:true,
+   d:"바다와 산맥을 바라보며 즐기는 승마 체험입니다.",
+   detail:"2시간 승마 투어",
+   inc:"투어 진행, 장비", exc:"차량 픽업 불포함(직접 이동)",
+   note:"사전예약 필수 · 10세 이상 · 키 140cm 이상 · 104kg 미만 · 커버 슈즈와 긴바지 착용 권장", img:"kualoa"},
+
+  {n:"쿠알로아랜치 · UTV 랩터 (2시간)", p:0, hot:false, pre:true,
+   d:"오프로드 차량으로 목장을 누비는 체험입니다.",
+   detail:"2시간 UTV 랩터 주행",
+   inc:"차량 이용, 장비", exc:"차량 픽업 불포함(직접 이동)",
+   note:"사전예약 필수 · 21세 이상 운전 가능 · 면허증 필수 소지 · 운전자 포함 최대 6명 탑승", img:"kualoa"},
+
+  {n:"쿠알로아랜치 · 짚라인 투어", p:0, hot:false, pre:true,
+   d:"정글 위를 가로지르는 짚라인 체험입니다.",
+   detail:"짚라인 코스 진행",
+   inc:"장비, 안전 교육", exc:"차량 픽업 불포함(직접 이동)",
+   note:"사전예약 필수 · 키 142~200cm · 체중 32~127kg · 커버 슈즈 착용", img:"kualoa"},
+
+  {n:"블루 하와이안 45분 헬기 투어", p:0, hot:false, pre:false,
+   d:"헬리콥터로 오아후섬 전경을 한눈에 담습니다.",
+   detail:"에코스타 헬리콥터 45분 비행 · 호놀룰루 하버 · 와이키키 · 와이마날로 비치 · 중국인 모자섬 · 카네오헤 비치 · 돌 플랜테이션 · 다이아몬드헤드 · 펀치볼 · 하나우마베이 · 샌디비치 · 마카푸 · 씨라이프 파크 · 미주리 전함",
+   inc:"헬기 탑승", exc:"차량 픽업 불포함(직접 이동)", note:"", img:"helicopter"},
+
+  {n:"폴리네시안 민속촌 게이트웨이 디너 패키지", p:0, hot:false, pre:false,
+   d:"6개 섬의 문화 체험과 저녁 뷔페, 라이브 음악을 함께 즐기는 패키지입니다.",
+   detail:"폴리네시안 원주민 전통 문화 체험 · 공연 관람 · 감미로운 라이브 음악",
+   inc:"문화 체험, 저녁 뷔페", exc:"차량 픽업 불포함(직접 이동)",
+   note:"요금 개별 문의 · 수 · 일 휴무", img:"pcc", ask:true},
+
+  {n:"한국인 서핑 강습", p:0, hot:false, pre:false,
+   d:"한국인 전문 강사가 알려주는 와이키키 서핑 레슨입니다.",
+   detail:"호텔에서 차량 10분 이동 후 서핑 강습 · 부기보드 또는 스노클링 진행",
+   inc:"왕복 차량 픽업, 서핑보드 장비, 간단한 간식 및 음료", exc:"", note:"", img:"surf"},
+
+  {n:"하와이안 로미로미 마사지 (60분)", p:0, hot:false, pre:false,
+   d:"손과 마음으로 치유하는 하와이 전통 마사지입니다.",
+   detail:"호텔 내 마사지샵에서 60분 전신 마사지",
+   inc:"60분 전신 마사지", exc:"마사지사 팁 1인 $20 별도", note:"", img:"lomilomi"},
+
+  {n:"빅아일랜드 HILO 1일 관광", p:0, hot:false, pre:false,
+   d:"지금도 용암을 분출하는 세계 최대 화산섬을 하루에 둘러봅니다.",
+   detail:"화산 국립공원 · 아카카 폭포 등",
+   inc:"왕복 차량 픽업, 왕복 항공료, 중식(현지식), 입장료",
+   exc:"현지 가이드 팁 1인 $10 현지 지불 · 식사 팁 별도",
+   note:"성수기 항공료 인상 시 비용 인상 가능 · 예약 확정과 동시에 주내선 발권 진행되며 취소 시 100% 패널티", img:"bigisland"},
+
+  {n:"마우이 MAUI 1일 관광", p:0, hot:false, pre:false,
+   d:"해발 3,055m 할레아칼라 화산과 옛 왕조 수도 라하이나를 둘러봅니다.",
+   detail:"할레아칼라 화산 분화구 · 아름다운 계곡 · 라하이나 · 카아나팔리 리조트",
+   inc:"왕복 차량 픽업, 왕복 항공료, 중식(현지식), 입장료",
+   exc:"현지 가이드 팁 1인 $10 현지 지불 · 식사 팁 별도", note:"", img:"maui"},
+
+  {n:"카우아이 KAUAI 1일 관광", p:0, hot:false, pre:false,
+   d:"정원의 섬이라 불리는 카우아이. 그랜드캐년을 축소한 듯한 와이메아 캐년이 있습니다.",
+   detail:"와이메아 캐년 · 영화 촬영지 · 하와이 최북단 섬",
+   inc:"왕복 차량 픽업, 왕복 항공료, 중식(현지식), 입장료",
+   exc:"현지 가이드 팁 1인 $10 현지 지불 · 식사 팁 별도", note:"", img:"kauai"},
+
+  {n:"락어훌라 루아우 뷔페 & 쇼 패키지", p:0, hot:false, pre:false,
+   d:"하와이에서 탄생한 이색 쇼. 폴리네시안 전통과 아메리칸 음악의 조합입니다.",
+   detail:"화려한 폴리네시안 댄스 · 뜨거운 불쇼 · 파워풀한 라이브 공연 · 소요시간 3시간 15분",
+   inc:"하와이안 뷔페 디너, 웰컴 드링크(마이타이 1잔), 프리미엄석(랜덤 지정)",
+   exc:"", note:"금요일 휴무", img:"luau"}
+];
+
+/* 선택옵션 예약 시 참고사항 */
+var OPT_NOTE = [
+  "72시간 이내 취소 시 100% 취소 수수료가 부가되며 환불이 불가합니다.",
+  "이웃섬 일일관광은 예약 후 취소 시 100% 취소 수수료가 부가되며 환불이 불가합니다.",
+  "타사에 예약하신 상품에 대해서는 본사가 일체의 책임을 지지 않으며 문의에도 답변드릴 수 없습니다.",
+  "사전예약 필수 표시가 있는 투어는 출발 2개월 전까지 담당자에게 요청해 주셔야 합니다.",
+  "투어사 사정으로 예약 시점에 따라 요금이 인상되거나 포함사항이 변동될 수 있습니다."
+];
+
+
+/* ══════════════════════════════════════════
+   패키지 유형
+   ══════════════════════════════════════════ */
+var PACKAGES = [
+  {id:"oahu", n:"오아후 단독", d:"오아후에서만 머무는 기본 일정입니다.",
+   minN:5, fixed:2},
+  {id:"combo", n:"이웃섬 + 오아후", d:"빅아일랜드 등 이웃섬을 먼저 둘러본 뒤 오아후로 이동합니다.",
+   minN:7, fixed:4}
+];
+
+/* 불포함 사항 */
+var NOT_INC = [
+  "가이드 팁 (1인 $50)",
+  "일정표에 표기된 자유 식사",
+  "ESTA 비자 발급 비용 (1인 $40.27)",
+  "스냅작가 팁 (1인 $40)",
+  "매너 팁, 개인 음료 · 주류 비용"
+];
+
+/* 추가 특전 */
+var PERKS_HW = [
+  {t:"다이아몬드 헤드 트레킹",
+   d:"매주 화 · 목요일 진행. 최소 4인 이상 모객 시 진행 가능하며 첫날 가이드에게 신청하셔야 합니다.",
+   exc:"입장료 1인 $5, 가이드 팁 1인 $5",
+   note:"인원 미달 시 진행이 불가할 수 있습니다."},
+  {t:"허니문 스냅 촬영",
+   d:"2~3팀이 함께 촬영하는 조인 스냅입니다. 성수기에는 최대 4팀이 진행될 수 있습니다.",
+   exc:"스냅작가 팁 1인 $40",
+   note:"현지 도착 후 가이드가 작가 일정 확인 후 날짜를 전달드립니다. 1차 보정본 최소 40장을 촬영 후 3~4주 이내 메일로 보내드립니다."}
+];
+
+/* 비자 · 여권 */
+var VISA_NOTE = [
+  "여권 유효기간은 출국일 기준 6개월 이상 남아 있어야 합니다.",
+  "미국 경유 · 입국 시 ESTA 비자 발급이 필수입니다."
+];
+
+/* 이웃섬 결합 시 주의사항 */
+var COMBO_NOTE = [
+  "리턴편 호놀룰루 공항 도착이 오전 11시까지여야 행사 조인이 가능합니다 (±10분까지 가능).",
+  "11시 이후 15시 전 도착 시 시내관광 없이 호텔 픽업만 가능하며 1인 $20이 추가됩니다.",
+  "16시 이후 도착 시 개별 이동하셔야 합니다."
+];
+
+
+/* ══════════════════════════════════════════
+   공통 유틸
+   ══════════════════════════════════════════ */
+function esc(t){
+  return String(t == null ? '' : t)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function $(id){ return document.getElementById(id); }
+function gv(id){ var el = $(id); return el ? el.value : ''; }
+function sv(id, v){ var el = $(id); if(el) el.value = v; }
+
+function usd(n){ return '$' + (Math.round(Number(n) || 0)).toLocaleString('en-US'); }
+function usd2(n){
+  var v = Number(n) || 0;
+  return '$' + v.toLocaleString('en-US', {minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits: 2});
+}
+function krw(n){ return (Math.round(Number(n) || 0)).toLocaleString('ko-KR') + '원'; }
+/* 고객 노출용 — 1,000원 단위 올림 */
+function krwC(n){ return (Math.ceil((Number(n) || 0) / 1000) * 1000).toLocaleString('ko-KR') + '원'; }
+
+function parseDate(v){
+  if(!v) return null;
+  var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(v));
+  if(!m) return null;
+  return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+}
+function addDays(d, n){ var x = new Date(d.getTime()); x.setDate(x.getDate() + n); return x; }
+function ymd(d){
+  return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+}
+var DOW = ['일','월','화','수','목','금','토'];
+function fmtDate(d){
+  if(!d) return '';
+  return (d.getMonth() + 1) + '/' + d.getDate() + '(' + DOW[d.getDay()] + ')';
+}
+function fmtFull(d){
+  if(!d) return '';
+  return d.getFullYear() + '.' + ('0' + (d.getMonth() + 1)).slice(-2) + '.' +
+    ('0' + d.getDate()).slice(-2) + ' (' + DOW[d.getDay()] + ')';
+}
+
+var __toastT = null;
+function toast(msg){
+  var el = $('toast');
+  if(!el) return;
+  el.textContent = msg;
+  el.classList.add('on');
+  if(__toastT) clearTimeout(__toastT);
+  __toastT = setTimeout(function(){ el.classList.remove('on'); }, 2400);
+}
+function copyText(t){
+  try{
+    var ta = document.createElement('textarea');
+    ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    toast('복사했습니다');
+  }catch(e){ toast('복사하지 못했습니다'); }
+}
+
+/* 이미지 */
+function hotelImgs(code, n){
+  if(!code) return [];
+  var out = [];
+  for(var i = 1; i <= (n || 3); i++){
+    out.push('images/hotels/' + String(code).toLowerCase() + (i > 1 ? '-' + i : '') + '.jpg');
+  }
+  return out;
+}
+function optImg(key){ return key ? 'images/options/' + key + '.jpg' : ''; }
+function imgFail(el){
+  var box = el.parentNode;
+  var src = el.getAttribute('src') || '';
+  box.innerHTML = '<div class="ph"><b>이미지 자리</b><span>' + esc(src) + '</span></div>';
+}
+function galFail(img){
+  var fig = img.parentNode;
+  var track = fig.parentNode;
+  track.removeChild(fig);
+  if(!track.children.length){
+    track.parentNode.innerHTML = '<div class="ph"><b>이미지 자리</b><span>' +
+      esc(img.getAttribute('src')) + '</span></div>';
+  }
+}
+function logoFail(el){
+  var span = document.createElement('span');
+  span.className = 'logotext';
+  span.textContent = COMPANY.nameEn;
+  el.parentNode.replaceChild(span, el);
+}
+
+/* ══════════════════════════════════════════
+   상태
+   ══════════════════════════════════════════ */
+var STATE = {
+  pkg: 'oahu',          /* 패키지 유형 */
+  island: '오아후',      /* 호텔 선택 중인 섬 */
+  grade: '',            /* 등급 필터 */
+  zone: '',             /* 위치 필터 */
+  ov: '',               /* 오션뷰 필터 */
+  hotels: [],           /* [{island, hotel(n), nights, rate}] */
+  options: [],          /* 선택한 옵션 index */
+  fx: FX_DEFAULT,
+  margin: MARGIN_DEFAULT,
+  air: {out:'', back:'', fare:0},          /* 국제선 — fare는 1인 요금(원화) */
+  localAir: []                              /* 주내선 [{route, fare}] */
+};
+
+function hotelByName(n){
+  var out = null;
+  Object.keys(HOTELS).forEach(function(is){
+    HOTELS[is].forEach(function(h){ if(h.n === n) out = {island: is, h: h}; });
+  });
+  return out;
+}
+function totalNights(){
+  return STATE.hotels.reduce(function(a, x){ return a + (Number(x.nights) || 0); }, 0);
+}
+
+/* ══════════════════════════════════════════
+   요금 계산
+   호텔 요금은 1박 객실 요금 → 1인 기준으로 나눕니다.
+   ══════════════════════════════════════════ */
+function calc(){
+  var pax = Math.max(1, Number(gv('qpax')) || 2);
+  var rooms = Math.ceil(pax / 2);
+  var fx = Number(gv('fx')) || FX_DEFAULT;
+  STATE.fx = fx;
+  var margin = Number(gv('margin')) || MARGIN_DEFAULT;
+  STATE.margin = margin;
+
+  var lines = [];
+
+  /* 호텔 — 1박 객실요금 × 박수 × 객실수 */
+  var hotelUSD = 0;
+  STATE.hotels.forEach(function(x){
+    var n = Number(x.nights) || 0, r = Number(x.rate) || 0;
+    if(!n || !r) return;
+    var amt = n * r * rooms;
+    hotelUSD += amt;
+    lines.push({g:'숙박', d: x.hotel + ' ' + n + '박', q: n, unit: r, amt: amt});
+  });
+
+  /* 지상비 — 1인 고정 */
+  var landUSD = LAND_FEE * pax;
+  lines.push({g:'지상비', d:'하와이 지상비', q: pax, unit: LAND_FEE, amt: landUSD});
+
+  /* 옵션 — 1인 요금 × 인원 */
+  var optUSD = 0;
+  STATE.options.forEach(function(i){
+    var o = OPTIONS[i];
+    if(!o || o.ask) return;   /* 개별 문의 상품은 금액에 넣지 않습니다 */
+    var amt = o.p * pax;
+    optUSD += amt;
+    lines.push({g:'옵션', d: o.n, q: pax, unit: o.p, amt: amt});
+  });
+
+  var costUSD = hotelUSD + landUSD + optUSD;
+  var marginUSD = margin * pax;
+  var saleUSD = costUSD + marginUSD;
+
+  /* 항공료 — 원화로 입력받아 1인 요금 × 인원 (달러 환산은 참고용) */
+  var airKRW = (Number(STATE.air.fare) || 0) * pax;
+  var localKRW = STATE.localAir.reduce(function(a, x){
+    return a + (Number(x.fare) || 0) * pax; }, 0);
+  var flightKRW = airKRW + localKRW;
+
+  var money = {
+    pax: pax, rooms: rooms, fx: fx,
+    hotelUSD: hotelUSD, landUSD: landUSD, optUSD: optUSD,
+    costUSD: costUSD, marginUSD: marginUSD, saleUSD: saleUSD,
+    perUSD: saleUSD / pax,
+    saleKRW: saleUSD * fx, perKRW: (saleUSD / pax) * fx,
+    airKRW: airKRW, localKRW: localKRW, flightKRW: flightKRW,
+    perAirKRW: flightKRW / pax,
+    totalKRW: saleUSD * fx + flightKRW,
+    perTotalKRW: (saleUSD * fx + flightKRW) / pax,
+    lines: lines, nights: totalNights()
+  };
+  renderMoney(money);
+  syncBottom(money);
+  return money;
+}
+
+function renderMoney(m){
+  var el = $('innerPanel');
+  if(el){
+    el.innerHTML =
+      '<h4>내부 정산 · 담당자만 보입니다</h4>' +
+      '<div class="ir"><span>호텔 원가</span><b>' + usd(m.hotelUSD) + '</b></div>' +
+      '<div class="ir"><span>지상비 (1인 ' + usd(LAND_FEE) + ')</span><b>' + usd(m.landUSD) + '</b></div>' +
+      (m.optUSD ? '<div class="ir"><span>옵션</span><b>' + usd(m.optUSD) + '</b></div>' : '') +
+      '<div class="ir"><span>총 매입 원가</span><b>' + usd(m.costUSD) + '</b></div>' +
+      '<div class="ir sub2"><span>· 원화 환산</span><b>' + krw(m.costUSD * m.fx) + '</b></div>' +
+      '<div class="ir"><span>마진 (1인 ' + usd(m.margin || STATE.margin) + ')</span><b>' + usd(m.marginUSD) + '</b></div>' +
+      '<div class="ir big"><span>고객 청구액</span><b>' + usd(m.saleUSD) + '</b></div>' +
+      '<div class="ir sub2"><span>· 원화 환산</span><b>' + krw(m.saleKRW) + '</b></div>' +
+      '<div class="ir"><span>1인당</span><b>' + usd(m.perUSD) + ' · ' + krw(m.perKRW) + '</b></div>' +
+      (m.flightKRW
+        ? '<div class="ir" style="margin-top:8px;border-top:1px solid rgba(255,255,255,.14);padding-top:10px">' +
+          '<span>항공료 (별도)</span><b>' + krw(m.flightKRW) + '</b></div>' +
+          (m.localKRW ? '<div class="ir sub2"><span>· 국제선</span><b>' + krw(m.airKRW) + '</b></div>' +
+                        '<div class="ir sub2"><span>· 주내선</span><b>' + krw(m.localKRW) + '</b></div>' : '') +
+          '<div class="ir big"><span>총 합계</span><b>' + krw(m.totalKRW) + '</b></div>' +
+          '<div class="ir"><span>1인당 총액</span><b>' + krw(m.perTotalKRW) + '</b></div>'
+        : '<div class="ir sub2" style="margin-top:6px"><span>항공료 미입력</span><b>—</b></div>');
+  }
+  var ml = $('marginLabel');
+  if(ml) ml.textContent = usd(STATE.margin) + ' / 1인';
+  var fl = $('fxLabel');
+  if(fl) fl.textContent = '1 USD = ' + krw(STATE.fx).replace('원','') + '원';
+}
+
+function syncBottom(m){
+  var el = $('bottomSt');
+  if(!el) return;
+  var name = customerName();
+  var line1 = (name || '고객명 미입력') +
+    (m.nights ? ' · ' + m.nights + '박 ' + (m.nights + 2) + '일' : '') +
+    ' · ' + m.pax + '명';
+  var line2 = '지상비 <b>' + usd(m.perUSD) + '</b>' +
+    (m.flightKRW ? ' + 항공 <b>' + krw(m.perAirKRW) + '</b>' : '') +
+    ' <span class="bt-tot">1인 ' + krw(m.perTotalKRW) + '</span>';
+  el.innerHTML = '<div class="bt-1">' + esc(line1) + '</div><div class="bt-2">' + line2 + '</div>';
+}
+
+/* ══════════════════════════════════════════
+   고객명
+   ══════════════════════════════════════════ */
+function customerName(){
+  var a = (gv('fn') || '').trim(), b = (gv('fn2') || '').trim();
+  if(a && b) return a + ' · ' + b + ' 님';
+  var one = a || b;
+  return one ? (one + ' 님') : '';
+}
+function syncNames(){
+  var el = $('nameHint');
+  var n = customerName();
+  if(el) el.textContent = n ? ('견적서 표시 · ' + n) : '한 분 이상 입력해 주세요';
+  markRq('fn', n);
+  calc();
+}
+function markRq(id, ok){
+  var el = document.querySelector('.rq[data-for="' + id + '"]');
+  if(el) el.classList.toggle('ok', !!ok);
+}
+
+/* ══════════════════════════════════════════
+   일정표 생성
+   ══════════════════════════════════════════ */
+function buildItinerary(){
+  var n = totalNights();
+  if(!n) return [];
+  var pkg = STATE.pkg;
+  var start = parseDate(gv('depDate'));
+  var days = [];
+
+  function d(i){ return start ? addDays(start, i) : null; }
+
+  if(pkg === 'oahu'){
+    /* 1일차 도착 + 동부해안 투어 */
+    days.push({t:'인천 → 하와이', k:'국제선 · 전용차량',
+      main:['인천 국제공항 출발', '호놀룰루 국제공항 도착 후 그룹 게이트 출구에서 가이드 미팅'],
+      tour: TOUR_EAST, after:['호텔 체크인 (15:00 이후) 후 자유 일정'],
+      hotel: true, meal:['조식 기내식','중식 테디스버거','석식 불포함']});
+    /* 2일차 북부 섬일주 */
+    days.push({t:'하와이', k:'북부 섬일주 관광',
+      main:['오전 가이드 미팅 후'],
+      tour: TOUR_NORTH, after:['투어 종료 후 자유 일정'],
+      hotel: true, meal:['조식 선택별','중식 새우트럭','석식 자유식']});
+    /* 3일차 — 옵션 추천 */
+    if(n >= 3){
+      days.push({t:'하와이', k:'자유 일정',
+        main:['전일 둘만의 자유일정'],
+        tour: TOUR_OPTION, after:[],
+        hotel: true, meal:['조식 선택별','중식 자유식','석식 자유식']});
+    }
+    /* 나머지 자유일정 */
+    for(var i = 3; i < n; i++){
+      days.push({t:'하와이', k:'자유 일정',
+        main:['전일 둘만의 자유일정'], tour:null, after:[],
+        hotel: true, meal:['조식 선택별','중식 자유식','석식 자유식']});
+    }
+  } else {
+    /* 이웃섬 + 오아후 — 앞 2박은 이웃섬 */
+    var iName = STATE.hotels.length && STATE.hotels[0].island !== '오아후'
+      ? STATE.hotels[0].island : '빅아일랜드';
+    days.push({t:'인천 → 하와이(오아후) → 하와이(' + iName + ')', k:'국제선 · 주내선',
+      main:['인천 국제공항 출발',
+            '호놀룰루 국제공항 도착 후 주내선 청사 개별 이동 후 환승',
+            iName + ' 공항 도착',
+            '공항에서 렌터카 픽업 후 호텔로 이동',
+            '호텔 체크인 후 자유일정'],
+      tour:null, after:[], hotel:true, meal:['조식 선택별','중식 자유식','석식 자유식']});
+    days.push({t:'하와이(' + iName + ')', k:'자유 일정',
+      main:['전일 둘만의 자유일정'],
+      tour: TOUR_BIG, after:[], hotel:true, meal:['조식 선택별','중식 자유식','석식 자유식']});
+    days.push({t:'하와이(' + iName + ') → 하와이(오아후)', k:'주내선 · 전용차량',
+      main:['호텔 체크아웃 후 ' + iName + ' 공항으로 이동',
+            '렌터카 반납 장소로 이동 후 반납',
+            iName + ' 공항 출발',
+            '오아후 공항 도착 후 주내선청사 배기지클레임 도착하여 가이드 미팅'],
+      tour: TOUR_EAST, after:['호텔 체크인 (15:00 이후) 후 자유 일정'],
+      hotel:true, meal:['조식 기내식','중식 테디스버거','석식 불포함']});
+    days.push({t:'하와이', k:'북부 섬일주 관광',
+      main:['오전 가이드 미팅 후'],
+      tour: TOUR_NORTH, after:['투어 종료 후 자유 일정'],
+      hotel:true, meal:['조식 선택별','중식 새우트럭','석식 자유식']});
+    if(n >= 5){
+      days.push({t:'하와이', k:'자유 일정',
+        main:['전일 둘만의 자유일정'], tour: TOUR_OPTION, after:[],
+        hotel:true, meal:['조식 선택별','중식 자유식','석식 자유식']});
+    }
+    for(var j = 5; j < n; j++){
+      days.push({t:'하와이', k:'자유 일정',
+        main:['전일 둘만의 자유일정'], tour:null, after:[],
+        hotel:true, meal:['조식 선택별','중식 자유식','석식 자유식']});
+    }
+  }
+
+  /* 마지막 이동일 + 한국 도착 */
+  days.push({t:'하와이', k:'전용차량 · 국제선',
+    main:['호텔 체크아웃 후 가이드 미팅','공항으로 이동','호놀룰루 국제공항 출발'],
+    tour:null, after:[], hotel:false, meal:['조식 선택별','중식 기내식','석식 기내식']});
+  days.push({t:'하와이 → 인천', k:'',
+    main:['인천 국제공항 도착'], tour:null, after:[], hotel:false, meal:null});
+
+  /* 날짜 · 호텔 배정 */
+  var hotelSeq = [];
+  STATE.hotels.forEach(function(x){
+    for(var k = 0; k < (Number(x.nights) || 0); k++) hotelSeq.push(x.hotel);
+  });
+  days.forEach(function(x, i){
+    x.i = i + 1;
+    x.d = d(i);
+    x.hotelName = x.hotel ? (hotelSeq[i] || '') : '';
+  });
+  return days;
+}
+
+/* 투어 내용 */
+var TOUR_EAST = {
+  t:'오아후 동부해안 및 호놀룰루 다운타운 투어',
+  li:['가슴과 눈이 시원해지는 코올라우 산맥의 절경을 감상하며 동부 해안을 따라 이동',
+      '유명한 하와이 스팸 무스비, 코나 카푸치노 캔커피 맛보기',
+      '마카푸 포인트, 블로우홀, 하나우마베이, 한국지도마을, 카할라 주택가, 다이아몬드 헤드 등 관광',
+      '테디스 버거 중식 포함',
+      '주 정부 청사 및 주지사 관저 (차창)',
+      '미국 내 하나뿐인 이올라니 궁전 (차창)',
+      '하와이 섬을 통일한 킹 카메하메하 동상 (하차)']
+};
+var TOUR_NORTH = {
+  t:'오아후 북부 맛집 섬 일주 투어',
+  li:['돌(Dole) 파인애플 농장 (하차)',
+      '옛 하와이 정착민들의 마을 할레이바 올드타운 (하차)',
+      '하와이 명물 레인보우 쉐이브 아이스크림 시식 (2인 1개)',
+      '거북이들이 돌아다니는 거북이 비치 (차창)',
+      '북쪽 황금빛 해변 와이메아 비치 (차창)',
+      '세계 서핑 대회로 유명한 선셋 비치 (하차)',
+      '하와이 명물 파인애플, 애플 바나나 시식, 카후쿠 새우트럭 시식',
+      '쥬라기공원 · 아바타 촬영지 쿠알로아 랜치 목장 (차창)',
+      '중국인 모자 모양의 모자섬 (하차)',
+      '하와이 최저가 대형 쇼핑몰 프리미엄 와이켈레 아울렛 방문']
+};
+var TOUR_OPTION = {
+  t:'유료 옵션 추천투어',
+  li:['돌핀 왓칭 & 거북이 스노클링','선셋 디너 크루즈 (STAR OF HONOLULU)',
+      '스카이 다이빙','쿠알로아랜치 투어','빅아일랜드 1일 투어','하와이안 로미로미 마사지']
+};
+var TOUR_BIG = {
+  t:'빅아일랜드 추천 일정',
+  li:['활화산으로 유명한 화산 국립 공원','코나 커피 농장',
+      '에메랄드 빛 매니니오왈리 비치','검은 모래 블랙 샌드 비치','카할루우 비치',
+      '로얄 코나 비지터 센터 밀 & 뮤지엄','코나 브루잉 컴퍼니 (맥주 공장)',
+      '선셋과 별자리를 볼 수 있는 마우나케아 천문대']
+};
+
+
+/* ══════════════════════════════════════════
+   제작 도구 화면
+   ══════════════════════════════════════════ */
+function renderBuilder(){
+  var h = '';
+
+  h += '<div class="hero">' +
+    '<img class="logo" src="images/logo.png" alt="' + COMPANY.nameEn + '" onerror="logoFail(this)">' +
+    '<div class="tag">HAWAII HONEYMOON</div>' +
+    '<h1>하와이 견적 만들기</h1>' +
+    '<p>이 화면은 내부용입니다. 고객에게는 만들어진 링크만 전달하세요.</p></div>';
+
+  /* 01 무엇을 만들까 */
+  h += '<section class="sec" id="sec-pkg"><div class="sec-h"><div class="eyebrow">01</div>' +
+    '<h2>상품 유형</h2><p>일정 구성이 달라집니다.</p></div>' +
+    '<div class="pickrow" id="pkgrow"></div>' +
+    '<details class="setbox" style="margin-top:10px"><summary style="font-size:13.5px;color:var(--g500)">발송 설정</summary>' +
+    '<div style="padding:0 16px 16px"><div class="field" style="margin:0">' +
+    '<label for="fb">이 파일의 인터넷 주소</label>' +
+    '<input id="fb" type="text" placeholder="https://예시.co.kr/hawaii/planittour-hawaii-v1.html">' +
+    '<small>서버에 올린 주소입니다. 고객에게 보낼 링크를 만들 때만 필요합니다.</small>' +
+    '</div></div></details></section>';
+
+  /* 02 고객 정보 */
+  h += '<section class="sec" id="sec-cust"><div class="sec-h"><div class="eyebrow">02</div><h2>고객 정보</h2></div>' +
+    '<div class="card">' +
+    '<div class="field"><label>고객명 <span class="lbnote">한 분만 입력하셔도 됩니다</span></label>' +
+    '<div class="namerow">' +
+    '<label class="rq" data-for="fn"><input id="fn" type="text" placeholder="신랑 성함" oninput="syncNames()"></label>' +
+    '<input id="fn2" type="text" placeholder="신부 성함" oninput="syncNames()"></div>' +
+    '<small id="nameHint">견적서에는 두 분 성함이 함께 표시됩니다</small></div>' +
+    '<div class="field"><label for="custEmail">고객 이메일 <span class="lbnote">메일 발송 시 사용</span></label>' +
+    '<input id="custEmail" type="email" placeholder="example@naver.com"></div>' +
+    '<div class="field"><label for="qpax">인원</label>' +
+    '<input id="qpax" type="number" min="1" value="2" oninput="calc()">' +
+    '<small>호텔은 2인 1실 객실 요금으로, 지상비와 옵션은 1인 요금으로 계산됩니다.</small></div>' +
+    '<div class="field" style="margin-bottom:0"><label for="depDate">한국 출발일</label>' +
+    '<label class="rq" data-for="depDate"><input id="depDate" type="date" oninput="onDep()"></label>' +
+    '<small id="spanHint">호텔 박수를 입력하면 여행 기간이 계산됩니다</small></div>' +
+    '</div></section>';
+
+  /* 03 호텔 */
+  h += '<section class="sec" id="sec-hotel"><div class="sec-h"><div class="eyebrow">03</div>' +
+    '<h2>호텔 선택</h2><p>섬과 등급으로 걸러서 고르세요. 박수와 1박 요금을 입력하면 금액이 계산됩니다.</p></div>' +
+    '<div class="hotelbar">' +
+    '<select id="islandSel" onchange="onIsland(this.value)"></select>' +
+    '<select id="gradeSel" onchange="STATE.grade=this.value;renderHotelList()"></select>' +
+    '<select id="zoneSel" onchange="STATE.zone=this.value;renderHotelList()"></select>' +
+    '<select id="ovSel" onchange="STATE.ov=this.value;renderHotelList()"></select>' +
+    '</div>' +
+    '<div class="filterchips" id="chips"></div>' +
+    '<div class="htcount" id="htcount"></div>' +
+    '<div class="htlist" id="htlist"></div>' +
+    '<div class="sec-h" style="margin:20px 0 10px"><h2 style="font-size:17px">선택한 호텔</h2></div>' +
+    '<div id="pickedHotels"></div>' +
+    '</section>';
+
+  /* 04 항공 */
+  h += '<section class="sec" id="sec-air"><div class="sec-h"><div class="eyebrow">04</div>' +
+    '<h2>항공</h2><p>스케줄을 고르고 1인 항공료를 입력하세요. 항공료는 지상비와 분리해 표시됩니다.</p></div>' +
+    '<div class="card">' +
+    '<div class="field"><label>국제선 · 인천 ↔ 호놀룰루</label>' +
+    '<div class="airrow">' +
+    '<select id="airOut" onchange="setAir(\'out\',this.value)"></select>' +
+    '<select id="airBack" onchange="setAir(\'back\',this.value)"></select>' +
+    '</div><div class="airinfo" id="airInfo"></div></div>' +
+    '<div class="field" style="margin-bottom:0"><label for="airFare">국제선 항공료 <span class="lbnote">1인 · 원화</span></label>' +
+    '<input id="airFare" type="number" min="0" step="10000" placeholder="예: 1450000" oninput="setAirFare(this.value)">' +
+    '<small>비워두면 견적서에 항공료가 표시되지 않습니다.</small></div>' +
+    '</div>' +
+    '<div class="card" id="localAirCard"></div>' +
+    (FLIGHT_VERIFIED ? '' :
+      '<div class="warn"><strong>스케줄 시각은 미검증 참고값입니다.</strong> ' +
+      '출처마다 시각이 달라 확정할 수 없었습니다. 실제 예약 전에 항공사에서 확인해 주세요.</div>') +
+    '</section>';
+
+  /* 05 옵션 */
+  h += '<section class="sec" id="sec-opt"><div class="sec-h"><div class="eyebrow">05</div>' +
+    '<h2>유료 옵션</h2><p>선택한 옵션만 견적에 포함됩니다. 선택하지 않은 옵션도 견적서에 추천 목록으로 안내됩니다.</p></div>' +
+    '<div class="note" style="margin-bottom:10px"><b>사전예약 필수</b> 표시가 있는 투어는 출발 2개월 전까지 요청하셔야 합니다. ' +
+    '72시간 이내 취소 시 100% 취소 수수료가 부가됩니다.</div>' +
+    '<div class="optlist" id="optlist"></div></section>';
+
+  /* 06 금액 */
+  h += '<section class="sec" id="sec-money"><div class="sec-h"><div class="eyebrow">06</div><h2>금액</h2></div>' +
+    '<div class="card">' +
+    '<div class="field"><label for="fx">환율 <span class="lbnote" id="fxLabel"></span></label>' +
+    '<input id="fx" type="number" min="500" step="1" value="' + FX_DEFAULT + '" oninput="calc()">' +
+    '<small>' + FX_NOTE + '. 자동 조회가 불가능하니 하나은행 고시 환율을 확인해 입력해 주세요.</small></div>' +
+    '<div class="field" style="margin-bottom:0"><label for="margin">마진 <span class="lbnote" id="marginLabel"></span></label>' +
+    '<div class="slider"><input id="margin" type="range" min="' + MARGIN_MIN + '" max="' + MARGIN_MAX +
+    '" step="' + MARGIN_STEP + '" value="' + MARGIN_DEFAULT + '" oninput="calc()">' +
+    '<div class="slabel"><span>' + usd(MARGIN_MIN) + '</span><span>' + usd(MARGIN_MAX) + '</span></div></div>' +
+    '<small>1인 기준입니다. 인원수만큼 곱해집니다.</small></div>' +
+    '</div><div class="inner" id="innerPanel"></div></section>';
+
+  /* 07 견적 정보 */
+  h += '<section class="sec" id="sec-info"><div class="sec-h"><div class="eyebrow">07</div><h2>견적 정보</h2></div>' +
+    '<div class="card">' +
+    '<div class="field"><label for="staff">담당자 <span class="lbnote">비우면 회사명만 표시됩니다</span></label>' +
+    '<input id="staff" type="text" placeholder="예: 김다은" oninput="calc()"></div>' +
+    '<div class="field"><label for="qno">견적번호</label><input id="qno" type="text"></div>' +
+    '<div class="field" style="margin-bottom:0"><label for="qvalid">유효기간</label>' +
+    '<input id="qvalid" type="text" placeholder="비우면 7일 뒤로 자동 설정">' +
+    '<small>환율과 호텔 요금이 수시로 바뀌므로 짧게 잡으시는 편이 안전합니다. ' +
+    '<b>이 날짜가 지나면 고객 화면에서 금액이 가려집니다.</b></small></div>' +
+    '<div class="field" style="margin-bottom:0"><label for="qvalidD">만료 기준일 <span class="lbnote">금액을 가릴 날짜</span></label>' +
+    '<input id="qvalidD" type="date"><small>비우면 발행일로부터 7일 뒤로 자동 설정됩니다.</small></div>' +
+    '</div></section>';
+
+  /* 08 발행 */
+  h += '<section class="sec" id="sec-send"><div class="sec-h"><div class="eyebrow">08</div><h2>고객 발송 링크</h2></div>' +
+    '<div id="links"><div class="empty">아래 버튼을 누르면 링크가 만들어집니다</div></div>' +
+    '<textarea class="msg" id="msg" readonly placeholder="발송 문구가 여기에 만들어집니다"></textarea>' +
+    '<button class="cta ghost" onclick="copyText($(\'msg\').value)">카카오톡 문구 복사</button>' +
+    '<div class="tools"><button type="button" onclick="openMail()">이메일로 보내기</button>' +
+    '<button type="button" class="ghost" onclick="copyMailBody()">이메일 본문 복사</button></div>' +
+    '</section>';
+
+  /* 09 발행 기록 */
+  h += '<section class="sec" id="sec-log"><div class="sec-h"><div class="eyebrow">09</div>' +
+    '<h2>발행 기록</h2><p>이 화면에서 발행한 견적서 목록입니다.</p></div>' +
+    '<div class="warn" id="logwarn" style="display:none">' +
+    '<strong>기록은 이 화면에서만 유지됩니다.</strong> 새로고침하거나 창을 닫으면 사라집니다. ' +
+    '작업을 마치시면 <b>기록 내보내기</b>로 파일에 저장해 두세요.</div>' +
+    '<div id="loglist"></div>' +
+    '<div class="tools">' +
+    '<button type="button" onclick="exportLog()">기록 내보내기 (CSV)</button>' +
+    '<label class="filebtn">기록 불러오기<input type="file" accept=".csv" onchange="importLog(this)"></label>' +
+    '</div></section>';
+
+  h += '<footer>하와이 견적 · 안내 시스템입니다. 견적서와 일정표가 이 파일 하나에 들어 있습니다.' +
+    '<div class="foot-copy">' + COPY.line + '<br>' + COPY.short + '</div></footer>';
+
+  h += '<div class="bottombar"><div class="in"><div class="st" id="bottomSt"></div>' +
+    '<button type="button" onclick="openConfirm()">링크 만들기</button></div></div>';
+
+  $('app').innerHTML = h;
+
+  renderPkg();
+  renderIslandSel();
+  renderHotelList();
+  renderPicked();
+  renderOptions();
+  renderAir();
+  renderLocalAir();
+  renderLog();
+  renderNav();
+  sv('qno', defaultQno());
+  syncNames();
+  calc();
+}
+
+function defaultQno(){
+  var d = new Date();
+  return 'HW-' + String(d.getFullYear()).slice(2) +
+    ('0' + (d.getMonth() + 1)).slice(-2) + ('0' + d.getDate()).slice(-2) + '-01';
+}
+function defaultValid(){
+  var d = new Date(); d.setDate(d.getDate() + 7);
+  return d.getFullYear() + '.' + ('0' + (d.getMonth() + 1)).slice(-2) + '.' +
+    ('0' + d.getDate()).slice(-2) + ' 18시까지';
+}
+
+function renderPkg(){
+  var el = $('pkgrow');
+  if(!el) return;
+  el.innerHTML = PACKAGES.map(function(p){
+    return '<label class="pickcard' + (STATE.pkg === p.id ? ' on' : '') + '" onclick="setPkg(\'' + p.id + '\')">' +
+      '<b>' + esc(p.n) + '</b><em>' + esc(p.d) + ' · 최소 ' + p.minN + '박</em></label>';
+  }).join('');
+}
+function setPkg(id){
+  STATE.pkg = id;
+  renderPkg();
+  if(id === 'combo' && STATE.island === '오아후') { STATE.island = '빅아일랜드'; renderIslandSel(); }
+  renderHotelList(); calc();
+}
+
+function onIsland(v){
+  STATE.island = v;
+  STATE.zone = '';   /* 섬마다 위치 구분이 달라 초기화합니다 */
+  renderIslandSel(); renderHotelList();
+}
+function renderIslandSel(){
+  var a = $('islandSel'), b = $('gradeSel'), c = $('zoneSel'), d = $('ovSel');
+  if(c){
+    c.innerHTML = '<option value="">전체 위치</option>' +
+      zoneList(STATE.island).map(function(z){
+        return '<option value="' + z + '"' + (STATE.zone === z ? ' selected' : '') + '>' +
+          zoneLabel(STATE.island, z) + '</option>';
+      }).join('');
+  }
+  if(d){
+    d.innerHTML = '<option value="">오션뷰 전체</option>' +
+      '<option value="1"' + (STATE.ov === '1' ? ' selected' : '') + '>오션뷰 가능</option>' +
+      '<option value="0"' + (STATE.ov === '0' ? ' selected' : '') + '>오션뷰 없음</option>';
+  }
+  if(a){
+    a.innerHTML = ISLANDS.map(function(i){
+      return '<option' + (STATE.island === i ? ' selected' : '') + '>' + i + '</option>';
+    }).join('');
+  }
+  if(b){
+    var gs = [''];
+    Object.values(HOTELS).flat().forEach(function(h){ if(gs.indexOf(h.g) < 0) gs.push(h.g); });
+    gs.sort(function(x, y){ return (parseFloat(x) || 0) - (parseFloat(y) || 0); });
+    b.innerHTML = gs.map(function(g){
+      return '<option value="' + g + '"' + (STATE.grade === g ? ' selected' : '') + '>' +
+        (g ? g + '급' : '전체 등급') + '</option>';
+    }).join('');
+  }
+}
+
+function renderHotelList(){
+  var el = $('htlist');
+  if(!el) return;
+  var all = HOTELS[STATE.island] || [];
+  var list = all.filter(function(h){
+    if(STATE.grade && h.g !== STATE.grade) return false;
+    if(STATE.zone && h.zone !== STATE.zone) return false;
+    if(STATE.ov !== '' && String(h.ov || 0) !== STATE.ov) return false;
+    return true;
+  });
+  renderChips();
+  var cnt = $('htcount');
+  if(cnt){
+    var on = (STATE.grade || STATE.zone || STATE.ov !== '');
+    cnt.textContent = list.length + '개' + (on ? ' (전체 ' + all.length + '개 중)' : '');
+  }
+  if(!list.length){ el.innerHTML = '<div class="empty">해당 조건의 호텔이 없습니다. 필터를 조정해 보세요.</div>'; return; }
+  el.innerHTML = list.map(function(h){
+    var on = STATE.hotels.some(function(x){ return x.hotel === h.n; });
+    return '<div class="htcard' + (on ? ' on' : '') + '" onclick="toggleHotel(\'' + esc(h.n).replace(/'/g,"\\'") + '\')">' +
+      '<div class="ht-h"><b>' + esc(h.kr) + '</b><span class="en">' + esc(h.n) + '</span>' +
+      '<span class="ht-g">' + esc(h.g) + '</span>' +
+      (h.src !== 'both' ? '<span class="ht-src ' + SRC_COLOR[h.src] + '">' + SRC_LABEL[h.src] + '</span>' : '') +
+      '</div>' +
+      '<div class="ht-meta"><b>위치</b> ' + esc(h.loc) +
+      (h.room ? ' · <b>객실</b> ' + esc(h.room) : '') + '</div>' +
+      (h.feat ? '<div class="ht-meta">' + esc(h.feat) + '</div>' : '') +
+      '<div class="ht-tags">' +
+        (h.zone ? '<span class="ht-tag zone">' + zoneLabel(STATE.island, h.zone) + '</span>' : '') +
+        (h.ov ? '<span class="ht-tag ov">오션뷰 가능</span>' : '') +
+      '</div>' +
+      (h.note ? '<div class="ht-note">⚠ ' + esc(h.note) + '</div>' : '') +
+      '</div>';
+  }).join('');
+}
+
+function renderChips(){
+  var el = $('chips');
+  if(!el) return;
+  var chips = [{k:'ov', v:'1', t:'오션뷰'}];
+  zoneList(STATE.island).slice(0, 3).forEach(function(z){
+    chips.push({k:'zone', v:z, t:zoneLabel(STATE.island, z)});
+  });
+  chips.push({k:'grade', v:'4성', t:'4성급'});
+  chips.push({k:'grade', v:'5성', t:'5성급'});
+  var any = STATE.grade || STATE.zone || STATE.ov !== '';
+  el.innerHTML = chips.map(function(c){
+    var on = String(STATE[c.k]) === c.v;
+    return '<button type="button" class="chip' + (on ? ' on' : '') +
+      '" onclick="setFilter(\'' + c.k + '\',\'' + c.v + '\')">' + c.t + '</button>';
+  }).join('') +
+  (any ? '<button type="button" class="chip" onclick="clearFilter()">필터 해제</button>' : '');
+}
+function setFilter(k, v){
+  STATE[k] = (String(STATE[k]) === v) ? (k === 'ov' ? '' : '') : v;
+  renderIslandSel(); renderHotelList();
+}
+function clearFilter(){
+  STATE.grade = ''; STATE.zone = ''; STATE.ov = '';
+  renderIslandSel(); renderHotelList();
+}
+
+function toggleHotel(name){
+  var i = -1;
+  STATE.hotels.forEach(function(x, k){ if(x.hotel === name) i = k; });
+  if(i >= 0) STATE.hotels.splice(i, 1);
+  else {
+    var f = hotelByName(name);
+    STATE.hotels.push({island: f ? f.island : STATE.island, hotel: name, nights: 0, rate: 0});
+  }
+  renderHotelList(); renderPicked(); renderLocalAir(); calc();
+}
+function removePicked(i){ STATE.hotels.splice(i, 1); renderHotelList(); renderPicked(); renderLocalAir(); calc(); }
+function movePicked(i, dir){
+  var j = i + dir;
+  if(j < 0 || j >= STATE.hotels.length) return;
+  var t = STATE.hotels[i]; STATE.hotels[i] = STATE.hotels[j]; STATE.hotels[j] = t;
+  renderPicked(); calc();
+}
+function setNights(i, v){ STATE.hotels[i].nights = Number(v) || 0; renderPicked(); onDep(); calc(); }
+function setRate(i, v){ STATE.hotels[i].rate = Number(v) || 0; calc(); }
+
+function renderPicked(){
+  var el = $('pickedHotels');
+  if(!el) return;
+  if(!STATE.hotels.length){
+    el.innerHTML = '<div class="empty">위에서 호텔을 눌러 선택하세요</div>';
+    return;
+  }
+  el.innerHTML = STATE.hotels.map(function(x, i){
+    var f = hotelByName(x.hotel);
+    var h = f ? f.h : null;
+    return '<div class="card" style="padding:14px 15px;margin-bottom:8px">' +
+      '<div class="ht-h" style="margin-bottom:8px">' +
+      '<b>' + esc(h ? h.kr : x.hotel) + '</b>' +
+      '<span class="ht-g">' + esc(x.island) + (h ? ' · ' + h.g : '') + '</span>' +
+      '<span style="margin-left:auto;display:flex;gap:3px">' +
+      '<button type="button" onclick="movePicked(' + i + ',-1)" style="min-height:0;width:26px;height:26px;padding:0;border:0;border-radius:7px;background:var(--g100);color:var(--g500);font-weight:700">↑</button>' +
+      '<button type="button" onclick="movePicked(' + i + ',1)" style="min-height:0;width:26px;height:26px;padding:0;border:0;border-radius:7px;background:var(--g100);color:var(--g500);font-weight:700">↓</button>' +
+      '<button type="button" onclick="removePicked(' + i + ')" style="min-height:0;width:26px;height:26px;padding:0;border:0;border-radius:7px;background:var(--redL);color:var(--red);font-weight:700">×</button>' +
+      '</span></div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1.4fr;gap:7px">' +
+      '<input type="number" min="0" max="30" placeholder="박" value="' + (x.nights || '') +
+        '" oninput="setNights(' + i + ',this.value)">' +
+      '<input type="number" min="0" step="1" placeholder="1박 객실 요금 ($)" value="' + (x.rate || '') +
+        '" oninput="setRate(' + i + ',this.value)">' +
+      '</div>' +
+      (x.nights && x.rate
+        ? '<div style="font-size:12.5px;color:var(--g500);margin-top:6px">' +
+          x.nights + '박 × ' + usd(x.rate) + ' = <b style="color:var(--g900)">' +
+          usd(x.nights * x.rate * Math.ceil((Number(gv('qpax')) || 2) / 2)) + '</b></div>'
+        : '') +
+      '</div>';
+  }).join('');
+}
+
+function renderOptions(){
+  var el = $('optlist');
+  if(!el) return;
+  el.innerHTML = OPTIONS.map(function(o, i){
+    var on = STATE.options.indexOf(i) > -1;
+    return '<div class="optcard' + (on ? ' on' : '') + '" onclick="toggleOpt(' + i + ')">' +
+      '<div class="opt-h"><b>' + esc(o.n) + '</b>' +
+      (o.hot ? '<span class="opt-hot">강추</span>' : '') +
+      (o.pre ? '<span class="opt-pre">사전예약</span>' : '') +
+      '<span class="opt-p">' + (o.ask ? '개별 문의' : usd(o.p)) + '</span></div>' +
+      '<div class="opt-d">' + esc(o.d) + '</div>' +
+      (o.exc ? '<div class="opt-ex">현지 지불 · ' + esc(o.exc) + '</div>' : '') +
+      '</div>';
+  }).join('');
+}
+function toggleOpt(i){
+  var k = STATE.options.indexOf(i);
+  if(k >= 0) STATE.options.splice(k, 1); else STATE.options.push(i);
+  renderOptions(); calc();
+}
+
+function onDep(){
+  var d = parseDate(gv('depDate'));
+  markRq('depDate', !!d);
+  var n = totalNights();
+  var el = $('spanHint');
+  if(el){
+    if(d && n){
+      var back = addDays(d, n + 1);
+      el.textContent = fmtFull(d) + ' 출발 ~ ' + fmtFull(back) + ' 도착 · ' + n + '박 ' + (n + 2) + '일';
+    } else {
+      el.textContent = '호텔 박수를 입력하면 여행 기간이 계산됩니다';
+    }
+  }
+  calc();
+}
+function tripSpan(){
+  var d = parseDate(gv('depDate'));
+  var n = totalNights();
+  if(!d || !n) return '';
+  var back = addDays(d, n + 1);
+  return fmtFull(d) + ' 출발 ~ ' + fmtFull(back) + ' 도착 · ' + n + '박 ' + (n + 2) + '일';
+}
+
+/* ══════════════════════════════════════════
+   항공
+   ══════════════════════════════════════════ */
+function renderAir(){
+  var a = $('airOut'), b = $('airBack');
+  if(a){
+    a.innerHTML = '<option value="">가는 편 선택</option>' +
+      FLIGHTS_INTL.filter(function(f){ return f.from === '인천'; }).map(function(f){
+        return '<option value="' + f.no + '"' + (STATE.air.out === f.no ? ' selected' : '') + '>' +
+          f.air + ' ' + f.no + (f.dep ? ' · ' + f.dep + ' → ' + f.arr : '') + '</option>';
+      }).join('');
+  }
+  if(b){
+    b.innerHTML = '<option value="">오는 편 선택</option>' +
+      FLIGHTS_INTL.filter(function(f){ return f.to === '인천'; }).map(function(f){
+        return '<option value="' + f.no + '"' + (STATE.air.back === f.no ? ' selected' : '') + '>' +
+          f.air + ' ' + f.no + (f.dep ? ' · ' + f.dep + ' → ' + f.arr + ' +1일' : '') + '</option>';
+      }).join('');
+  }
+  syncAirInfo();
+}
+function flightByNo(no){
+  for(var i = 0; i < FLIGHTS_INTL.length; i++) if(FLIGHTS_INTL[i].no === no) return FLIGHTS_INTL[i];
+  return null;
+}
+function setAir(dir, v){ STATE.air[dir] = v; syncAirInfo(); calc(); }
+function setAirFare(v){ STATE.air.fare = Number(v) || 0; calc(); }
+function syncAirInfo(){
+  var el = $('airInfo');
+  if(!el) return;
+  var o = flightByNo(STATE.air.out), b = flightByNo(STATE.air.back);
+  if(!o && !b){ el.innerHTML = ''; return; }
+  var h = '';
+  if(o) h += '<div><b>가는 편</b> ' + esc(o.air + ' ' + o.no) +
+    (o.dep ? ' · ' + o.dep + ' 인천 출발 → ' + o.arr + ' 호놀룰루 도착 (당일)' : '') +
+    (o.days ? ' · ' + esc(o.days) : '') + '</div>';
+  if(b) h += '<div><b>오는 편</b> ' + esc(b.air + ' ' + b.no) +
+    (b.dep ? ' · ' + b.dep + ' 호놀룰루 출발 → ' + b.arr + ' 인천 도착 (익일)' : '') +
+    (b.days ? ' · ' + esc(b.days) : '') + '</div>';
+  el.innerHTML = h;
+}
+
+/* 주내선 */
+function renderLocalAir(){
+  var el = $('localAirCard');
+  if(!el) return;
+  var islands = [];
+  STATE.hotels.forEach(function(x){
+    if(x.island !== '오아후' && islands.indexOf(x.island) < 0) islands.push(x.island);
+  });
+  var h = '<div class="field" style="margin-bottom:' + (STATE.localAir.length ? '10px' : '0') + '">' +
+    '<label>주내선 · 이웃섬 이동 <span class="lbnote">선택</span></label>';
+  if(!islands.length){
+    h += '<small>이웃섬 호텔을 선택하면 해당 노선이 여기에 나타납니다. 오아후만 가시면 필요 없습니다.</small>';
+  } else {
+    h += '<div class="airrow"><select id="localSel">' +
+      '<option value="">노선 추가</option>' +
+      islands.map(function(is){
+        return (ISLAND_AIRPORT[is] || []).map(function(dest){
+          return '<option value="' + esc(dest) + '">호놀룰루 ↔ ' + esc(dest) + '</option>';
+        }).join('');
+      }).join('') +
+      '</select><button type="button" class="addbtn" onclick="addLocalAir()">추가</button></div>';
+  }
+  h += '</div>';
+  if(STATE.localAir.length){
+    h += STATE.localAir.map(function(x, i){
+      var f = FLIGHTS_LOCAL.filter(function(y){ return y.to === x.route; })[0];
+      return '<div class="localrow">' +
+        '<div class="lr-h"><b>호놀룰루 ↔ ' + esc(x.route) + '</b>' +
+        (f ? '<span>' + esc(f.air) + ' · ' + esc(f.t) + '</span>' : '') +
+        '<button type="button" onclick="removeLocalAir(' + i + ')">×</button></div>' +
+        '<input type="number" min="0" step="10000" placeholder="1인 왕복 항공료 (원)" value="' +
+        (x.fare || '') + '" oninput="setLocalFare(' + i + ',this.value)">' +
+        (f && f.n ? '<small>' + esc(f.n) + '</small>' : '') +
+        '</div>';
+    }).join('');
+  }
+  el.innerHTML = h;
+}
+function addLocalAir(){
+  var v = gv('localSel');
+  if(!v){ toast('노선을 골라주세요'); return; }
+  if(STATE.localAir.some(function(x){ return x.route === v; })){ toast('이미 추가된 노선입니다'); return; }
+  STATE.localAir.push({route: v, fare: 0});
+  renderLocalAir(); calc();
+}
+function removeLocalAir(i){ STATE.localAir.splice(i, 1); renderLocalAir(); calc(); }
+function setLocalFare(i, v){ STATE.localAir[i].fare = Number(v) || 0; calc(); }
+
+/* ══════════════════════════════════════════
+   사이드 메뉴 (PC 전용)
+   ══════════════════════════════════════════ */
+var NAV_ITEMS = [
+  {id:'sec-pkg',   n:'상품 유형'},
+  {id:'sec-cust',  n:'고객 정보'},
+  {id:'sec-hotel', n:'호텔 선택'},
+  {id:'sec-air',   n:'항공'},
+  {id:'sec-opt',   n:'유료 옵션'},
+  {id:'sec-money', n:'금액'},
+  {id:'sec-info',  n:'견적 정보'},
+  {id:'sec-send',  n:'발송 링크'}
+];
+function renderNav(){
+  var el = $('sidenav');
+  if(!el) return;
+  el.innerHTML = '<div class="nv-brand">' +
+    '<b>' + COMPANY.nameEn + '</b><span>하와이 견적 시스템</span></div>' +
+    '<div class="nv-list">' +
+    NAV_ITEMS.map(function(x, i){
+      return '<button type="button" class="nv-item" data-sec="' + x.id +
+        '" onclick="goSec(\'' + x.id + '\')"><i>' + (i + 1) + '</i>' + x.n + '</button>';
+    }).join('') + '</div>' +
+    '<div class="nv-foot" id="navFoot"></div>';
+  syncNavActive();
+}
+function goSec(id){
+  var el = $(id);
+  if(!el) return;
+  var y = el.getBoundingClientRect().top + window.pageYOffset - 14;
+  window.scrollTo({top: y, behavior: 'smooth'});
+}
+function syncNavActive(){
+  var cur = '';
+  NAV_ITEMS.forEach(function(x){
+    var el = $(x.id);
+    if(el && el.getBoundingClientRect().top <= 120) cur = x.id;
+  });
+  document.querySelectorAll('.nv-item').forEach(function(b){
+    b.classList.toggle('on', b.getAttribute('data-sec') === cur);
+  });
+}
+
+
+/* ══════════════════════════════════════════
+   발행
+   ══════════════════════════════════════════ */
+/* 만료 기준일 — YYMMDD. 비우면 발행일 + 7일 */
+function expiryKey(){
+  var v = parseDate(gv('qvalidD'));
+  if(!v){ v = new Date(); v.setDate(v.getDate() + 7); }
+  return String(v.getFullYear()).slice(2) +
+    ('0' + (v.getMonth() + 1)).slice(-2) + ('0' + v.getDate()).slice(-2);
+}
+function isExpired(key){
+  if(!key || key.length !== 6) return false;
+  var d = new Date(2000 + Number(key.slice(0,2)), Number(key.slice(2,4)) - 1, Number(key.slice(4,6)));
+  d.setHours(23, 59, 59);
+  return new Date() > d;
+}
+
+function packTrip(){
+  var m = calc();
+  var o = {
+    n: customerName(),
+    p: m.pax,
+    k: STATE.pkg,
+    s: gv('depDate').replace(/-/g, '').slice(2),
+    q: [gv('qno'), (gv('qvalid') || '').trim() || defaultValid(), Math.round(m.saleUSD), m.fx,
+        expiryKey(), (gv('staff') || '').trim()],
+    h: STATE.hotels.filter(function(x){ return x.nights > 0; }).map(function(x){
+      return [x.island, x.hotel, x.nights];
+    }),
+    o: STATE.options.slice()
+  };
+  /* 항공 — 요금이 있을 때만 담습니다 */
+  if(STATE.air.out || STATE.air.back || STATE.air.fare){
+    o.a = [STATE.air.out || '', STATE.air.back || '', Number(STATE.air.fare) || 0];
+  }
+  if(STATE.localAir.length){
+    o.la = STATE.localAir.map(function(x){ return [x.route, Number(x.fare) || 0]; });
+  }
+  var a = (gv('fn') || '').trim(), b = (gv('fn2') || '').trim();
+  if(a && b) o.n2 = [a, b];
+  return encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(o)))));
+}
+
+function unpackTrip(){
+  var raw = null;
+  try{
+    var m = /[#?&]d=([^&]+)/.exec(location.hash + location.search);
+    if(!m) return null;
+    raw = JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(m[1])))));
+  }catch(e){ return null; }
+  if(!raw) return null;
+
+  var s = raw.s;
+  var start = (s && s.length === 6)
+    ? new Date(2000 + Number(s.slice(0,2)), Number(s.slice(2,4)) - 1, Number(s.slice(4,6)))
+    : null;
+
+  STATE.pkg = raw.k || 'oahu';
+  STATE.hotels = (raw.h || []).map(function(x){
+    return {island: x[0], hotel: x[1], nights: x[2], rate: 0};
+  });
+  STATE.options = raw.o || [];
+  STATE.air = raw.a ? {out: raw.a[0], back: raw.a[1], fare: raw.a[2]} : {out:'', back:'', fare:0};
+  STATE.localAir = (raw.la || []).map(function(x){ return {route: x[0], fare: x[1]}; });
+
+  var qq = raw.q || [];
+  var pax = raw.p || 2;
+  var fx = qq[3] || FX_DEFAULT;
+  var saleUSD = qq[2] || 0;
+
+  return {
+    n: raw.n || '', n2: raw.n2 || null, pax: pax, start: start,
+    no: qq[0] || '', valid: qq[1] || '', saleUSD: saleUSD, fx: fx,
+    expired: isExpired(qq[4]), staff: qq[5] || '',
+    perUSD: saleUSD / pax, saleKRW: saleUSD * fx, perKRW: (saleUSD / pax) * fx,
+    nights: STATE.hotels.reduce(function(a, x){ return a + x.nights; }, 0),
+    hotels: STATE.hotels, options: STATE.options, pkg: STATE.pkg,
+    air: STATE.air, localAir: STATE.localAir,
+    airKRW: (STATE.air.fare || 0) * pax,
+    localKRW: STATE.localAir.reduce(function(a, x){ return a + (x.fare || 0) * pax; }, 0),
+    perAirKRW: ((STATE.air.fare || 0) +
+      STATE.localAir.reduce(function(a, x){ return a + (x.fare || 0); }, 0))
+  };
+}
+
+function baseUrl(){
+  var v = (gv('fb') || '').trim();
+  if(v) return v.split('#')[0];
+  return location.href.split('#')[0];
+}
+
+function validateQuote(){
+  var errs = [], warns = [];
+  if(!customerName()) errs.push('신랑 또는 신부 성함을 입력해 주세요');
+  if(!parseDate(gv('depDate'))) errs.push('한국 출발일을 입력해 주세요');
+  if(!STATE.hotels.length) errs.push('호텔을 선택해 주세요');
+  var n = totalNights();
+  if(!n) errs.push('호텔 박수를 입력해 주세요');
+  var pkg = PACKAGES.filter(function(p){ return p.id === STATE.pkg; })[0];
+  if(pkg && n && n < pkg.minN) warns.push(pkg.n + ' 상품은 최소 ' + pkg.minN + '박입니다 (현재 ' + n + '박)');
+  STATE.hotels.forEach(function(x){
+    if(x.nights > 0 && !x.rate) errs.push(x.hotel + ' 1박 요금이 비어 있습니다');
+  });
+  if(!gv('qno').trim()) errs.push('견적번호를 입력해 주세요');
+  var fx = Number(gv('fx'));
+  if(!fx || fx < 500) errs.push('환율을 확인해 주세요');
+  return {errs: errs, warns: warns};
+}
+
+function openConfirm(){
+  var v = validateQuote();
+  var m = calc();
+  var h = '';
+  if(v.errs.length){
+    h += '<div class="errbox"><b>수정이 필요합니다</b><ul>' +
+      v.errs.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>';
+  }
+  if(v.warns.length){
+    h += '<div class="warn">' + v.warns.map(esc).join('<br>') + '</div>';
+  }
+  h += '<div class="card flat" style="margin-top:10px">';
+  h += '<div class="cfkv"><span>고객명</span><em>' + esc(customerName() || '미입력') + '</em></div>';
+  h += '<div class="cfkv"><span>상품</span><em>' +
+    esc((PACKAGES.filter(function(p){ return p.id === STATE.pkg; })[0] || {}).n || '') + '</em></div>';
+  h += '<div class="cfkv"><span>기간</span><em>' + esc(tripSpan() || '미입력') + '</em></div>';
+  h += '<div class="cfkv"><span>인원 · 객실</span><em>' + m.pax + '명 · ' + m.rooms + '실</em></div>';
+  STATE.hotels.forEach(function(x){
+    var f = hotelByName(x.hotel);
+    h += '<div class="cfkv"><span>' + esc(x.island) + '</span><em>' +
+      esc(f ? f.h.kr : x.hotel) + ' · ' + x.nights + '박 · ' + usd(x.rate) + '/박</em></div>';
+  });
+  if(STATE.options.length){
+    h += '<div class="cfkv"><span>옵션</span><em>' +
+      STATE.options.map(function(i){ return esc(OPTIONS[i].n); }).join('<br>') + '</em></div>';
+  }
+  h += '<div class="cfkv"><span>환율</span><em>1 USD = ' + m.fx.toLocaleString('ko-KR') + '원</em></div>';
+  h += '<div class="cfkv"><span>유효기간</span><em>' +
+    esc((gv('qvalid') || '').trim() || defaultValid()) + '</em></div>';
+  h += '</div>';
+
+  h += '<div class="inner" style="margin-top:10px">' +
+    '<div class="ir"><span>매입 원가</span><b>' + usd(m.costUSD) + '</b></div>' +
+    '<div class="ir"><span>마진</span><b>' + usd(m.marginUSD) + '</b></div>' +
+    '<div class="ir big"><span>고객 청구액</span><b>' + usd(m.saleUSD) + '</b></div>' +
+    '<div class="ir sub2"><span>· 원화</span><b>' + krw(m.saleKRW) + '</b></div>' +
+    '<div class="ir"><span>1인당</span><b>' + usd(m.perUSD) + '</b></div></div>';
+
+  h += '<div class="chkbox"><b style="font-size:13.5px;display:block;margin-bottom:4px">최종 확인</b>' +
+    '<label><input type="checkbox" class="cfx"><span>위 내용이 모두 정확합니다</span></label>' +
+    '<label><input type="checkbox" class="cfx"><span>환율과 금액을 확인했습니다</span></label>' +
+    '<label><input type="checkbox" class="cfx"><span>고객에게 발송해도 됩니다</span></label></div>';
+
+  $('cfBody').innerHTML = h;
+  $('cfOk').disabled = v.errs.length > 0;
+  $('confirm').classList.add('on');
+}
+function closeConfirm(){ $('confirm').classList.remove('on'); }
+function doIssue(){
+  var all = true;
+  document.querySelectorAll('.cfx').forEach(function(b){ if(!b.checked) all = false; });
+  if(!all){ toast('최종 확인 항목을 모두 체크해 주세요'); return; }
+  closeConfirm();
+  issueLinks();
+}
+
+var LAST_LINKS = [];
+function issueLinks(){
+  var code = packTrip();
+  var base = baseUrl();
+  var url = base + '#q=1&d=' + code;
+  LAST_LINKS = [{t: '하와이 신혼여행 견적서', url: url}];
+
+  $('links').innerHTML = LAST_LINKS.map(function(l){
+    return '<div class="linkrow"><b>' + esc(l.t) + '</b>' +
+      '<div class="u">' + esc(l.url) + '</div>' +
+      '<div class="btns">' +
+      '<button type="button" onclick="copyText(\'' + l.url.replace(/'/g, "\\'") + '\')">링크 복사</button>' +
+      '<button type="button" class="ghost" onclick="window.open(\'' + l.url.replace(/'/g, "\\'") + '\',\'_blank\')">미리보기</button>' +
+      '</div></div>';
+  }).join('');
+
+  var name = customerName() || '고객';
+  var msg = name + ', 안녕하세요.\n' + COMPANY.name + ' ' + COMPANY.staff + '입니다.\n\n' +
+    '요청하신 하와이 신혼여행 견적서를 보내드립니다.\n\n' +
+    LAST_LINKS.map(function(l){ return '[' + l.t + ']\n' + l.url; }).join('\n\n') + '\n\n' +
+    '유효기간 ' + ((gv('qvalid') || '').trim() || defaultValid()) + '\n\n' +
+    COMPANY.name + ' ' + COMPANY.staff + ' · ' + COMPANY.tel;
+  $('msg').value = msg;
+  try{ pushLog(calc(), url, code); }catch(e){}
+  sv('qno', defaultQno());
+  toast('견적서를 발행하고 기록에 남겼습니다');
+}
+
+function buildMailBody(){
+  var name = customerName() || '고객';
+  var b = name + ', 안녕하세요.\n' + COMPANY.name + ' ' + COMPANY.staff + '입니다.\n\n';
+  b += '상담해 주신 하와이 신혼여행 견적서를 보내드립니다.\n\n';
+  var sp = tripSpan();
+  if(sp) b += '· 여행 기간 : ' + sp + '\n';
+  b += '· 견적번호 : ' + (gv('qno') || '-') + '\n';
+  b += '· 유효기간 : ' + ((gv('qvalid') || '').trim() || defaultValid()) + '\n\n';
+  LAST_LINKS.forEach(function(l){ b += '[' + l.t + ']\n' + l.url + '\n\n'; });
+  b += '일정과 포함 사항을 확인하시고 궁금하신 점은 편하게 연락 주세요.\n\n';
+  b += '───────────────\n' + COMPANY.name + ' ' + COMPANY.nameEn + '\n';
+  b += '담당 ' + COMPANY.staff + ' · ' + COMPANY.tel + '\n' + COMPANY.email + '\n' + COMPANY.site + '\n';
+  return b;
+}
+function openMail(){
+  if(!LAST_LINKS.length){ toast('먼저 링크를 만들어 주세요'); return; }
+  var to = (gv('custEmail') || '').trim();
+  var subj = '[' + COMPANY.name + '] ' + (customerName() || '고객') + ' 하와이 신혼여행 견적서 · ' + gv('qno');
+  var body = buildMailBody();
+  var url = 'mailto:' + encodeURIComponent(to) + '?subject=' + encodeURIComponent(subj) +
+    '&body=' + encodeURIComponent(body);
+  if(url.length > 1900){
+    copyText(body);
+    alert('본문이 길어 메일 앱에 자동으로 담기 어렵습니다.\n\n본문을 복사했으니 붙여넣어 주세요.');
+    location.href = 'mailto:' + encodeURIComponent(to) + '?subject=' + encodeURIComponent(subj);
+    return;
+  }
+  location.href = url;
+}
+function copyMailBody(){
+  if(!LAST_LINKS.length){ toast('먼저 링크를 만들어 주세요'); return; }
+  copyText(buildMailBody());
+}
+
+
+/* ══════════════════════════════════════════
+   발행 기록
+   화면에서만 유지됩니다. 파일로 저장해 두세요.
+   ══════════════════════════════════════════ */
+var LOG = [];
+
+function pushLog(m, url, code){
+  LOG.unshift({
+    t: new Date().toLocaleString('ko-KR', {hour12:false}),
+    no: gv('qno'),
+    name: customerName(),
+    pax: m.pax,
+    staff: staffName(),
+    costUSD: Math.round(m.costUSD),
+    saleUSD: Math.round(m.saleUSD),
+    marginUSD: Math.round(m.marginUSD),
+    airKRW: Math.round(m.flightKRW || 0),
+    fx: m.fx,
+    valid: (gv('qvalid') || '').trim() || defaultValid(),
+    url: url, code: code
+  });
+  renderLog();
+}
+
+function renderLog(){
+  var el = $('loglist');
+  if(!el) return;
+  var w = $('logwarn');
+  if(w) w.style.display = LOG.length ? '' : 'none';
+  if(!LOG.length){
+    el.innerHTML = '<div class="empty">발행한 견적서가 없습니다</div>';
+    return;
+  }
+  el.innerHTML = LOG.map(function(x, i){
+    return '<div class="logrow"><div class="l1"><span class="no">' + esc(x.no) + '</span>' +
+      '<span class="amt">' + usd(x.saleUSD) + '</span></div>' +
+      '<div class="l2">' + esc(x.name) + ' · ' + x.pax + '명 · 수익 ' + usd(x.marginUSD) +
+      (x.staff ? ' · ' + esc(x.staff) : '') + '</div>' +
+      '<div class="l3">' + esc(x.t) + ' · 원가 ' + usd(x.costUSD) +
+      (x.airKRW ? ' · 항공 ' + krw(x.airKRW) : '') +
+      ' · 환율 ' + x.fx.toLocaleString('ko-KR') + ' · 유효 ' + esc(x.valid) + '</div>' +
+      (x.code
+        ? '<div class="l4">' +
+          '<button type="button" onclick="reloadFromLog(' + i + ')">이 견적 불러오기</button>' +
+          '<button type="button" class="gh" onclick="copyText(\'' +
+            String(x.url).replace(/'/g, "\\'") + '\')">링크 복사</button>' +
+          '<button type="button" class="gh" onclick="window.open(\'' +
+            String(x.url).replace(/'/g, "\\'") + '\',\'_blank\')">열기</button>' +
+          '</div>'
+        : '') + '</div>';
+  }).join('');
+}
+
+function reloadFromLog(i){
+  var x = LOG[i];
+  if(!x || !x.code){ toast('복원할 정보가 없습니다'); return; }
+  if(!confirm(x.no + ' 견적을 불러옵니다.\n\n지금 입력하신 내용은 사라집니다.\n계속할까요?')) return;
+  location.hash = '#q=1&d=' + x.code + '&edit=1';
+  location.reload();
+}
+
+function exportLog(){
+  if(!LOG.length){ toast('발행 기록이 없습니다'); return; }
+  var head = '발행일시,견적번호,고객명,인원,담당자,매입원가USD,고객청구액USD,수익USD,항공료KRW,환율,유효기간,견적서링크,복원코드\n';
+  var body = LOG.map(function(x){
+    return [x.t, x.no, x.name, x.pax, x.staff || '', x.costUSD, x.saleUSD, x.marginUSD,
+            x.airKRW || 0, x.fx, x.valid, x.url || '', x.code || '']
+      .map(function(v){ return '"' + String(v).replace(/"/g, '""') + '"'; }).join(',');
+  }).join('\n');
+  var blob = new Blob(['\ufeff' + head + body], {type:'text/csv;charset=utf-8;'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '하와이견적발행기록_' + new Date().toISOString().slice(0, 10) + '.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast(LOG.length + '건을 파일로 저장했습니다');
+}
+
+function importLog(input){
+  var file = input.files[0];
+  if(!file) return;
+  var r = new FileReader();
+  r.onload = function(){
+    try{
+      var lines = String(r.result).replace(/^\ufeff/, '').split(/\r?\n/).filter(Boolean).slice(1);
+      var add = lines.map(function(l){
+        var v = l.match(/("([^"]|"")*"|[^,]*)/g).filter(function(x, i){ return i % 2 === 0; })
+                 .map(function(x){ return x.replace(/^"|"$/g, '').replace(/""/g, '"'); });
+        return {t:v[0], no:v[1], name:v[2], pax:v[3], staff:v[4],
+                costUSD:Number(v[5]) || 0, saleUSD:Number(v[6]) || 0, marginUSD:Number(v[7]) || 0,
+                airKRW:Number(v[8]) || 0, fx:Number(v[9]) || FX_DEFAULT,
+                valid:v[10], url:v[11], code:v[12]};
+      });
+      var seen = {}, merged = [];
+      add.concat(LOG).forEach(function(x){
+        var k = (x.no || '') + '|' + (x.t || '');
+        if(seen[k]) return;
+        seen[k] = 1; merged.push(x);
+      });
+      merged.sort(function(a, b){ return String(b.t).localeCompare(String(a.t)); });
+      var dup = (add.length + LOG.length) - merged.length;
+      LOG = merged;
+      renderLog();
+      toast(add.length + '건을 불러왔습니다' + (dup ? ' (중복 ' + dup + '건 제외)' : ''));
+    }catch(e){ toast('파일을 읽지 못했습니다'); }
+    input.value = '';
+  };
+  r.readAsText(file, 'utf-8');
+}
+
+/* ══════════════════════════════════════════
+   고객 견적서
+   ══════════════════════════════════════════ */
+function renderQuote(){
+  var T = unpackTrip();
+  if(!T){ $('app').innerHTML = '<div class="sec"><div class="empty">견적서를 불러오지 못했습니다. 담당자에게 문의해 주세요.</div></div>'; return; }
+
+  var secN = 0;
+  function no(){ secN++; return ('0' + secN).slice(-2); }
+  var h = '';
+  var pkgName = (PACKAGES.filter(function(p){ return p.id === T.pkg; })[0] || {}).n || '';
+  var span = T.start ? (fmtFull(T.start) + ' 출발 · ' + T.nights + '박 ' + (T.nights + 2) + '일') : '';
+
+  /* 표지 */
+  h += '<div class="hero">' +
+    '<img class="logo" src="images/logo.png" alt="' + COMPANY.nameEn + '" onerror="logoFail(this)">' +
+    '<div class="tag">HONEYMOON ITINERARY</div>' +
+    '<h1>하와이 허니문 ' + T.nights + '박 ' + (T.nights + 2) + '일</h1>' +
+    (T.n ? '<p>' + esc(T.n) + '</p>' : '') + '</div>';
+
+  /* 요약 */
+  h += '<section class="sec"><div class="sumgrid">' +
+    '<div class="sumcard"><dt>여행지역</dt><dd>하와이</dd></div>' +
+    '<div class="sumcard"><dt>상품</dt><dd>' + esc(pkgName) + '</dd></div>' +
+    '<div class="sumcard"><dt>이동 (투어 시)</dt><dd>전용 차량</dd></div>' +
+    '<div class="sumcard"><dt>상품 포인트</dt><dd>북부 섬 일주투어</dd></div>' +
+    '</div></section>';
+
+  /* 금액 */
+  if(T.expired){
+    h += '<section class="sec"><div class="expbox">' +
+      '<b>견적 유효기간이 지났습니다</b>' +
+      '<p>이 견적은 ' + esc(T.valid) + ' 까지 유효했습니다.<br>' +
+      '환율과 호텔 요금, 항공료가 수시로 변동되어 <strong>금액을 표시하지 않습니다.</strong></p>' +
+      '<p class="exp-sub">아래 일정과 상품 내용은 그대로 확인하실 수 있습니다.<br>' +
+      '최신 금액이 필요하시면 담당자에게 문의해 주세요.</p>' +
+      '<a href="tel:' + COMPANY.tel.replace(/-/g,'') + '" class="exp-btn">' + COMPANY.tel + ' 문의하기</a>' +
+      '</div></section>';
+  } else {
+  h += '<section class="sec"><div class="pricebox">' +
+    '<span>1인 여행 경비</span>' +
+    '<b>' + usd(T.perUSD) + '</b>' +
+    '<span class="krw">약 ' + krwC(T.perKRW) + '</span>' +
+    '<em>' + T.pax + '명 총액 ' + usd(T.saleUSD) + '</em>' +
+    '<span class="krw2">약 ' + krwC(T.saleKRW) + '</span>' +
+    '<div class="fxnote">원화 금액은 1 USD = ' + T.fx.toLocaleString('ko-KR') + '원 기준 참고값입니다.<br>' +
+    '실제 결제 시점 환율에 따라 달라질 수 있습니다.</div>' +
+    '</div>' +
+    (T.perAirKRW
+      ? '<div class="airbox">' +
+        '<div class="ab-h"><b>항공료 별도</b><span>1인 ' + krwC(T.perAirKRW) + '</span></div>' +
+        '<div class="ab-d">' + T.pax + '명 총액 ' + krwC(T.perAirKRW * T.pax) + '</div>' +
+        (T.localKRW ? '<div class="ab-s">국제선 ' + krwC(T.airKRW / T.pax) +
+          ' · 주내선 ' + krwC(T.localKRW / T.pax) + '</div>' : '') +
+        '<div class="ab-n">항공료는 발송 시점 기준이며 <b>실시간으로 변동</b>됩니다. ' +
+        '좌석 상황에 따라 예약 시점에 금액이 달라질 수 있습니다.</div>' +
+        '</div>' +
+        '<div class="totalbox"><span>1인 총 예상 금액</span>' +
+        '<b>' + krwC(T.perKRW + T.perAirKRW) + '</b>' +
+        '<em>지상비 ' + krwC(T.perKRW) + ' + 항공료 ' + krwC(T.perAirKRW) + '</em></div>'
+      : '') +
+    (span ? '<div class="note" style="margin-top:10px"><b>여행 기간</b> ' + esc(span) + '</div>' : '') +
+    '</section>';
+  }
+  if(T.expired && span){
+    h += '<section class="sec"><div class="note"><b>여행 기간</b> ' + esc(span) + '</div></section>';
+  }
+
+  /* 항공 일정 */
+  if(T.air && (T.air.out || T.air.back || T.localAir.length)){
+    h += '<section class="sec"><div class="sec-h"><div class="eyebrow">' + no() + '</div>' +
+      '<h2>항공 일정</h2><p>인천 ~ 하와이는 밤 출발이라 도착일이 출발일과 같습니다.</p></div><div class="card">';
+    function fl(no2){
+      for(var i = 0; i < FLIGHTS_INTL.length; i++) if(FLIGHTS_INTL[i].no === no2) return FLIGHTS_INTL[i];
+      return null;
+    }
+    var o = fl(T.air.out), b = fl(T.air.back);
+    if(o) h += '<div class="flrow"><span>가는 편</span><em>' + esc(o.air + ' ' + o.no) +
+      (o.dep ? '<br>' + o.dep + ' 인천 출발 → ' + o.arr + ' 호놀룰루 도착' : '') + '</em></div>';
+    if(b) h += '<div class="flrow"><span>오는 편</span><em>' + esc(b.air + ' ' + b.no) +
+      (b.dep ? '<br>' + b.dep + ' 호놀룰루 출발 → 익일 ' + b.arr + ' 인천 도착' : '') + '</em></div>';
+    T.localAir.forEach(function(x){
+      h += '<div class="flrow"><span>주내선</span><em>호놀룰루 ↔ ' + esc(x.route) + '</em></div>';
+    });
+    h += '</div>';
+    h += '<div class="note">항공 시각은 항공사 사정으로 변경될 수 있습니다. 출발 전 반드시 확인해 주세요.</div>';
+    h += '</section>';
+  }
+
+  /* 포함 · 불포함 */
+  h += '<section class="sec"><div class="sec-h"><div class="eyebrow">' + no() + '</div><h2>상품 기본 안내</h2></div>' +
+    '<div class="grid g2">' +
+    '<div class="card"><h3>포함사항</h3><ul class="list inc">' +
+    LAND_FEE_INC.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') +
+    '<li>일정표에 명시된 전 일정 숙박</li>' +
+    (T.options.length ? '<li>선택하신 유료 옵션 ' + T.options.length + '건</li>' : '') +
+    '</ul></div>' +
+    '<div class="card"><h3>불포함사항</h3><ul class="list exc">' +
+    NOT_INC.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') +
+    (T.perAirKRW ? '<li><b>항공료</b> 위에 별도 표기 (지상비에 미포함)</li>'
+                 : '<li>한국 출발 · 귀국 국제선 항공권</li>') +
+    '</ul></div></div>' +
+    '<div class="grid g2" style="margin-top:9px">' +
+    '<div class="card"><h3>비자 및 여권</h3><ul class="list exc" style="list-style:none">' +
+    VISA_NOTE.map(function(x){ return '<li style="padding-left:12px">' + esc(x) + '</li>'; }).join('') +
+    '</ul></div>' +
+    '<div class="card"><h3>비고</h3><p style="font-size:14.5px;color:var(--g600)">현지 사정에 따라 세부 순서는 변경될 수 있습니다.</p></div>' +
+    '</div></section>';
+
+  /* 특전 */
+  h += '<section class="sec"><div class="perkbox">' +
+    '<div class="perkhead"><span class="perkbadge">HONEYMOON BENEFIT</span>' +
+    '<b>플래닛투어 하와이 예약 추가 특전</b>' +
+    '<p>아래 특전이 기본으로 포함됩니다</p></div>' +
+    PERKS_HW.map(function(p, i){
+      return '<div class="perkitem"><span class="pnum">' + (i + 1) + '</span>' +
+        '<div class="ptxt"><b>' + esc(p.t) + '</b>' +
+        '<em>' + esc(p.d) + (p.exc ? '<br>불포함 · ' + esc(p.exc) : '') +
+        (p.note ? '<br>' + esc(p.note) : '') + '</em></div></div>';
+    }).join('') +
+    '<div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.18);' +
+    'font-size:12.5px;color:#A896C4;text-align:center">상기 특전은 현지 사정에 의해 변동될 수 있습니다.</div>' +
+    '</div></section>';
+
+  /* 호텔 */
+  if(T.hotels.length){
+    h += '<section class="sec"><div class="sec-h"><div class="eyebrow">' + no() + '</div>' +
+      '<h2>숙박 안내</h2><p>선택하신 호텔입니다.</p></div>';
+    T.hotels.forEach(function(x){
+      var f = hotelByName(x.hotel);
+      var ht = f ? f.h : null;
+      h += '<div class="card">' +
+        '<div class="ht-h"><b style="font-size:17px">' + esc(ht ? ht.kr : x.hotel) + '</b>' +
+        '<span class="en">' + esc(x.hotel) + '</span>' +
+        (ht ? '<span class="ht-g">' + esc(ht.g) + '</span>' : '') +
+        '<span class="ht-g" style="background:var(--g100);color:var(--g600)">' + x.nights + '박</span></div>';
+      if(ht){
+        h += '<div class="ht-meta"><b>지역</b> ' + esc(x.island) + ' · ' + esc(ht.loc) + '</div>';
+        if(ht.room) h += '<div class="ht-meta"><b>객실</b> ' + esc(ht.room) + '</div>';
+        if(ht.feat) h += '<div class="ht-meta">' + esc(ht.feat) + '</div>';
+        h += '<div class="ht-tags">' +
+          (ht.zone ? '<span class="ht-tag zone">' + zoneLabel(x.island, ht.zone) + '</span>' : '') +
+          (ht.ov ? '<span class="ht-tag ov">오션뷰 가능</span>' : '') + '</div>';
+        if(ht.note) h += '<div class="ht-note">⚠ ' + esc(ht.note) + '</div>';
+        var imgs = hotelImgs(ht.code, 3);
+        if(imgs.length){
+          h += '<div class="ht-imgs">' + imgs.map(function(src){
+            return '<figure><img src="' + src + '" alt="' + esc(ht.kr) +
+              '" loading="lazy" onerror="galFail(this)"></figure>';
+          }).join('') + '</div>';
+        }
+      }
+      h += '</div>';
+    });
+    h += '</section>';
+  }
+
+  /* 일정표 */
+  var days = buildItinerary();
+  if(days.length){
+    h += '<section class="sec"><div class="sec-h"><div class="eyebrow">' + no() + '</div>' +
+      '<h2>일자별 상세 일정</h2></div>';
+    days.forEach(function(x){
+      h += '<div class="dayrow"><div class="day-h">' +
+        '<span class="day-n">' + x.i + '일차</span>' +
+        '<span class="day-t">' + esc(x.t) + '</span>' +
+        (x.k ? '<span class="day-k">' + esc(x.k) + '</span>' : '') + '</div>' +
+        '<div class="day-b"><div class="day-main">';
+      x.main.forEach(function(l){ h += '<div class="li">' + esc(l) + '</div>'; });
+      if(x.tour){
+        h += '<div class="tourbox"><b>◆ ' + esc(x.tour.t) + '</b>';
+        x.tour.li.forEach(function(l){ h += '<div class="li">' + esc(l) + '</div>'; });
+        h += '</div>';
+      }
+      x.after.forEach(function(l){ h += '<div class="li">' + esc(l) + '</div>'; });
+      if(x.hotelName){
+        var hf = hotelByName(x.hotelName);
+        h += '<div class="hotelmark"><span>HOTEL</span>' + esc(hf ? hf.h.kr : x.hotelName) + '</div>';
+      }
+      h += '</div>';
+      if(x.meal){
+        h += '<div class="day-meal"><strong>식사</strong>' +
+          x.meal.map(function(m){
+            var p = m.split(' ');
+            return '<div><em>' + esc(p[0]) + '</em>' + esc(p.slice(1).join(' ')) + '</div>';
+          }).join('') + '</div>';
+      }
+      h += '</div></div>';
+    });
+    h += '</section>';
+  }
+
+  /* 선택한 옵션 */
+  if(T.options.length){
+    h += '<section class="sec"><div class="sec-h"><div class="eyebrow">' + no() + '</div>' +
+      '<h2>포함된 유료 옵션</h2><p>견적에 포함된 옵션입니다.</p></div>';
+    T.options.forEach(function(i){
+      var o = OPTIONS[i];
+      if(!o) return;
+      h += '<details open><summary><span class="sm-lab">' + esc(o.n) +
+        (o.pre ? ' <span class="opt-pre">사전예약</span>' : '') +
+        '<small>' + esc(o.d) + ' · ' + (o.ask ? '개별 문의' : usd(o.p) + ' / 1인') + '</small></span>' +
+        '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>' +
+        '<div class="dbody">' +
+        '<figure style="margin:0 0 10px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--g100)">' +
+        '<img src="' + optImg(o.img) + '" alt="' + esc(o.n) + '" loading="lazy" ' +
+        'style="width:100%;height:100%;object-fit:cover" onerror="imgFail(this)"></figure>' +
+        (o.detail ? '<p>' + esc(o.detail) + '</p>' : '') +
+        (o.inc ? '<p><strong>포함</strong><br>' + esc(o.inc) + '</p>' : '') +
+        (o.exc ? '<div class="warn"><strong>현지 지불 · 불포함</strong><br>' + esc(o.exc) + '</div>' : '') +
+        (o.note ? '<p style="font-size:13px;color:var(--g500);margin-top:9px">' + esc(o.note) + '</p>' : '') +
+        '</div></details>';
+    });
+    h += '</section>';
+  }
+
+  /* 추천 옵션 */
+  var rest = OPTIONS.map(function(o, i){ return i; }).filter(function(i){ return T.options.indexOf(i) < 0; });
+  if(rest.length){
+    h += '<section class="sec"><div class="sec-h"><div class="eyebrow">' + no() + '</div>' +
+      '<h2>유료 옵션 투어</h2><p>자유일정에 추가하실 수 있습니다. 원하시면 담당자에게 문의해 주세요.</p></div>';
+    rest.forEach(function(i){
+      var o = OPTIONS[i];
+      h += '<details><summary><span class="sm-lab">' + esc(o.n) +
+        (o.hot ? ' <span class="opt-hot">강추</span>' : '') +
+        (o.pre ? ' <span class="opt-pre">사전예약</span>' : '') +
+        '<small>' + esc(o.d) + ' · ' + (o.ask ? '개별 문의' : usd(o.p) + ' / 1인') + '</small></span>' +
+        '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>' +
+        '<div class="dbody">' +
+        (o.detail ? '<p>' + esc(o.detail) + '</p>' : '') +
+        (o.inc ? '<p><strong>포함</strong><br>' + esc(o.inc) + '</p>' : '') +
+        (o.exc ? '<div class="warn"><strong>현지 지불 · 불포함</strong><br>' + esc(o.exc) + '</div>' : '') +
+        (o.note ? '<p style="font-size:13px;color:var(--g500);margin-top:9px">' + esc(o.note) + '</p>' : '') +
+        '</div></details>';
+    });
+    h += '<div class="card" style="margin-top:10px"><h3>예약 시 참고사항</h3><ul class="list exc" style="list-style:none">' +
+      OPT_NOTE.map(function(x){ return '<li style="padding-left:12px">' + esc(x) + '</li>'; }).join('') +
+      '</ul></div>';
+    h += '<div class="note">상기 유료 일정은 현지 사정에 의해 사전 고지 없이 변동될 수 있습니다.</div></section>';
+  }
+
+  /* 이웃섬 주의 */
+  if(T.pkg === 'combo'){
+    h += '<section class="sec"><div class="sec-h"><div class="eyebrow">' + no() + '</div>' +
+      '<h2>이웃섬 결합 시 확인사항</h2></div><div class="card"><ul class="list exc" style="list-style:none">' +
+      COMBO_NOTE.map(function(x){ return '<li style="padding-left:12px">' + esc(x) + '</li>'; }).join('') +
+      '</ul></div></section>';
+  }
+
+  /* 꼭 확인 */
+  h += '<section class="sec"><div class="note"><b>꼭 확인해 주세요</b><br>' +
+    '상기 일정은 항공, 기상, 현지 사정에 따라 순서 및 내용이 변경될 수 있습니다.<br>' +
+    '호텔 객실 사항은 실시간이 아니므로 예약 후 컨펌을 받아야 합니다. ' +
+    '호텔의 블랙아웃 및 스톱셀 기간과 예약 취소 규정은 호텔 사정에 의해 예고 없이 변경될 수 있습니다.' +
+    '</div></section>';
+
+  /* 유효기간 */
+  if(T.valid){
+    h += '<section class="sec"><div class="warn" style="text-align:center;font-size:15px">' +
+      '이 견적의 유효기간은 <strong>' + esc(T.valid) + '</strong> 입니다.<br>' +
+      '<span style="font-size:13px">항공료와 호텔 요금, 환율이 수시로 변동되어 이후에는 금액이 달라질 수 있습니다.</span>' +
+      '</div></section>';
+  }
+
+  /* CTA */
+  h += '<section class="sec"><div class="card" style="text-align:center;background:var(--ppLL)">' +
+    '<b style="font-size:19px;font-weight:900;display:block;letter-spacing:-.6px">궁금하신 점이 있으신가요</b>' +
+    '<p style="font-size:14px;color:var(--g500);margin-top:6px">일정 조정이나 호텔 변경도 편하게 말씀해 주세요.</p>' +
+    '<a href="tel:' + COMPANY.tel.replace(/-/g,'') + '" class="cta" style="text-decoration:none;display:block">' +
+    COMPANY.tel + ' 전화하기</a>' +
+    '<p style="font-size:13px;color:var(--g400);margin-top:9px">' +
+    COMPANY.name + ' ' + COMPANY.nameEn + ' · 담당 ' + COMPANY.staff + '</p>' +
+    '</div></section>';
+
+  /* 저작권 */
+  h += '<section class="sec"><div class="copybox"><b>저작권 안내</b>' +
+    '<p>' + COPY.full + '</p><p style="color:var(--g400);font-size:12.5px">' + COPY.law + '</p>' +
+    '<div class="copyline">' + COPY.line + '</div></div></section>';
+
+  h += '<footer><span>' + COMPANY.name + ' ' + COMPANY.nameEn + ' · 담당 ' + COMPANY.staff +
+    ' · ' + COMPANY.tel + '</span><br>' +
+    '견적번호 ' + esc(T.no) + '<br>' +
+    '본 견적서는 참고용이며 계약서를 대체하지 않습니다.<br>' +
+    COMPANY.site + ' · ' + COMPANY.email +
+    '<div class="foot-copy">' + COPY.line + '<br>' + COPY.short + '</div></footer>';
+
+  $('app').innerHTML = h;
+  document.title = 'PLANITTOUR 하와이 신혼여행 견적서' + (T.n ? ' · ' + T.n : '');
+}
+
+/* ══════════════════════════════════════════
+   라우터
+   ══════════════════════════════════════════ */
+function route(){
+  /* edit=1 이면 링크 내용을 불러와 제작 화면으로 */
+  if(/[#?&]edit=1/.test(location.hash + location.search)){
+    var T = unpackTrip();
+    document.body.classList.add('builder');
+    renderBuilder();
+    if(T){
+      sv('fn', T.n2 ? T.n2[0] : String(T.n || '').replace(/\s*님$/, ''));
+      sv('fn2', T.n2 ? T.n2[1] : '');
+      sv('qpax', T.pax);
+      if(T.start) sv('depDate', ymd(T.start));
+      sv('qno', T.no ? (T.no + '-R2') : defaultQno());
+      sv('qvalid', T.valid || '');
+      sv('fx', T.fx || FX_DEFAULT);
+      if(T.staff) sv('staff', T.staff);
+      renderPicked(); renderOptions(); renderAir(); renderLocalAir();
+      syncNames(); onDep(); calc();
+      setTimeout(function(){
+        alert('견적을 불러왔습니다.\n\n' +
+              '호텔 1박 요금과 마진은 다시 입력해 주세요.\n' +
+              '요금은 링크에 담기지 않습니다.');
+      }, 400);
+    }
+    return;
+  }
+  if(/[#?&]q=1/.test(location.hash + location.search)) renderQuote();
+  else {
+    document.body.classList.add('builder');
+    renderBuilder();
+    window.addEventListener('scroll', function(){ try{ syncNavActive(); }catch(e){} });
+    var m = document.createElement('div');
+    m.className = 'modal'; m.id = 'confirm';
+    m.innerHTML = '<div class="sheet"><h3>발행 전 확인</h3>' +
+      '<div class="sub">입력하신 내용을 확인해 주세요.</div>' +
+      '<div id="cfBody"></div>' +
+      '<div class="foot"><button type="button" class="cancel" onclick="closeConfirm()">돌아가서 수정</button>' +
+      '<button type="button" class="ok" id="cfOk" onclick="doIssue()">확인했습니다, 발행</button></div></div>';
+    document.body.appendChild(m);
+    m.addEventListener('click', function(e){ if(e.target.id === 'confirm') closeConfirm(); });
+  }
+}
+window.addEventListener('hashchange', function(){ location.reload(); });
+route();
+
+
+
+/* ── 제작 전용 기능 무력화 ──
+   아래 함수들은 고객용 파일에서 동작하지 않습니다. */
+function calc(){ /* 고객용 파일에서 제거됨 */ return null; }
+function packTrip(){ /* 고객용 파일에서 제거됨 */ return null; }
+function issueLinks(){ /* 고객용 파일에서 제거됨 */ return null; }
+function renderBuilder(){ /* 고객용 파일에서 제거됨 */ return null; }
+function renderMoney(){ /* 고객용 파일에서 제거됨 */ return null; }
+function renderHotelList(){ /* 고객용 파일에서 제거됨 */ return null; }
+function renderPicked(){ /* 고객용 파일에서 제거됨 */ return null; }
+function renderOptions(){ /* 고객용 파일에서 제거됨 */ return null; }
+function renderAir(){ /* 고객용 파일에서 제거됨 */ return null; }
+function renderLocalAir(){ /* 고객용 파일에서 제거됨 */ return null; }
+function renderNav(){ /* 고객용 파일에서 제거됨 */ return null; }
+function syncNavActive(){ /* 고객용 파일에서 제거됨 */ return null; }
+function openConfirm(){ /* 고객용 파일에서 제거됨 */ return null; }
+function validateQuote(){ /* 고객용 파일에서 제거됨 */ return null; }
+function doIssue(){ /* 고객용 파일에서 제거됨 */ return null; }
+function openMail(){ /* 고객용 파일에서 제거됨 */ return null; }
+function copyMailBody(){ /* 고객용 파일에서 제거됨 */ return null; }
+function syncBottom(){ /* 고객용 파일에서 제거됨 */ return null; }
+function toggleHotel(){ /* 고객용 파일에서 제거됨 */ return null; }
+function toggleOpt(){ /* 고객용 파일에서 제거됨 */ return null; }
+function setAir(){ /* 고객용 파일에서 제거됨 */ return null; }
+function setAirFare(){ /* 고객용 파일에서 제거됨 */ return null; }
+function addLocalAir(){ /* 고객용 파일에서 제거됨 */ return null; }
+function renderPkg(){ /* 고객용 파일에서 제거됨 */ return null; }
+function renderIslandSel(){ /* 고객용 파일에서 제거됨 */ return null; }
+function renderChips(){ /* 고객용 파일에서 제거됨 */ return null; }
+</script>
+</body>
+</html>
