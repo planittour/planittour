@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!--
+  플래닛투어 PLANITTOUR — 견적 시스템 안내 페이지
+  Copyright (c) 2026 플래닛투어 (PLANITTOUR). All rights reserved.
+
+  주소만 치고 들어온 방문자에게 보여주는 화면입니다.
+  실제 견적서는 담당자가 보낸 링크로만 열립니다.
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="theme-color" content="#3182F6">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, noarchive">
+<title>플래닛투어 PLANITTOUR</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --blue:#3182F6; --blueD:#1B64DA; --blueL:#E8F3FF; --blueLL:#F4F9FF;
+  --g900:#191F28; --g700:#333D4B; --g600:#4E5968; --g500:#6B7684;
+  --g400:#8B95A1; --g300:#B0B8C1; --g200:#E5E8EB; --g100:#F2F4F6;
+  --g50:#F9FAFB; --w:#fff;
+  --font:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,
+    'Apple SD Gothic Neo',system-ui,sans-serif;
+}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--g100);color:var(--g900);font-family:var(--font);
+  font-size:16px;line-height:1.8;letter-spacing:-.3px;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;padding:28px 18px 50px}
+.wrap{width:100%;max-width:520px}
+
+.card{background:var(--w);border-radius:24px;padding:44px 32px 36px;text-align:center;
+  box-shadow:0 4px 28px rgba(25,31,40,.06)}
+@media(min-width:560px){.card{padding:52px 44px 42px}}
+
+.logo{height:34px;width:auto;max-width:200px;object-fit:contain;margin:0 auto 22px;display:block}
+.logotext{font-size:17px;font-weight:800;letter-spacing:2.4px;color:var(--blueD);margin-bottom:22px}
+
+.icon{width:62px;height:62px;margin:0 auto 20px;border-radius:50%;
+  background:var(--blueL);display:flex;align-items:center;justify-content:center}
+.icon svg{width:28px;height:28px;color:var(--blueD)}
+
+h1{font-size:clamp(21px,5.4vw,25px);font-weight:900;letter-spacing:-.9px;line-height:1.4}
+.lead{margin-top:12px;font-size:15.5px;color:var(--g500);line-height:1.8}
+
+.hr{height:1px;background:var(--g200);margin:28px 0 24px}
+
+.help{background:var(--g50);border-radius:16px;padding:20px 22px;text-align:left}
+.help b{display:block;font-size:14px;font-weight:800;color:var(--g700);margin-bottom:10px}
+.help ul{list-style:none}
+.help li{position:relative;padding-left:20px;font-size:14.5px;color:var(--g600);
+  line-height:1.75;margin-bottom:8px}
+.help li:last-child{margin-bottom:0}
+.help li::before{content:'';position:absolute;left:5px;top:11px;width:5px;height:5px;
+  border-radius:50%;background:var(--g300)}
+
+.tel{display:flex;align-items:center;justify-content:center;gap:9px;
+  margin-top:24px;background:var(--blue);color:#fff;text-decoration:none;
+  font-size:17px;font-weight:800;padding:17px;border-radius:15px;letter-spacing:-.5px;
+  transition:.14s}
+.tel:hover{background:var(--blueD)}
+.tel svg{width:19px;height:19px}
+
+.sub{margin-top:14px;font-size:13.5px;color:var(--g400);line-height:1.75}
+.sub a{color:var(--g500);text-decoration:none}
+
+.foot{margin-top:26px;text-align:center;font-size:12px;color:var(--g300);line-height:1.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <img class="logo" src="images/logo.png" alt="PLANITTOUR" onerror="logoFail(this)">
+
+    <div class="icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+    </div>
+
+    <h1>견적서는 링크로만<br>확인하실 수 있습니다</h1>
+    <p class="lead">담당자가 보내드린 링크를 통해<br>견적서와 여행 안내를 확인해 주세요.</p>
+
+    <div class="hr"></div>
+
+    <div class="help">
+      <b>이런 경우에 이 화면이 보입니다</b>
+      <ul>
+        <li>주소만 입력해 들어오신 경우</li>
+        <li>링크가 중간에 잘려서 전달된 경우</li>
+        <li>메신저에서 링크 일부만 복사된 경우</li>
+      </ul>
+    </div>
+
+    <a class="tel" href="tel:0424717742">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07
+                 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3
+                 a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91
+                 a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7
+                 A2 2 0 0 1 22 16.92z"/>
+      </svg>
+      042-471-7742
+    </a>
+
+    <p class="sub">
+      링크를 다시 받고 싶으시면 담당자에게 연락해 주세요.<br>
+      <a href="mailto:planittour@naver.com">planittour@naver.com</a>
+    </p>
+  </div>
+
+  <div class="foot">
+    &copy; <span id="yr"></span> 플래닛투어 (PLANITTOUR). All rights reserved.
+  </div>
+</div>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+function logoFail(el){
+  var d = document.createElement('div');
+  d.className = 'logotext';
+  d.textContent = 'PLANITTOUR';
+  el.parentNode.replaceChild(d, el);
+}
+</script>
+</body>
+</html>
