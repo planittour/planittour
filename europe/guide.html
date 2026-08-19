@@ -27,7 +27,20 @@
 <meta name="copyright" content="Copyright (c) 2026 플래닛투어 (PLANITTOUR). All rights reserved.">
 <meta name="robots" content="noarchive, noimageindex">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>PLANITTOUR 플래닛투어 · 유럽 신혼여행 안내</title>
+<title>유럽 신혼여행 견적서 · 플래닛투어</title>
+
+<!-- 카카오톡 · 문자로 링크를 보낼 때 보이는 미리보기 -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="유럽 신혼여행 견적서">
+<meta property="og:description" content="담당자가 보내드린 링크로 확인하세요 · 플래닛투어 042-471-7742">
+<meta property="og:image" content="https://planittour.github.io/planittour/images/og-europe.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="플래닛투어">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="유럽 신혼여행 견적서">
+<meta name="twitter:description" content="담당자가 보내드린 링크로 확인하세요">
+<meta name="twitter:image" content="https://planittour.github.io/planittour/images/og-europe.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
 <style>
@@ -1536,6 +1549,21 @@ input[type=time]::-webkit-datetime-edit-ampm-field{
 .sf-per{display:block;font-style:normal;font-size:11px;color:var(--g500);
   margin-top:4px;letter-spacing:-.2px;line-height:1.5;min-height:16px}
 .sf-per:empty{min-height:0}
+
+
+/* 발행 기록 검색 */
+.logsearch{display:grid;grid-template-columns:1fr 168px auto;gap:7px;margin-bottom:9px}
+@media(max-width:600px){.logsearch{grid-template-columns:1fr 1fr}
+  .logsearch input{grid-column:1/-1}}
+.logsearch input,.logsearch select{height:40px;font-size:14px;padding:0 12px;
+  border-radius:10px;border:1px solid var(--g200);background:var(--w);
+  color:var(--g900);letter-spacing:-.3px}
+.logsearch .lgclr{font-family:var(--font);font-size:13px;font-weight:700;background:var(--g100);
+  border:0;color:var(--g500);padding:0 15px;border-radius:10px;cursor:pointer;
+  min-height:0;height:40px;white-space:nowrap}
+.logcount{font-size:12.5px;color:var(--g400);margin-bottom:9px;letter-spacing:-.2px}
+.logcount:empty{display:none}
+.lg-start{color:var(--blueD);font-weight:800}
 
 /* ── 단일 파일 라우팅 ── */
 #builder,#stage{display:none}
@@ -5610,8 +5638,7 @@ function syncPerNight(row, L){
   var allRooms = total * rooms;
   var perHead = Math.round(allRooms / pax);
   el.innerHTML = '<b>1박 ' + won(perNight) + '</b>' +
-    (rooms > 1 ? ' · ' + rooms + '실 총 ' + won(allRooms) : '') +
-    ' · 1인 부담 ' + won(perHead);
+    (rooms > 1 ? ' · ' + rooms + '실 총 ' + won(allRooms) : '');
 }
 
 function onNightsChange(el){
@@ -7661,6 +7688,7 @@ function doIssueInner(skipLog){
       profit: money.margin,
       pax: money.pax,
       valid: (document.getElementById('qvalid').value || '').trim() || defaultValid(),
+      start: o.s || '',
       stages: list.map(function(x){ return x.n; }).join(','),
       /* 링크를 함께 남깁니다 — 나중에 그대로 불러와 재견적할 수 있습니다 */
       code: codeQuote,
@@ -7679,18 +7707,60 @@ function doIssueInner(skipLog){
 }
 
 /* ── 발행 기록 ── */
+function clearLogFilter(){
+  var a = document.getElementById('logQ'); if(a) a.value = '';
+  var b = document.getElementById('logPeriod'); if(b) b.value = '';
+  renderLog();
+}
+
+/* 검색 · 기간으로 걸러냅니다 */
+function filterLog(){
+  var q = (gv('logQ') || '').trim().toLowerCase();
+  var period = gv('logPeriod') || '';
+  var today = new Date(); today.setHours(0,0,0,0);
+
+  return LOG.filter(function(x){
+    if(q){
+      var hay = ((x.name || '') + ' ' + (x.no || '')).toLowerCase();
+      if(hay.indexOf(q) < 0) return false;
+    }
+    if(period){
+      var d = x.start ? sToDate(x.start) : null;
+      if(!d) return period === '' ;
+      var diff = Math.round((d - today) / 86400000);
+      if(period === 'm3'  && !(diff >= 0 && diff <= 92)) return false;
+      if(period === 'm6'  && !(diff >= 0 && diff <= 184)) return false;
+      if(period === 'past' && diff >= 0) return false;
+    }
+    return true;
+  });
+}
+
 function renderLog(){
   var el = document.getElementById('loglist');
   var w = document.getElementById('logwarn');
   if(w) w.style.display = LOG.length ? '' : 'none';
   if(!LOG.length){ el.innerHTML = '<div class="empty-log">발행한 견적서가 없습니다</div>'; return; }
-  el.innerHTML = LOG.map(function(x, i){
+  var list = filterLog();
+  var cnt = document.getElementById('logCount');
+  if(cnt){
+    cnt.textContent = (list.length === LOG.length)
+      ? (LOG.length ? LOG.length + '건' : '')
+      : (list.length + '건 / 전체 ' + LOG.length + '건');
+  }
+  if(LOG.length && !list.length){
+    el.innerHTML = '<div class="empty-log">조건에 맞는 기록이 없습니다</div>';
+    return;
+  }
+  el.innerHTML = list.map(function(x){
+    var i = LOG.indexOf(x);
     return '<div class="logrow"><div class="l1"><span class="no">' + esc(x.no) + '</span>' +
       '<span class="amt">' + won(x.amt) + '</span></div>' +
       '<div class="l2">' + esc(x.name) + ' · ' + x.pax + '명 · 수익 ' + won(x.profit || 0) +
       (x.staff ? ' · ' + esc(x.staff) : '') + '</div>' +
-      '<div class="l3">' + esc(x.t) + ' · 원가 ' + won(x.cost || 0) + ' · 유효 ' + esc(x.valid) +
-      ' · 발송 단계 ' + esc(x.stages) + '</div>' +
+      '<div class="l3">' +
+      (x.start ? '<b class="lg-start">' + fmtDate(sToDate(x.start)) + ' 출발</b> · ' : '') +
+      esc(x.t) + ' · 원가 ' + won(x.cost || 0) + ' · 유효 ' + esc(x.valid) + '</div>' +
       (x.code
         ? '<div class="l4">' +
           '<button type="button" onclick="reloadFromLog(' + i + ')">이 견적 불러오기</button>' +
@@ -7718,9 +7788,9 @@ function reloadFromLog(i){
 
 function exportLog(){
   if(!LOG.length){ toast('발행 기록이 없습니다'); return; }
-  var head = '발행일시,견적번호,고객명,인원,담당자,매입원가,고객청구액,수익,유효기간,발송단계,견적서링크,복원코드\n';
+  var head = '발행일시,견적번호,고객명,출발일,인원,담당자,매입원가,고객청구액,수익,유효기간,발송단계,견적서링크,복원코드\n';
   var body = LOG.map(function(x){
-    return [x.t, x.no, x.name, x.pax, x.staff || '', x.cost || 0, x.amt, x.profit || 0,
+    return [x.t, x.no, x.name, x.start || '', x.pax, x.staff || '', x.cost || 0, x.amt, x.profit || 0,
             x.valid, x.stages, x.url || '', x.code || '']
       .map(function(v){ return '"' + String(v).replace(/"/g, '""') + '"'; }).join(',');
   }).join('\n');
@@ -7742,6 +7812,11 @@ function importLog(input){
         var v = l.match(/("([^"]|"")*"|[^,]*)/g).filter(function(x, i){ return i % 2 === 0; })
                  .map(function(x){ return x.replace(/^"|"$/g, '').replace(/""/g, '"'); });
         /* 예전 형식(9칸)과 새 형식(12칸) 모두 읽습니다 */
+        if(v.length >= 13){
+          return {t:v[0], no:v[1], name:v[2], start:v[3], pax:v[4], staff:v[5],
+                  cost:Number(v[6]) || 0, amt:Number(v[7]) || 0, profit:Number(v[8]) || 0,
+                  valid:v[9], stages:v[10], url:v[11], code:v[12]};
+        }
         if(v.length >= 12){
           return {t:v[0], no:v[1], name:v[2], pax:v[3], staff:v[4], cost:Number(v[5]) || 0,
                   amt:Number(v[6]) || 0, profit:Number(v[7]) || 0, valid:v[8], stages:v[9],
