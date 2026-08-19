@@ -1512,6 +1512,31 @@ button,select,input,.qbtn,.ctabtn,summary,.nav a,.country-tabs button{min-height
   font-size:13px;color:#7A5F22;letter-spacing:-.3px;line-height:1.6}
 .ip-fuzzy b{color:#8A6A1E;font-weight:800}
 
+
+/* 날짜 · 시각 입력칸 글꼴 통일
+   브라우저가 date · time 입력에 기본 글꼴을 쓰는 것을 막습니다 */
+input[type=date],input[type=time]{
+  font-family:var(--font)!important;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-.2px}
+input[type=date]::-webkit-datetime-edit,
+input[type=time]::-webkit-datetime-edit,
+input[type=date]::-webkit-datetime-edit-text,
+input[type=date]::-webkit-datetime-edit-year-field,
+input[type=date]::-webkit-datetime-edit-month-field,
+input[type=date]::-webkit-datetime-edit-day-field,
+input[type=time]::-webkit-datetime-edit-hour-field,
+input[type=time]::-webkit-datetime-edit-minute-field,
+input[type=time]::-webkit-datetime-edit-ampm-field{
+  font-family:var(--font)!important;font-size:inherit;color:inherit}
+
+
+.sf-hint{font-style:normal;font-size:10px;font-weight:600;color:var(--g300);margin-left:4px}
+.sf-per b{font-weight:800;color:var(--g700)}
+.sf-per{display:block;font-style:normal;font-size:11px;color:var(--g500);
+  margin-top:4px;letter-spacing:-.2px;line-height:1.5;min-height:16px}
+.sf-per:empty{min-height:0}
+
 /* ── 단일 파일 라우팅 ── */
 #builder,#stage{display:none}
 #builder.on,#stage.on{display:block}
@@ -3231,8 +3256,7 @@ function packTrip(){
     }
   }
 
-  var json = JSON.stringify(o);
-  return encodeURIComponent(btoa(unescape(encodeURIComponent(json))));
+  return encodePayload(o);
 }
 
 /* ── 디코딩 → 견적서용 데이터 재구성 ── */
@@ -4253,6 +4277,11 @@ function renderNav(){
 
 /* 왼쪽 메뉴에 입력 상태를 표시합니다 */
 function navSectionState(id){
+  /* 안내문을 만들지 않으면 그 섹션은 아예 표시하지 않습니다 */
+  if(id === 'sec-guide'){
+    var any = pickedStages().some(function(n){ return n >= 1 && n <= 4; });
+    if(!any) return {hide: 1};
+  }
   /* 반환 — done 완료 / need 미입력 개수 / '' 해당없음 */
   function cnt(sel){ return document.querySelectorAll(sel).length; }
   try{
@@ -4310,6 +4339,11 @@ function syncNavStatus(){
     var st = navSectionState(b.getAttribute('data-sec'));
     var em = b.querySelector('.nv-st');
     if(!em) return;
+    if(st.hide){
+      b.style.display = 'none';
+      return;
+    }
+    b.style.display = '';
     if(st.n){
       em.textContent = st.n;
       em.className = 'nv-st need';
@@ -4686,6 +4720,7 @@ function loadQuote(){
   LEGS = (raw.st || []).map(function(x){
     var L = newLeg(idToCity(x[0]), x[1]);
     L.hname = x[2] || ''; L.room = x[3] || ''; L.meal = x[4] || 'BB';
+    L.total = 0;
     L.ci = x[5] || DEFAULT_CI; L.co = x[6] || DEFAULT_CO;
     return L;
   });
@@ -5007,7 +5042,7 @@ function parseItineraryText(txt){
     return a.replace(/\s+/g, '') + b + '박';
   });
   /* 구분자 통일 */
-  t = t.replace(/[,·>→~\/|]+/g, '-').replace(/\s*-\s*/g, '-').replace(/\s+/g, '-');
+  t = t.replace(/[,·>→~\/|+]+/g, '-').replace(/\s*-\s*/g, '-').replace(/\s+/g, '-');
   var parts = t.split('-').filter(function(x){ return x.trim(); });
 
   parts.forEach(function(p){
@@ -5296,7 +5331,7 @@ var LEG_SEQ = 0;
 
 function newLeg(city, nights){
   return {id: 'L' + (++LEG_SEQ), city: city, nights: Number(nights) || 0,
-          hotel: '', hname: '', cost: 0, room: '', meal: 'BB',
+          hotel: '', hname: '', cost: 0, total: 0, room: '', meal: 'BB',
           ci: DEFAULT_CI, co: DEFAULT_CO};
 }
 
@@ -5382,7 +5417,8 @@ function readLegInputs(){
     var L = LEGS[i];
     L.nights = Number(el[0].value) || 0;
     L.hotel = el[1].value;
-    L.cost = Number(el[2].value) || 0;
+    L.total = Number(el[2].value) || 0;
+    L.cost = L.nights ? Math.round(L.total / L.nights) : 0;
     L.hname = ((r.querySelector('.sd-hname') || {}).value || '').trim();
     L.room = ((r.querySelector('.sd-room') || {}).value || '').trim();
     L.meal = (r.querySelector('.sd-meal') || {}).value || 'BB';
@@ -5397,7 +5433,7 @@ function buildPlan(){
   var start = parseDate(document.getElementById('qstart').value);
   var rows = LEGS.map(function(l){
     return {id: l.id, city: l.city, nights: l.nights, hotel: l.hotel, cost: l.cost,
-            hname: l.hname, room: l.room, meal: l.meal, ci: l.ci, co: l.co};
+            total: l.total, hname: l.hname, room: l.room, meal: l.meal, ci: l.ci, co: l.co};
   });
   var cur = start, legs = [];
   rows.forEach(function(x, i){
@@ -5485,9 +5521,11 @@ function renderLegs(){
         '<input type="number" min="0" max="30" value="' + (L.nights || 0) + '" oninput="onNightsChange(this)"></label>' +
       '<label class="sf"><span>호텔</span>' +
         '<select onchange="onHotelChange(this)"' + (zero ? ' disabled' : '') + '>' + opts + '</select></label>' +
-      '<label class="sf rqcost"><span>1박 객실 원가</span>' +
+      '<label class="sf rqcost"><span>총 숙박 원가 <i class="sf-hint">' +
+        (zero ? '' : L.nights + '박 전체') + '</i></span>' +
         '<input type="number" min="0" step="1000" placeholder="' + (zero ? '숙박 없음' : '필수') + '" value="' +
-        (L.cost || '') + '" oninput="calc()"' + (zero ? ' disabled' : '') + '></label>' +
+        (L.total || '') + '" oninput="onTotalInput(this)"' + (zero ? ' disabled' : '') + '>' +
+        '<i class="sf-per" data-leg="' + L.id + '"></i></label>' +
       '</div>';
 
     if(!zero){
@@ -5525,6 +5563,11 @@ function renderLegs(){
 
     return h + '</div>';
   }).join('');
+  /* 각 줄의 1박당 금액 안내 */
+  document.querySelectorAll('#stayrows .stayrow').forEach(function(r){
+    var i = legIndex(r.getAttribute('data-leg'));
+    if(i >= 0) syncPerNight(r, LEGS[i]);
+  });
   syncStayLabels();
 }
 
@@ -5537,10 +5580,49 @@ function toggleDetail(id){
   syncPlan();
 }
 
+/* 총 숙박 원가를 넣으면 1박당 금액을 계산해 아래에 보여줍니다 */
+function onTotalInput(el){
+  var row = el.closest('.stayrow');
+  if(!row) return;
+  var i = legIndex(row.getAttribute('data-leg'));
+  if(i < 0) return;
+  var total = Number(el.value) || 0;
+  LEGS[i].total = total;
+  /* 계산에 쓰는 값은 1박당 객실 요금입니다 */
+  var n = Number(LEGS[i].nights) || 0;
+  LEGS[i].cost = n ? Math.round(total / n) : 0;
+  syncPerNight(row, LEGS[i]);
+  calc();
+}
+
+/* 1박당 · 1인당 금액 안내 */
+function syncPerNight(row, L){
+  var el = row.querySelector('.sf-per');
+  if(!el) return;
+  var n = Number(L.nights) || 0;
+  var total = Number(L.total) || 0;
+  if(!n || !total){ el.textContent = ''; return; }
+  var pax = Math.max(1, Number(gv('qpax')) || 2);
+  var rooms = Math.ceil(pax / 2);
+  var perNight = Math.round(total / n);
+  /* 입력한 총액은 객실 1개 기준입니다.
+     실제 청구액은 객실 수만큼 곱하고, 1인 금액은 인원으로 나눕니다. */
+  var allRooms = total * rooms;
+  var perHead = Math.round(allRooms / pax);
+  el.innerHTML = '<b>1박 ' + won(perNight) + '</b>' +
+    (rooms > 1 ? ' · ' + rooms + '실 총 ' + won(allRooms) : '') +
+    ' · 1인 부담 ' + won(perHead);
+}
+
 function onNightsChange(el){
   var row = el.closest('.stayrow');
   var i = legIndex(row.getAttribute('data-leg'));
-  if(i >= 0) LEGS[i].nights = Number(el.value) || 0;
+  if(i >= 0){
+    LEGS[i].nights = Number(el.value) || 0;
+    /* 총액은 그대로 두고 1박당 금액만 다시 나눕니다 */
+    var n = LEGS[i].nights, t = Number(LEGS[i].total) || 0;
+    LEGS[i].cost = n ? Math.round(t / n) : 0;
+  }
   renderLegs();
   syncPlan(); calc();
 }
