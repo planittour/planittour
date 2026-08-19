@@ -1378,6 +1378,29 @@ button,select,input,.qbtn,.ctabtn,summary,.nav a,.country-tabs button{min-height
 .grptoggle.on{background:var(--blueL);color:var(--blueD)}
 .grpbody{display:grid;gap:7px}
 
+
+/* 항공 날짜 — 맨 위에 크게 */
+.fdate{display:flex;align-items:center;gap:12px;background:var(--blueLL);
+  border-radius:11px;padding:11px 14px;margin-bottom:9px}
+.fdlab{flex:0 0 auto;font-size:13px;font-weight:800;color:var(--blueD);letter-spacing:-.3px}
+.fdate .rq{flex:1;min-width:0}
+.fdate input{width:100%;font-size:15.5px;font-weight:600}
+
+
+/* 왼쪽 메뉴 — 입력 상태 */
+@media(min-width:1180px){
+  .nv-item{gap:9px}
+  .nv-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .nv-st{flex:0 0 auto;font-style:normal;font-size:10.5px;font-weight:800;
+    min-width:18px;height:18px;padding:0 5px;border-radius:100px;
+    display:none;align-items:center;justify-content:center;letter-spacing:-.2px}
+  .nv-st.need{display:flex;background:var(--red);color:#fff}
+  .nv-st.ok{display:flex;background:rgba(46,158,91,.24);color:#7FD9A3}
+  .nv-st.ok.lb{background:rgba(255,255,255,.12);color:#A3B0BF}
+  .nv-item.on .nv-st.ok{background:rgba(255,255,255,.22);color:#fff}
+  .nv-item.on .nv-st.need{background:#fff;color:var(--red)}
+}
+
 /* ── 단일 파일 라우팅 ── */
 #builder,#stage{display:none}
 #builder.on,#stage.on{display:block}
@@ -1699,8 +1722,9 @@ var TRAINS = [
 var TRANSFERS = [
   {n:"로마 공항 ↔ 테르미니역 근처 호텔", p:0, t:"약 50분 · 교통체증 별도 · 와츠앱 필수", city:"로마"},
   {n:"베니스 메스트레역 호텔 ↔ 베니스 공항", p:0, t:"약 25분 · 교통체증 별도 · 와츠앱 필수", city:"베니스"},
-  {n:"파리 공항 ↔ 파리 시내 호텔", p:0, t:"약 60분 · 교통체증 별도", city:"파리"},
-  {n:"파리 시내 호텔 ↔ 오를리 공항", p:0, t:"약 30분 · 교통체증 별도", city:"파리"},
+  {n:"파리 공항 ↔ 파리 시내 호텔", p:0, t:"약 60분 · 교통체증 별도 · 샤를드골", city:"파리"},
+  /* 오를리는 유럽 내 다른 공항으로 이동할 때만 씁니다. 자동 배치에서 제외됩니다. */
+  {n:"파리 시내 호텔 ↔ 오를리 공항", p:0, t:"약 30분 · 교통체증 별도 · 유럽 내 이동 시", city:"파리", noAuto:true},
   {n:"런던 트랜스퍼", p:0, t:"공항 ↔ 시내 호텔", city:"런던"},
   {n:"밀라노 트랜스퍼", p:0, t:"공항 ↔ 시내 호텔", city:"밀라노"},
   {n:"나폴리 ↔ 포지타노 트랜스퍼 (왕복)", p:0, t:"왕복 전용 차량", city:"나폴리"},
@@ -3290,6 +3314,7 @@ function applyAutoPlace(){
       var isArr = fl.out && +day.d === +fl.out.arrDate;
       if(!isArr) return false;
       var tr = TRANSFERS.filter(function(t){ return t.n === p.name; })[0];
+      if(tr && tr.noAuto) return false;
       return !!(tr && staysIn(day, tr.city));
     }
     /* 투어 — 자유일정이 아니거나 그 도시가 아니면 제거 */
@@ -3306,6 +3331,7 @@ function applyAutoPlace(){
   days.forEach(function(day){
     if(!fl.out || +day.d !== +fl.out.arrDate) return;
     TRANSFERS.forEach(function(t){
+      if(t.noAuto) return;              /* 자동 배치 제외 항목 */
       if(!staysIn(day, t.city)) return;
       if(hasAuto(day.key, t.n)) return;
       if(PLACED.some(function(p){ return p.name === t.n; })) return;
@@ -4023,9 +4049,83 @@ function renderNav(){
     '<span>유럽 견적 시스템</span></div><div class="nv-list">' +
     NAV_ITEMS.map(function(x, i){
       return '<button type="button" class="nv-item" data-sec="' + x.id +
-        '" onclick="goSec(\'' + x.id + '\')"><i>' + (i + 1) + '</i>' + x.n + '</button>';
+        '" onclick="goSec(\'' + x.id + '\')"><i>' + (i + 1) + '</i>' +
+        '<span class="nv-t">' + x.n + '</span><em class="nv-st"></em></button>';
     }).join('') + '</div>';
   syncNavActive();
+  syncNavStatus();
+}
+
+/* 왼쪽 메뉴에 입력 상태를 표시합니다 */
+function navSectionState(id){
+  /* 반환 — done 완료 / need 미입력 개수 / '' 해당없음 */
+  function cnt(sel){ return document.querySelectorAll(sel).length; }
+  try{
+    if(id === 'sec-cust'){
+      var need = 0;
+      if(!customerName()) need++;
+      if(!(gv('qpax') || '').trim()) need++;
+      return need ? {n: need} : {ok: 1};
+    }
+    if(id === 'sec-city'){
+      var c = tripCityList().length;
+      return c ? {ok: 1, label: c + '개'} : {n: 1};
+    }
+    if(id === 'sec-air'){
+      var a = 0;
+      if(!gv('foutDate')) a++;
+      if(!gv('finDate')) a++;
+      return a ? {n: a} : {ok: 1};
+    }
+    if(id === 'sec-stay'){
+      if(!LEGS.length) return {n: 1};
+      var miss = 0, nights = 0;
+      document.querySelectorAll('#stayrows .row').forEach(function(r){
+        var el = r.querySelectorAll('input,select');
+        var nt = Number(el[0].value) || 0;
+        nights += nt;
+        if(nt > 0 && !(Number(el[2].value) || 0)) miss++;
+      });
+      if(!nights) return {n: 1};
+      return miss ? {n: miss} : {ok: 1, label: nights + '박'};
+    }
+    if(id === 'sec-tour'){
+      var t = PLACED.length;
+      return t ? {ok: 1, label: t + '건'} : {};
+    }
+    if(id === 'sec-plans'){
+      return PLANS.length ? {ok: 1, label: PLANS.length + '안'} : {};
+    }
+    if(id === 'sec-perk'){
+      var p = document.querySelectorAll('.perkx:checked').length;
+      return p ? {ok: 1, label: p + '개'} : {};
+    }
+    if(id === 'sec-margin'){
+      return (Number(gv('mper')) || 0) ? {ok: 1} : {n: 1};
+    }
+    if(id === 'sec-log'){
+      return LOG.length ? {ok: 1, label: LOG.length + '건'} : {};
+    }
+  }catch(e){}
+  return {};
+}
+
+function syncNavStatus(){
+  document.querySelectorAll('.nv-item').forEach(function(b){
+    var st = navSectionState(b.getAttribute('data-sec'));
+    var em = b.querySelector('.nv-st');
+    if(!em) return;
+    if(st.n){
+      em.textContent = st.n;
+      em.className = 'nv-st need';
+    } else if(st.ok){
+      em.textContent = st.label || '\u2713';
+      em.className = 'nv-st ok' + (st.label ? ' lb' : '');
+    } else {
+      em.textContent = '';
+      em.className = 'nv-st';
+    }
+  });
 }
 function goSec(id){
   var el = document.getElementById(id);
@@ -4827,6 +4927,71 @@ function onFlightNoInput(dir){
   syncPlan();
 }
 
+/* ══════════════════════════════════════════
+   숙박 줄 입력 처리
+   ══════════════════════════════════════════ */
+
+/* 호텔을 고르면 지도 링크와 위치 배지를 갱신합니다 */
+function onHotelChange(sel){
+  var row = sel.closest('.row');
+  if(!row) return;
+  var i = legIndex(row.getAttribute('data-leg'));
+  if(i >= 0) LEGS[i].hotel = sel.value;
+  var city = row.getAttribute('data-city');
+  var link = row.querySelector('.maplink');
+  if(link) link.href = mapUrl(city, sel.value);
+  var hi = hotelInfo(city, sel.value);
+  var locEl = row.querySelector('.sd-loc');
+  if(locEl) locEl.textContent = (hi && hi.loc) ? hi.loc : '';
+  calc();
+}
+
+/* 식사 조건 — 조식 / 불포함 토글 */
+function setMeal(btn, v){
+  var wrap = btn.parentNode;
+  wrap.querySelectorAll('button').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  var sel = wrap.querySelector('.sd-meal');
+  if(sel) sel.value = v;
+  var row = btn.closest('.row');
+  if(row){
+    var i = legIndex(row.getAttribute('data-leg'));
+    if(i >= 0) LEGS[i].meal = v;
+  }
+  calc();
+}
+
+/* "다른 조건" — 드롭다운으로 전환합니다 */
+function toggleMealMode(link){
+  var row = link.closest('.row');
+  if(!row) return;
+  var cur = (row.querySelector('.sd-meal') || {}).value || 'BB';
+  var host = row.querySelector('.mealslot');
+  if(!host) return;
+  host.innerHTML = '<select class="sd-meal wide" onchange="onMealSelect(this)">' +
+    MEAL_OPTS.map(function(m){
+      return '<option value="' + m.v + '"' + (cur === m.v ? ' selected' : '') + '>' + m.t + '</option>';
+    }).join('') + '</select>';
+  link.style.display = 'none';
+  calc();
+}
+
+function onMealSelect(sel){
+  var row = sel.closest('.row');
+  if(row){
+    var i = legIndex(row.getAttribute('data-leg'));
+    if(i >= 0) LEGS[i].meal = sel.value;
+  }
+  calc();
+}
+
+/* 구글맵 검색 주소 — 호텔이 있으면 호텔명으로, 없으면 도시명으로 */
+function mapUrl(city, hotel){
+  var q = hotelName(hotel);
+  return 'https://www.google.com/maps/search/' +
+    encodeURIComponent(q ? (q + ' ' + city) : city);
+}
+
 /* 호텔명 정리 — 드롭다운 값에서 등급 표기를 뗍니다 */
 function hotelName(v){ return v ? String(v).split(' · ')[0].trim() : ''; }
 /* 직접 입력한 이름이 있으면 그것을, 없으면 목록 선택값을 씁니다 */
@@ -5602,6 +5767,7 @@ function calc(){
   lines.forEach(function(l){ if(l.g === '숙박') hc += l.amt; });
   try{ syncTopbar({cost: cost, margin: margin, sale: sale, pax: pax, rooms: rooms,
                    airPer: airPer, airTotal: airTotal}); }catch(e){}
+  try{ syncNavStatus(); }catch(e){}
   return {cost: cost, margin: margin, sale: sale, lines: lines, plan: plan,
           pax: pax, nights: nights, picked: picked, rooms: rooms,
           hotelCost: hc, exHotel: cost - hc,
