@@ -1401,6 +1401,112 @@ button,select,input,.qbtn,.ctabtn,summary,.nav a,.country-tabs button{min-height
   .nv-item.on .nv-st.need{background:#fff;color:var(--red)}
 }
 
+
+/* ══════════════════════════════════════════
+   숙박 입력 — 카드형
+   ══════════════════════════════════════════ */
+.stayrow{background:var(--w);border:1px solid var(--g200);border-radius:16px;
+  padding:15px 17px;margin-bottom:9px}
+.stayrow.zero{background:var(--g50);opacity:.94}
+
+.sr-head{display:flex;align-items:center;gap:9px;margin-bottom:12px;flex-wrap:wrap}
+.sr-no{width:25px;height:25px;border-radius:50%;background:var(--g900);color:#fff;
+  font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.stayrow.zero .sr-no{background:var(--g300)}
+.sr-city{font-size:16.5px;font-weight:800;letter-spacing:-.5px}
+.sr-area{font-size:12.5px;color:var(--g400);letter-spacing:-.2px}
+.lg-io{font-size:10px;font-weight:800;padding:2px 7px;border-radius:5px;letter-spacing:.3px}
+.lg-io.in{background:#DCF2E4;color:#1E7A44}
+.lg-io.out{background:#FFE8CC;color:#9A5B0A}
+.sr-acts{margin-left:auto;display:flex;gap:4px}
+.sr-acts button{width:27px;height:27px;border:0;border-radius:8px;background:var(--g100);
+  color:var(--g500);font-size:12.5px;font-weight:700;cursor:pointer;padding:0;
+  min-height:0;line-height:1;font-family:var(--font)}
+.sr-acts button:hover:not(:disabled){background:var(--blueL);color:var(--blueD)}
+.sr-acts button:disabled{opacity:.3;cursor:default}
+.sr-acts button.rm:hover{background:var(--redL);color:var(--red)}
+
+/* 입력 줄 — 모든 칸 높이 통일 */
+.sr-main{display:grid;grid-template-columns:92px 1fr 148px;gap:9px;margin-bottom:9px}
+.sr-main:last-of-type{margin-bottom:0}
+@media(max-width:760px){.sr-main{grid-template-columns:1fr 1fr}}
+@media(max-width:460px){.sr-main{grid-template-columns:1fr}}
+
+.sf{display:block;min-width:0}
+.sf>span{display:block;font-size:11px;font-weight:700;color:var(--g400);
+  margin-bottom:4px;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sf>input,.sf>select{width:100%;height:40px;font-size:14px;padding:0 11px;
+  border-radius:10px;border:1px solid var(--g200);background:var(--w);
+  color:var(--g900);letter-spacing:-.3px}
+.sf>input:focus,.sf>select:focus{outline:2px solid var(--blue);outline-offset:-2px;border-color:transparent}
+.sf>input:disabled,.sf>select:disabled{background:var(--g50);color:var(--g300)}
+.sf>input::placeholder{color:var(--g300)}
+
+/* 필수 표시 */
+.sf.rqcost.rq>input{border:1.5px solid var(--red);background:#FFF7F8}
+.sf.rqcost.rq.ok>input{border:1.5px solid #2E9E5B;background:#F4FBF6}
+
+/* 식사 토글 */
+.mealslot{display:block}
+.mealtog{display:flex;gap:3px;height:40px}
+.mealtog button{flex:1;font-family:var(--font);font-size:12.5px;font-weight:700;
+  border:1.5px solid var(--g200);background:var(--w);color:var(--g400);
+  border-radius:10px;cursor:pointer;min-height:0;padding:0}
+.mealtog button.on.bb{background:#DCF2E4;border-color:#2E9E5B;color:#1E7A44}
+.mealtog button.on.ro{background:#FEE2E2;border-color:#F04452;color:#C0353F}
+.mealslot select{width:100%;height:40px;font-size:14px;padding:0 11px;border-radius:10px;
+  border:1px solid #BFD4F5;background:var(--blueLL);color:var(--blueD);font-weight:700}
+
+/* 접히는 시각 영역 */
+.sr-extra{display:none;grid-template-columns:1fr 1fr;gap:9px;margin-top:9px;
+  padding-top:11px;border-top:1px dashed var(--g200)}
+.stayrow.open .sr-extra{display:grid}
+@media(max-width:460px){.sr-extra{grid-template-columns:1fr}}
+
+.sr-zero{font-size:12.5px;color:var(--g400);letter-spacing:-.3px;padding:2px 0}
+
+/* 마지막 줄 */
+.sr-foot{display:flex;align-items:center;gap:9px;margin-top:12px;padding-top:11px;
+  border-top:1px solid var(--g100);font-size:12.5px;color:var(--g500);flex-wrap:wrap}
+.sr-lnk{font-family:var(--font);font-size:12px;font-weight:700;color:var(--blue);
+  background:none;border:0;cursor:pointer;padding:0;min-height:0;text-decoration:none}
+.sr-lnk:hover{text-decoration:underline}
+.sr-sum{margin-left:auto;font-size:12.5px;color:var(--g500);white-space:nowrap}
+.sr-sum b{font-size:14.5px;font-weight:800;color:var(--g900);margin-left:3px}
+.sd-loc{font-size:11.5px;font-weight:700;color:#1E7A44;background:#DCF2E4;
+  padding:3px 8px;border-radius:6px}
+.sd-loc:empty{display:none}
+
+
+/* ══════════════════════════════════════════
+   도시 간 이동
+   ══════════════════════════════════════════ */
+.legrow{background:var(--w);border:1px solid var(--g200);border-radius:14px;
+  padding:13px 16px;margin-bottom:8px}
+.lg-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.lg-route{font-size:15px;font-weight:800;letter-spacing:-.4px}
+.lg-date{font-size:12.5px;color:var(--g400)}
+.lg-modes{margin-left:auto;display:flex;gap:3px;background:var(--g100);
+  padding:3px;border-radius:10px}
+.lg-modes .mb{font-family:var(--font);font-size:12.5px;font-weight:700;
+  background:none;border:0;color:var(--g500);padding:6px 13px;border-radius:8px;
+  cursor:pointer;min-height:0;letter-spacing:-.3px}
+.lg-modes .mb:hover{color:var(--g900)}
+.lg-modes .mb.on{background:var(--w);color:var(--blueD);
+  box-shadow:0 1px 3px rgba(25,31,40,.10)}
+.lg-b{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.lg-info{font-size:12.5px;color:var(--g500);letter-spacing:-.2px;flex:1;min-width:130px}
+.lg-b .rqfare{flex:0 0 152px}
+.lg-b .rqfare input{width:100%;height:38px;font-size:14px;padding:0 11px;
+  border-radius:10px;border:1px solid var(--g200)}
+.lg-sum{font-size:12.5px;color:var(--g500);white-space:nowrap}
+.lg-sum b{font-size:14.5px;font-weight:800;color:var(--g900);margin-left:3px}
+@media(max-width:560px){
+  .lg-modes{margin-left:0;width:100%}
+  .lg-modes .mb{flex:1}
+  .lg-b .rqfare{flex:1}
+}
+
 /* ── 단일 파일 라우팅 ── */
 #builder,#stage{display:none}
 #builder.on,#stage.on{display:block}
@@ -2993,6 +3099,10 @@ function packTrip(){
   o.xhc = money.hotelCost;
   /* 항공료 — 1인 요금 */
   if(money.airPer) o.af = money.airPer;
+  /* 이동 수단 — 기차가 아닌 구간만 담습니다 */
+  var lm = {};
+  Object.keys(LEG_MODE).forEach(function(k){ if(LEG_MODE[k] !== 'train') lm[k] = LEG_MODE[k]; });
+  if(Object.keys(lm).length) o.lm = lm;
   /* 숙박: [도시id, 박수, 호텔명] */
   o.st = plan.rows.map(function(x){
     var hi = hotelInfo(x.city, x.hotel);
@@ -3212,6 +3322,7 @@ function unpackTrip(){
   });
 
   var airPer = raw.af || 0;
+  LEG_MODE = raw.lm || {};
 
   var qq = raw.q || [];
   return {
@@ -3459,7 +3570,7 @@ function syncRequired(){
 
   /* 숙박 — 박수 있는데 원가 비었으면 표시 */
   var stayNeed = 0, hasStay = false;
-  document.querySelectorAll('#stayrows .row').forEach(function(r){
+  document.querySelectorAll('#stayrows .stayrow').forEach(function(r){
     var el = r.querySelectorAll('input,select');
     var n = Number(el[0].value) || 0, c = Number(el[2].value) || 0;
     var wrap = r.querySelector('.rqcost');
@@ -4080,7 +4191,7 @@ function navSectionState(id){
     if(id === 'sec-stay'){
       if(!LEGS.length) return {n: 1};
       var miss = 0, nights = 0;
-      document.querySelectorAll('#stayrows .row').forEach(function(r){
+      document.querySelectorAll('#stayrows .stayrow').forEach(function(r){
         var el = r.querySelectorAll('input,select');
         var nt = Number(el[0].value) || 0;
         nights += nt;
@@ -4396,9 +4507,9 @@ function applyPaste(){
   var r = previewPaste();
   if(!r){ toast('읽을 내용이 없습니다'); return; }
   var city = document.getElementById('pasteCity').value;
-  var rows = document.querySelectorAll('#stayrows .row');
+  var rows = document.querySelectorAll('#stayrows .stayrow');
   var target = null;
-  if(PASTE_LEG) target = document.querySelector('#stayrows .row[data-leg="' + PASTE_LEG + '"]');
+  if(PASTE_LEG) target = document.querySelector('#stayrows .stayrow[data-leg="' + PASTE_LEG + '"]');
   if(!target){
     for(var i = 0; i < rows.length; i++){
       if(rows[i].getAttribute('data-city') === city){ target = rows[i]; break; }
@@ -4933,7 +5044,7 @@ function onFlightNoInput(dir){
 
 /* 호텔을 고르면 지도 링크와 위치 배지를 갱신합니다 */
 function onHotelChange(sel){
-  var row = sel.closest('.row');
+  var row = sel.closest('.stayrow');
   if(!row) return;
   var i = legIndex(row.getAttribute('data-leg'));
   if(i >= 0) LEGS[i].hotel = sel.value;
@@ -4953,7 +5064,7 @@ function setMeal(btn, v){
   btn.classList.add('on');
   var sel = wrap.querySelector('.sd-meal');
   if(sel) sel.value = v;
-  var row = btn.closest('.row');
+  var row = btn.closest('.stayrow');
   if(row){
     var i = legIndex(row.getAttribute('data-leg'));
     if(i >= 0) LEGS[i].meal = v;
@@ -4963,7 +5074,7 @@ function setMeal(btn, v){
 
 /* "다른 조건" — 드롭다운으로 전환합니다 */
 function toggleMealMode(link){
-  var row = link.closest('.row');
+  var row = link.closest('.stayrow');
   if(!row) return;
   var cur = (row.querySelector('.sd-meal') || {}).value || 'BB';
   var host = row.querySelector('.mealslot');
@@ -4977,7 +5088,7 @@ function toggleMealMode(link){
 }
 
 function onMealSelect(sel){
-  var row = sel.closest('.row');
+  var row = sel.closest('.stayrow');
   if(row){
     var i = legIndex(row.getAttribute('data-leg'));
     if(i >= 0) LEGS[i].meal = sel.value;
@@ -5089,7 +5200,7 @@ function addLegCity(city){
 
 /* 입력값 → LEGS 반영 */
 function readLegInputs(){
-  document.querySelectorAll('#stayrows .row').forEach(function(r){
+  document.querySelectorAll('#stayrows .stayrow').forEach(function(r){
     var i = legIndex(r.getAttribute('data-leg'));
     if(i < 0) return;
     var el = r.querySelectorAll('input,select');
@@ -5156,6 +5267,7 @@ function renderLegs(){
     if(rec) opts += rec.list.map(function(h){
       return '<option' + (L.hotel === (h.n + ' · ' + h.g) ? ' selected' : '') + '>' +
         h.n + ' · ' + h.g + '</option>'; }).join('');
+
     var curMeal = L.meal || 'BB';
     var mealOpts = MEAL_OPTS.map(function(m){
       return '<option value="' + m.v + '"' + (curMeal === m.v ? ' selected' : '') + '>' + m.t + '</option>';
@@ -5169,48 +5281,89 @@ function renderLegs(){
             '" onclick="setMeal(this,\'RO\')">불포함</button>' +
           '<select class="sd-meal" style="display:none" onchange="calc()">' + mealOpts + '</select>' +
         '</div>'
-      : '<select class="sd-meal wide" onchange="onMealSelect(this)">' + mealOpts + '</select>';
+      : '<select class="sd-meal" onchange="onMealSelect(this)">' + mealOpts + '</select>';
+
     var hi = hotelInfo(L.city, L.hotel);
     var zero = L.nights === 0;
     var inout = (i === 0 ? '<span class="lg-io in">IN</span>' : '') +
                 (i === LEGS.length - 1 ? '<span class="lg-io out">OUT</span>' : '');
+    var open = L.detailOpen ? ' open' : '';
 
-    return '<div class="row stay' + (zero ? ' zero' : '') + '" data-leg="' + L.id +
-      '" data-city="' + esc(L.city) + '">' +
-      '<div class="staycity"><span class="lg-no">' + (i + 1) + '</span>' + esc(L.city) + inout +
-        (rec ? '<em>' + esc(rec.area) + '</em>' : '<em>추천 목록 없음</em>') + '</div>' +
-      '<input type="number" min="0" max="30" placeholder="박" value="' + (L.nights || 0) + '" oninput="onNightsChange(this)">' +
-      '<select onchange="onHotelChange(this)"' + (zero ? ' disabled' : '') + '>' + opts + '</select>' +
-      '<label class="rqcost"><input type="number" min="0" step="1000" placeholder="1박 원가 (객실 기준)" value="' +
+    var h = '<div class="stayrow' + (zero ? ' zero' : '') + open + '" data-leg="' + L.id +
+      '" data-city="' + esc(L.city) + '">';
+
+    /* ── 1줄 · 도시와 조작 ── */
+    h += '<div class="sr-head">' +
+      '<span class="sr-no">' + (i + 1) + '</span>' +
+      '<span class="sr-city">' + esc(L.city) + '</span>' + inout +
+      (rec ? '<span class="sr-area">' + esc(rec.area) + '</span>' : '') +
+      '<span class="sr-acts">' +
+        '<button type="button" onclick="moveLeg(\'' + L.id + '\',-1)"' + (i === 0 ? ' disabled' : '') + ' title="위로">↑</button>' +
+        '<button type="button" onclick="moveLeg(\'' + L.id + '\',1)"' + (i === LEGS.length - 1 ? ' disabled' : '') + ' title="아래로">↓</button>' +
+        '<button type="button" onclick="duplicateLeg(\'' + L.id + '\')" title="같은 도시 다시 방문">+</button>' +
+        '<button type="button" class="rm" onclick="removeLeg(\'' + L.id + '\')" title="삭제">×</button>' +
+      '</span></div>';
+
+    /* ── 2줄 · 박수 · 호텔 · 원가 ── */
+    h += '<div class="sr-main">' +
+      '<label class="sf"><span>박수</span>' +
+        '<input type="number" min="0" max="30" value="' + (L.nights || 0) + '" oninput="onNightsChange(this)"></label>' +
+      '<label class="sf"><span>호텔</span>' +
+        '<select onchange="onHotelChange(this)"' + (zero ? ' disabled' : '') + '>' + opts + '</select></label>' +
+      '<label class="sf rqcost"><span>1박 객실 원가</span>' +
+        '<input type="number" min="0" step="1000" placeholder="' + (zero ? '숙박 없음' : '필수') + '" value="' +
         (L.cost || '') + '" oninput="calc()"' + (zero ? ' disabled' : '') + '></label>' +
-      (zero
-        ? '<div class="lg-zero">숙박 없이 지나가는 도시입니다. 이동 구간에만 반영됩니다.</div>'
-        : '<div class="staydetail">' +
-          '<input class="sd-hname" type="text" placeholder="호텔명 직접 입력 (선택)" value="' + esc(L.hname || '') + '" oninput="calc()">' +
-          '<input class="sd-room" type="text" placeholder="객실 타입 (예: Double or Twin)" value="' + esc(L.room || '') + '" oninput="calc()">' +
-          '<div class="mealslot">' + mealUI + '</div>' +
-          '<label class="tlab"><span>체크인</span><input class="sd-ci" type="time" value="' + (L.ci || DEFAULT_CI) + '" onchange="calc()"></label>' +
-          '<label class="tlab"><span>체크아웃</span><input class="sd-co" type="time" value="' + (L.co || DEFAULT_CO) + '" onchange="calc()"></label>' +
-          '</div>') +
-      '<div class="calcline"><span class="sd">일정 미계산</span>' +
-        (isSimple && !zero ? '<button type="button" class="mealmore" onclick="toggleMealMode(this)">다른 조건</button>' : '') +
-        '<span class="sd-loc">' + (hi && hi.loc ? esc(hi.loc) : '') + '</span>' +
-        '<span class="lg-btns">' +
-          '<button type="button" onclick="moveLeg(\'' + L.id + '\',-1)"' + (i === 0 ? ' disabled' : '') + '>↑</button>' +
-          '<button type="button" onclick="moveLeg(\'' + L.id + '\',1)"' + (i === LEGS.length - 1 ? ' disabled' : '') + '>↓</button>' +
-          '<button type="button" onclick="duplicateLeg(\'' + L.id + '\')" title="같은 도시 다시 방문">+</button>' +
-          '<button type="button" class="rm" onclick="removeLeg(\'' + L.id + '\')">×</button>' +
-        '</span>' +
-        (zero ? '' : '<button type="button" class="pastebtn" onclick="openPaste(\'' + esc(L.city) + '\',\'' + L.id + '\')">예약내역 붙여넣기</button>') +
-        '<a class="maplink" href="' + mapUrl(L.city, L.hotel) + '" target="_blank" rel="noopener">지도</a>' +
-        ' 객실 합계 <b class="sa">0원</b></span></div>' +
       '</div>';
+
+    if(!zero){
+      /* ── 3줄 · 호텔명 · 객실 · 식사 ── */
+      h += '<div class="sr-main">' +
+        '<label class="sf"><span>호텔명 직접 입력</span>' +
+          '<input class="sd-hname" type="text" placeholder="선택 사항" value="' + esc(L.hname || '') + '" oninput="calc()"></label>' +
+        '<label class="sf"><span>객실 타입</span>' +
+          '<input class="sd-room" type="text" placeholder="Double or Twin" value="' + esc(L.room || '') + '" oninput="calc()"></label>' +
+        '<label class="sf"><span>식사</span><span class="mealslot">' + mealUI + '</span></label>' +
+        '</div>';
+
+      /* ── 접힘 · 체크인 시각 ── */
+      h += '<div class="sr-extra">' +
+        '<label class="sf"><span>체크인</span>' +
+          '<input class="sd-ci" type="time" value="' + (L.ci || DEFAULT_CI) + '" onchange="calc()"></label>' +
+        '<label class="sf"><span>체크아웃</span>' +
+          '<input class="sd-co" type="time" value="' + (L.co || DEFAULT_CO) + '" onchange="calc()"></label>' +
+        '</div>';
+    } else {
+      h += '<div class="sr-zero">숙박 없이 지나가는 도시입니다. 이동 구간에만 반영됩니다.</div>';
+    }
+
+    /* ── 마지막 줄 · 날짜와 합계 ── */
+    h += '<div class="sr-foot">' +
+      '<span class="sd">일정 미계산</span>' +
+      (hi && hi.loc ? '<span class="sd-loc">' + esc(hi.loc) + '</span>' : '<span class="sd-loc"></span>') +
+      (zero ? '' :
+        '<button type="button" class="sr-lnk" onclick="toggleDetail(\'' + L.id + '\')">' +
+          (L.detailOpen ? '시간 접기' : '체크인 시간') + '</button>' +
+        '<button type="button" class="sr-lnk" onclick="openPaste(\'' + esc(L.city) + '\',\'' + L.id + '\')">예약내역 붙여넣기</button>') +
+      '<a class="sr-lnk" href="' + mapUrl(L.city, L.hotel) + '" target="_blank" rel="noopener">지도</a>' +
+      '<span class="sr-sum">객실 합계 <b class="sa">0원</b></span>' +
+      '</div>';
+
+    return h + '</div>';
   }).join('');
   syncStayLabels();
 }
 
+/* 체크인 시각 접기 · 펼치기 */
+function toggleDetail(id){
+  var i = legIndex(id);
+  if(i < 0) return;
+  LEGS[i].detailOpen = !LEGS[i].detailOpen;
+  renderLegs();
+  syncPlan();
+}
+
 function onNightsChange(el){
-  var row = el.closest('.row');
+  var row = el.closest('.stayrow');
   var i = legIndex(row.getAttribute('data-leg'));
   if(i >= 0) LEGS[i].nights = Number(el.value) || 0;
   renderLegs();
@@ -5228,7 +5381,7 @@ function syncStayRows(){
 function syncStayLabels(){
   var plan = buildPlan();
   plan.rows.forEach(function(x){
-    var row = document.querySelector('#stayrows .row[data-leg="' + x.id + '"]');
+    var row = document.querySelector('#stayrows .stayrow[data-leg="' + x.id + '"]');
     if(!row) return;
     var sd = row.querySelector('.sd');
     if(!sd) return;
@@ -5241,6 +5394,32 @@ function syncStayLabels(){
     }
   });
 }
+
+/* ══════════════════════════════════════════
+   이동 수단
+   기본은 기차이고, 유럽 내 항공이나 버스로 바꿀 수 있습니다.
+   요금표는 기차 기준이라 항공은 직접 입력합니다.
+   ══════════════════════════════════════════ */
+var MODES = [
+  {v:'train', n:'기차'},
+  {v:'air',   n:'항공'},
+  {v:'bus',   n:'버스'}
+];
+var LEG_MODE = {};   /* {구간키: 수단} */
+var LEG_FARE = {};   /* {구간키: 직접 입력한 요금} */
+
+function setLegMode(key, v){
+  LEG_MODE[key] = v;
+  /* 수단을 바꾸면 직접 입력값을 지워 요금표를 다시 적용합니다 */
+  delete LEG_FARE[key];
+  syncPlan(); calc();
+}
+function onFareInput(el){
+  var row = el.closest('.legrow');
+  if(row) LEG_FARE[row.getAttribute('data-key')] = Number(el.value) || 0;
+  calc();
+}
+function legModeOf(from, to){ return LEG_MODE[from + '>' + to] || 'train'; }
 
 /* ── 열차 요금 조회 ── */
 function findTrain(a, b){
@@ -5295,17 +5474,38 @@ function syncPlan(){
     calc(); return;
   }
   host.innerHTML = plan.legs.map(function(g, i){
+    var key = g.from + '>' + g.to;
+    var mode = LEG_MODE[key] || 'train';
     var t = findTrain(g.from, g.to);
     var we = isWeekendFare(g.date);
-    var fare = t ? (we ? t.we : t.wd) : 0;
-    return '<div class="row leg" data-i="' + i + '">' +
-      '<div class="legname">' + esc(g.from) + ' → ' + esc(g.to) +
-        '<em>' + fmtDate(g.date) + (t ? ' · ' + t.t : ' · 요금표 없음 · 직접 입력') + '</em></div>' +
-      '<div class="legfare"><span class="fb' + (we ? '' : ' on') + '">주중</span>' +
-        '<span class="fb' + (we ? ' on' : '') + '">주말</span></div>' +
-      '<label class="rqfare"><input type="number" min="0" step="100" value="' + (fare || '') + '" placeholder="1인 원가" oninput="calc()"></label>' +
-      '<div class="calcline"><span>1인 ' + (fare ? won(fare) : '직접 입력') + '</span>' +
-        '<span>합계 <b class="la">0원</b></span></div></div>';
+    /* 항공은 요금표가 없어 직접 입력합니다 */
+    var auto = (mode === 'air') ? 0 : (t ? (we ? t.we : t.wd) : 0);
+    var saved = LEG_FARE[key];
+    var fare = (saved != null) ? saved : auto;
+
+    var modeBtns = MODES.map(function(m){
+      return '<button type="button" class="mb' + (mode === m.v ? ' on' : '') +
+        '" onclick="setLegMode(\'' + esc(key) + '\',\'' + m.v + '\')">' + m.n + '</button>';
+    }).join('');
+
+    var info;
+    if(mode === 'air') info = '항공 · 요금 직접 입력';
+    else if(t) info = t.t;
+    else info = '요금표 없음 · 직접 입력';
+
+    return '<div class="legrow" data-i="' + i + '" data-key="' + esc(key) + '">' +
+      '<div class="lg-h">' +
+        '<span class="lg-route">' + esc(g.from) + ' → ' + esc(g.to) + '</span>' +
+        '<span class="lg-date">' + fmtDate(g.date) + '</span>' +
+        '<span class="lg-modes">' + modeBtns + '</span>' +
+      '</div>' +
+      '<div class="lg-b">' +
+        '<span class="lg-info">' + esc(info) +
+          (mode !== 'air' && t ? ' · ' + (we ? '주말' : '주중') + ' 요금' : '') + '</span>' +
+        '<label class="rqfare"><input type="number" min="0" step="100" value="' + (fare || '') +
+          '" placeholder="1인 원가" oninput="onFareInput(this)"></label>' +
+        '<span class="lg-sum">합계 <b class="la">0원</b></span>' +
+      '</div></div>';
   }).join('');
   calc();
 }
@@ -5650,7 +5850,7 @@ function calc(){
   /* 숙박 — 객실 요금 (2인 1실 기준). 객실수 = 인원 ÷ 2 올림 */
   var rooms = Math.ceil(pax / 2);
   plan.rows.forEach(function(x){
-    var row = document.querySelector('#stayrows .row[data-leg="' + x.id + '"]');
+    var row = document.querySelector('#stayrows .stayrow[data-leg="' + x.id + '"]');
     var sa = row ? row.querySelector('.sa') : null;
     if(!x.nights || !x.cost){ if(sa) sa.textContent = won(0); return; }
     var amt = x.nights * x.cost * rooms;
@@ -5662,7 +5862,7 @@ function calc(){
   });
 
   /* 열차 — 1인 요금 × 인원 */
-  Array.prototype.forEach.call(document.querySelectorAll('#trainrows .row'), function(r, i){
+  Array.prototype.forEach.call(document.querySelectorAll('#trainrows .legrow'), function(r, i){
     var f = Number(r.querySelector('input').value) || 0;
     var amt = f * pax;
     cost += amt;
