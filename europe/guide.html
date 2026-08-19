@@ -1565,6 +1565,18 @@ input[type=time]::-webkit-datetime-edit-ampm-field{
 .logcount:empty{display:none}
 .lg-start{color:var(--blueD);font-weight:800}
 
+
+/* 숙박 줄 — 정리된 배치 */
+.sr-main.two{grid-template-columns:1fr 148px}
+@media(max-width:560px){.sr-main.two{grid-template-columns:1fr}}
+.sr-extra{grid-template-columns:1fr 120px 120px}
+@media(max-width:640px){.sr-extra{grid-template-columns:1fr 1fr}
+  .sr-extra .sf.wide{grid-column:1/-1}}
+.sr-tools{margin-left:auto;display:flex;align-items:center;gap:10px}
+.sr-tools .sa{font-size:14.5px;font-weight:800;color:var(--g900);letter-spacing:-.3px}
+.sr-tools .sa:empty{display:none}
+.sf-per b{font-weight:800;color:var(--g700)}
+
 /* ── 단일 파일 라우팅 ── */
 #builder,#stage{display:none}
 #builder.on,#stage.on{display:block}
@@ -5549,25 +5561,25 @@ function renderLegs(){
         '<input type="number" min="0" max="30" value="' + (L.nights || 0) + '" oninput="onNightsChange(this)"></label>' +
       '<label class="sf"><span>호텔</span>' +
         '<select onchange="onHotelChange(this)"' + (zero ? ' disabled' : '') + '>' + opts + '</select></label>' +
-      '<label class="sf rqcost"><span>총 숙박 원가 <i class="sf-hint">' +
-        (zero ? '' : L.nights + '박 전체') + '</i></span>' +
+      '<label class="sf rqcost"><span>숙박 원가 <i class="sf-hint">' +
+        (zero ? '' : L.nights + '박 · 1실 총액') + '</i></span>' +
         '<input type="number" min="0" step="1000" placeholder="' + (zero ? '숙박 없음' : '필수') + '" value="' +
         (L.total || '') + '" oninput="onTotalInput(this)"' + (zero ? ' disabled' : '') + '>' +
         '<i class="sf-per" data-leg="' + L.id + '"></i></label>' +
       '</div>';
 
     if(!zero){
-      /* ── 3줄 · 호텔명 · 객실 · 식사 ── */
-      h += '<div class="sr-main">' +
-        '<label class="sf"><span>호텔명 직접 입력</span>' +
-          '<input class="sd-hname" type="text" placeholder="선택 사항" value="' + esc(L.hname || '') + '" oninput="calc()"></label>' +
+      /* ── 3줄 · 객실 타입 · 식사 ── */
+      h += '<div class="sr-main two">' +
         '<label class="sf"><span>객실 타입</span>' +
           '<input class="sd-room" type="text" placeholder="Double or Twin" value="' + esc(L.room || '') + '" oninput="calc()"></label>' +
         '<label class="sf"><span>식사</span><span class="mealslot">' + mealUI + '</span></label>' +
         '</div>';
 
-      /* ── 접힘 · 체크인 시각 ── */
+      /* ── 접힘 · 호텔명 직접 입력과 시각 ── */
       h += '<div class="sr-extra">' +
+        '<label class="sf wide"><span>호텔명 직접 입력 <i class="sf-hint">목록에 없는 호텔</i></span>' +
+          '<input class="sd-hname" type="text" placeholder="선택 사항" value="' + esc(L.hname || '') + '" oninput="calc()"></label>' +
         '<label class="sf"><span>체크인</span>' +
           '<input class="sd-ci" type="time" value="' + (L.ci || DEFAULT_CI) + '" onchange="calc()"></label>' +
         '<label class="sf"><span>체크아웃</span>' +
@@ -5577,16 +5589,17 @@ function renderLegs(){
       h += '<div class="sr-zero">숙박 없이 지나가는 도시입니다. 이동 구간에만 반영됩니다.</div>';
     }
 
-    /* ── 마지막 줄 · 날짜와 합계 ── */
+    /* ── 마지막 줄 · 날짜와 도구 ── */
     h += '<div class="sr-foot">' +
       '<span class="sd">일정 미계산</span>' +
       (hi && hi.loc ? '<span class="sd-loc">' + esc(hi.loc) + '</span>' : '<span class="sd-loc"></span>') +
       (zero ? '' :
+        '<span class="sr-tools">' +
         '<button type="button" class="sr-lnk" onclick="toggleDetail(\'' + L.id + '\')">' +
-          (L.detailOpen ? '시간 접기' : '체크인 시간') + '</button>' +
-        '<button type="button" class="sr-lnk" onclick="openPaste(\'' + esc(L.city) + '\',\'' + L.id + '\')">예약내역 붙여넣기</button>') +
-      '<a class="sr-lnk" href="' + mapUrl(L.city, L.hotel) + '" target="_blank" rel="noopener">지도</a>' +
-      '<span class="sr-sum">객실 합계 <b class="sa">0원</b></span>' +
+          (L.detailOpen ? '접기' : '호텔명 · 시간') + '</button>' +
+        '<button type="button" class="sr-lnk" onclick="openPaste(\'' + esc(L.city) + '\',\'' + L.id + '\')">예약내역</button>' +
+        '<a class="sr-lnk" href="' + mapUrl(L.city, L.hotel) + '" target="_blank" rel="noopener">지도</a>' +
+        '<b class="sa"></b></span>') +
       '</div>';
 
     return h + '</div>';
@@ -5637,8 +5650,8 @@ function syncPerNight(row, L){
      실제 청구액은 객실 수만큼 곱하고, 1인 금액은 인원으로 나눕니다. */
   var allRooms = total * rooms;
   var perHead = Math.round(allRooms / pax);
-  el.innerHTML = '<b>1박 ' + won(perNight) + '</b>' +
-    (rooms > 1 ? ' · ' + rooms + '실 총 ' + won(allRooms) : '');
+  el.innerHTML = '1박 ' + won(perNight) +
+    (rooms > 1 ? ' · ' + rooms + '실 <b>' + won(allRooms) + '</b>' : '');
 }
 
 function onNightsChange(el){
@@ -6136,10 +6149,12 @@ function calc(){
   plan.rows.forEach(function(x){
     var row = document.querySelector('#stayrows .stayrow[data-leg="' + x.id + '"]');
     var sa = row ? row.querySelector('.sa') : null;
-    if(!x.nights || !x.cost){ if(sa) sa.textContent = won(0); return; }
+    if(!x.nights || !x.cost){ if(sa) sa.textContent = ''; return; }
     var amt = x.nights * x.cost * rooms;
     cost += amt;
-    if(sa) sa.textContent = won(amt);
+    /* 입력한 총액과 같으면 굳이 다시 보여주지 않습니다.
+       객실이 둘 이상일 때만 실제 청구액을 표시합니다. */
+    if(sa) sa.textContent = (rooms > 1) ? won(amt) : '';
     lines.push({g:'숙박', d: x.city + ' ' + x.nights + '박' + (stayHotel(x) ? ' · ' + stayHotel(x) : '') +
                    (x.meal ? ' · ' + mealShort(x.meal) : ''),
                 q: x.nights, unit: x.cost, amt: amt});
@@ -7688,7 +7703,7 @@ function doIssueInner(skipLog){
       profit: money.margin,
       pax: money.pax,
       valid: (document.getElementById('qvalid').value || '').trim() || defaultValid(),
-      start: o.s || '',
+      start: (money.plan && money.plan.start) ? dateToS(money.plan.start) : '',
       stages: list.map(function(x){ return x.n; }).join(','),
       /* 링크를 함께 남깁니다 — 나중에 그대로 불러와 재견적할 수 있습니다 */
       code: codeQuote,
