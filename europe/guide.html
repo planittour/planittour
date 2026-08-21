@@ -160,6 +160,12 @@ ol.now li strong{display:block;color:var(--g900);font-weight:700}
 .note{background:var(--blueL);border-radius:12px;padding:15px 16px;font-size:14.5px;
   color:var(--blueD);letter-spacing:-.35px;line-height:1.65}
 .note strong{color:var(--blueD);font-weight:700}
+/* 투어 불포함 — 정보 전달용이라 차분한 회색으로 둡니다 */
+.exclude{background:var(--g50);border:1px solid var(--g200);border-radius:12px;
+  padding:15px 16px;font-size:14.5px;color:var(--g600);
+  letter-spacing:-.35px;line-height:1.65}
+.exclude strong{color:var(--g700);font-weight:700}
+
 .warn{background:var(--redL);border-radius:12px;padding:15px 16px;font-size:14.5px;
   color:#C0353F;letter-spacing:-.35px;line-height:1.65}
 .warn strong{color:#A82B34;font-weight:700}
@@ -1577,6 +1583,40 @@ input[type=time]::-webkit-datetime-edit-ampm-field{
 .sr-tools .sa{font-size:14.5px;font-weight:800;color:var(--g900);letter-spacing:-.3px}
 .sr-tools .sa:empty{display:none}
 .sf-per b{font-weight:800;color:var(--g700)}
+
+
+/* 투어 줄 미리보기 */
+.tp-box{background:var(--w);border:1px solid var(--g200);border-radius:12px;
+  padding:13px 15px;margin-top:10px}
+.tp-h{display:block;font-size:12px;font-weight:800;color:var(--g500);margin-bottom:9px}
+.tp-row{display:flex;align-items:flex-start;gap:10px;padding:7px 0;
+  border-bottom:1px solid var(--g100);font-size:13.5px}
+.tp-row:last-child{border-bottom:0}
+.tp-row.bad{color:var(--red)}
+.tp-d{flex:0 0 74px;font-size:12.5px;font-weight:700;color:var(--g500)}
+.tp-n{flex:1;color:var(--g900);font-weight:600}
+.tp-p{flex:0 0 auto;font-size:12.5px;color:var(--g400)}
+.tp-e{flex:1;font-size:13px;color:var(--red)}
+.tp-multi{flex:1;display:flex;flex-wrap:wrap;gap:5px}
+.tp-opt{font-family:var(--font);font-size:12.5px;font-weight:600;background:var(--g50);
+  border:1.5px solid var(--g200);color:var(--g600);padding:6px 10px;border-radius:9px;
+  cursor:pointer;min-height:0;text-align:left;line-height:1.4}
+.tp-opt em{display:block;font-style:normal;font-size:11px;color:var(--g400);margin-top:2px}
+.tp-opt.on{background:var(--blueL);border-color:var(--blue);color:var(--blueD)}
+.tp-opt.on em{color:var(--blueD)}
+.tp-warn{background:#FFF8E6;border-radius:8px;padding:8px 11px;margin:6px 0 2px;
+  font-size:12.5px;color:#7A5F22;line-height:1.6}
+
+
+/* 여러 줄 일정 입력 */
+.ib-row textarea{flex:1;min-width:0;font-family:var(--font);font-size:15px;
+  padding:12px 14px;border-radius:12px;border:1px solid var(--g200);
+  background:var(--w);color:var(--g900);letter-spacing:-.3px;line-height:1.7;
+  resize:vertical;min-height:96px}
+.ib-row textarea:focus{outline:2px solid var(--blue);outline-offset:-2px;border-color:transparent}
+.ib-row textarea::placeholder{color:var(--g300)}
+@media(max-width:640px){.ib-row{flex-direction:column;align-items:stretch}
+  .ib-row button{width:100%}}
 
 /* ── 단일 파일 라우팅 ── */
 #builder,#stage{display:none}
@@ -4324,6 +4364,7 @@ function applyAutoPlace(){
       if(!staysIn(day, t.city)) return;
       if(hasAuto(day.key, t.n)) return;
       if(PLACED.some(function(p){ return p.name === t.n; })) return;
+      if(TOUR_MANUAL.indexOf(t.n) >= 0) return;
       PLACED.push({key: day.key, name: t.n, group: '교통', price: t.p,
                    perRoom: false, auto: true});
     });
@@ -4335,6 +4376,8 @@ function applyAutoPlace(){
     var key = city + ' · ' + tn;
     /* 이미 어딘가 배치되어 있으면 건너뜀 */
     if(PLACED.some(function(p){ return p.name === key; })) return;
+    /* 텍스트로 직접 넣으신 투어라면 자동으로 다시 넣지 않습니다 */
+    if(TOUR_MANUAL.indexOf(tn) >= 0) return;
     var t2 = (TOURS[city] || []).filter(function(x){ return x.n === tn; })[0];
     if(!t2) return;
     var sunBlocked = isSundayBlocked(key);
@@ -5759,6 +5802,9 @@ function fuzzyCity(q){
 }
 
 var LAST_FUZZY = [];   /* 오탈자로 고친 목록 — 미리보기에 표시합니다 */
+var TOUR_LINES = [];   /* 두 번째 줄부터의 투어 입력 */
+var TOUR_PARSED = [];  /* 해석 결과 — 미리보기에서 선택할 수 있습니다 */
+var TOUR_MANUAL = [];  /* 텍스트로 직접 넣은 투어 — 자동 배치가 건너뜁니다 */
 
 function matchCity(name){
   var q = String(name).trim();
@@ -5800,9 +5846,146 @@ function matchCity(name){
 }
 
 /* 텍스트 → {date, stops:[{city, nights}], unknown:[]} */
+/* ══════════════════════════════════════════
+   투어 줄 해석
+
+   일정 줄 아래에 투어를 한 줄씩 적을 수 있습니다.
+     6/6 밀1 베3 피1 로3
+     6/7 베니스투어
+     첫날 밀라노픽업
+     마지막날 로마샌딩
+   ══════════════════════════════════════════ */
+
+/* 이름이 비슷한 투어를 모두 찾습니다 */
+function findTours(word){
+  var q = String(word || '').replace(/\s+/g, '');
+  if(!q) return [];
+  var hits = [];
+
+  /* 도시 이름이 앞에 붙었으면 그 도시 안에서 먼저 찾습니다 */
+  Object.keys(TOURS).forEach(function(city){
+    TOURS[city].forEach(function(t, i){
+      var name = t.n.replace(/\s+/g, '');
+      var score = 0;
+      if(name === q) score = 100;
+      else if(name.indexOf(q) === 0) score = 80;
+      else if(name.indexOf(q) >= 0) score = 60;
+      else {
+        /* "베니스투어" 처럼 도시 + 낱말로 나뉘는 경우 */
+        var c = q.replace(city.replace(/\s+/g, ''), '');
+        if(c !== q && c.length >= 1){
+          if(name.indexOf(c) >= 0) score = 50;
+          else if(c === '투어' || c === '시티투어') score = 30;
+        }
+        /* "돌로미티투어" 처럼 이름 중간의 낱말로 찾는 경우 */
+        if(!score){
+          var w = q.replace(/투어$|입장권$|셔틀$/, '');
+          if(w.length >= 2 && name.indexOf(w) >= 0) score = 45;
+        }
+      }
+      if(score) hits.push({city: city, idx: i, tour: t, score: score});
+    });
+  });
+
+  /* 픽업 · 샌딩 */
+  TRANSFERS.forEach(function(t, i){
+    var name = t.n.replace(/\s+/g, '');
+    var cityKey = (t.city || '').replace(/\s+/g, '');
+    var score = 0;
+    if(name.indexOf(q) >= 0) score = 70;
+    else if(cityKey && q.indexOf(cityKey) === 0){
+      var rest = q.replace(cityKey, '');
+      if(/픽업|샌딩|트랜스퍼|이동/.test(rest)) score = 55;
+    }
+    if(score) hits.push({city: t.city, idx: i, transfer: t, score: score});
+  });
+
+  hits.sort(function(a, b){ return b.score - a.score; });
+  return hits.slice(0, 6);
+}
+
+/* "첫날" "마지막날" "3일차" "6/7" 을 날짜로 */
+function parseDayToken(tok, start, totalNights){
+  var t = String(tok || '').trim();
+  if(!t || !start) return null;
+  if(/^첫날|^첫째날|^도착일/.test(t)) return new Date(start.getTime());
+  if(/^마지막날|^막날|^출국일|^귀국일/.test(t)){
+    return addDays(start, totalNights);
+  }
+  var m = /^(\d+)\s*일차$/.exec(t);
+  if(m) return addDays(start, Number(m[1]) - 1);
+  var d = parseLooseDate(t);
+  if(d){
+    /* 연도가 없으면 여행 기간에 맞춥니다 */
+    var y = start.getFullYear();
+    var cand = new Date(y, d.getMonth(), d.getDate());
+    if(cand < start) cand = new Date(y + 1, d.getMonth(), d.getDate());
+    return cand;
+  }
+  return null;
+}
+
+/* 일정표가 쓰는 날짜 키 (2027-6-7 형식) */
+function planKey(d){
+  return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+}
+
+/* 그 날 어느 도시에 있는지 */
+function cityOnDate(plan, date){
+  if(!plan || !plan.days) return null;
+  var key = planKey(date);
+  for(var i = 0; i < plan.days.length; i++){
+    if(planKey(plan.days[i].d) === key){
+      return {cities: plan.days[i].cities || [plan.days[i].city],
+              moving: (plan.days[i].cities || []).length > 1};
+    }
+  }
+  return null;
+}
+
+/* 투어 줄 전체를 읽습니다 */
+function parseTourLines(lines, plan, start, totalNights){
+  var out = [];
+  lines.forEach(function(raw){
+    var line = String(raw || '').trim();
+    if(!line) return;
+
+    /* 앞부분을 날짜로, 나머지를 투어 이름으로 */
+    var m = /^(\S+)\s+(.+)$/.exec(line);
+    if(!m){ out.push({raw: line, error: '날짜와 투어 이름을 함께 적어주세요'}); return; }
+
+    var date = parseDayToken(m[1], start, totalNights);
+    if(!date){ out.push({raw: line, error: '날짜를 읽지 못했습니다'}); return; }
+
+    var word = m[2].trim();
+    var hits = findTours(word);
+    if(!hits.length){ out.push({raw: line, date: date, word: word, error: '해당하는 투어를 찾지 못했습니다'}); return; }
+
+    /* 그날 머무는 도시와 맞는지 */
+    var where = cityOnDate(plan, date);
+    var item = {raw: line, date: date, word: word, hits: hits, pick: 0};
+    if(where){
+      var ok = hits.filter(function(h){ return where.cities.indexOf(h.city) >= 0; });
+      if(ok.length){
+        item.hits = ok.concat(hits.filter(function(h){ return ok.indexOf(h) < 0; }));
+        item.pick = 0;
+        if(where.moving) item.warn = '도시 간 이동일입니다. 투어를 진행할 시간이 되는지 확인해 주세요';
+      } else {
+        item.warn = '이 날은 ' + where.cities.join(' · ') + ' 일정입니다. 투어 도시가 맞는지 확인해 주세요';
+      }
+    }
+    out.push(item);
+  });
+  return out;
+}
+
 function parseItineraryText(txt){
-  var t = String(txt || '').trim();
-  if(!t) return null;
+  var raw = String(txt || '').trim();
+  if(!raw) return null;
+  /* 첫 줄은 일정, 나머지는 투어입니다 */
+  var lines = raw.split(/\n/).map(function(x){ return x.trim(); }).filter(Boolean);
+  var t = lines.shift() || '';
+  TOUR_LINES = lines;
   LAST_FUZZY = [];
   var out = {date: null, stops: [], unknown: []};
 
@@ -5838,6 +6021,73 @@ function parseItineraryText(txt){
 }
 
 /* 미리보기 */
+/* 아직 입력 전이라 임시로 날짜별 도시를 계산합니다 */
+function previewPlan(r){
+  var start = r.date ? new Date(r.date.getTime()) : new Date();
+  /* 첫 도시 도착일 = 한국 출발 다음날로 보되, 항공 정보가 있으면 그걸 씁니다 */
+  var nd = Number(gv('foutNd'));
+  if(isNaN(nd)) nd = 0;
+  var cur = addDays(start, nd);
+  var days = [], first = new Date(cur.getTime());
+  r.stops.forEach(function(x, i){
+    for(var k = 0; k < Math.max(1, x.nights); k++){
+      var d = addDays(cur, k);
+      var found = null;
+      days.forEach(function(dd){ if(planKey(dd.d) === planKey(d)) found = dd; });
+      if(found){ if(found.cities.indexOf(x.city) < 0) found.cities.push(x.city); }
+      else days.push({d: d, city: x.city, cities: [x.city]});
+    }
+    cur = addDays(cur, x.nights);
+    /* 이동일에는 두 도시가 함께 있습니다 */
+    if(i < r.stops.length - 1){
+      var md = new Date(cur.getTime());
+      var f2 = null;
+      days.forEach(function(dd){ if(planKey(dd.d) === planKey(md)) f2 = dd; });
+      var nxt = r.stops[i + 1].city;
+      if(f2){ if(f2.cities.indexOf(nxt) < 0) f2.cities.push(nxt); }
+      else days.push({d: md, city: nxt, cities: [nxt]});
+    }
+  });
+  return {days: days, start: first};
+}
+
+/* 투어 후보를 보여주고 고르게 합니다 */
+function renderTourPreview(){
+  if(!TOUR_PARSED.length) return '';
+  var h = '<div class="tp-box"><b class="tp-h">투어 · 픽업</b>';
+  TOUR_PARSED.forEach(function(it, i){
+    h += '<div class="tp-row' + (it.error ? ' bad' : '') + '">';
+    h += '<span class="tp-d">' + (it.date ? fmtDate(it.date) : '?') + '</span>';
+    if(it.error){
+      h += '<span class="tp-e">' + esc(it.raw) + ' — ' + it.error + '</span>';
+    } else if(it.hits.length === 1){
+      var t = it.hits[0].tour || it.hits[0].transfer;
+      h += '<span class="tp-n">' + esc(t.n) + '</span>' +
+           '<span class="tp-p">' + won(t.p) + '</span>';
+    } else {
+      h += '<span class="tp-multi">' +
+        it.hits.slice(0, 4).map(function(x, k){
+          var t = x.tour || x.transfer;
+          return '<button type="button" class="tp-opt' + (k === it.pick ? ' on' : '') +
+            '" onclick="pickTour(' + i + ',' + k + ')">' + esc(t.n) +
+            '<em>' + won(t.p) + '</em></button>';
+        }).join('') + '</span>';
+    }
+    h += '</div>';
+    if(it.warn) h += '<div class="tp-warn">' + esc(it.warn) + '</div>';
+  });
+  return h + '</div>';
+}
+
+function pickTour(i, k){
+  if(TOUR_PARSED[i]) TOUR_PARSED[i].pick = k;
+  var host = document.getElementById('itinPreview');
+  if(!host) return;
+  /* 선택만 바꾸고 다시 그립니다 */
+  var box = host.querySelector('.tp-box');
+  if(box) box.outerHTML = renderTourPreview();
+}
+
 function previewItinText(){
   var r = parseItineraryText(document.getElementById('itinText').value);
   var host = document.getElementById('itinPreview');
@@ -5868,6 +6118,13 @@ function previewItinText(){
         return esc(x.typed) + ' → <b>' + esc(x.city) + '</b>';
       }).join(' · ') + ' 로 인식했습니다</div>';
   }
+  /* 투어 줄 해석 — 임시 일정을 만들어 도시를 맞춰봅니다 */
+  TOUR_PARSED = [];
+  if(TOUR_LINES.length && r.stops.length && r.date){
+    var tmpPlan = previewPlan(r);
+    TOUR_PARSED = parseTourLines(TOUR_LINES, tmpPlan, tmpPlan.start, total);
+    h += renderTourPreview();
+  }
   if(r.unknown.length){
     h += '<div class="ip-warn">찾지 못한 도시 · ' + r.unknown.map(esc).join(', ') +
       '<br>도시명을 정확히 적어주세요.</div>';
@@ -5880,6 +6137,42 @@ function previewItinText(){
   h += '</div>';
   host.innerHTML = h;
   return r;
+}
+
+/* 미리보기에서 고른 투어를 일정에 넣습니다.
+   자동 배치된 것과 겹치면 입력한 날짜를 우선합니다. */
+function applyTourLines(){
+  if(!TOUR_PARSED.length) return 0;
+  var n = 0;
+  /* 먼저 겹치는 자동 배치를 걷어냅니다 */
+  var names = [];
+  TOUR_PARSED.forEach(function(it){
+    if(it.error || !it.hits || !it.hits.length) return;
+    var pk = it.hits[it.pick] || it.hits[0];
+    var tt = pk.tour || pk.transfer;
+    if(tt) names.push(tt.n);
+  });
+  /* 자동 배치는 "도시 · 투어명" 형태라 도시 부분을 떼고 비교합니다 */
+  function bare(x){ return String(x).split(' · ').pop().trim(); }
+  TOUR_MANUAL = names.map(bare);
+  PLACED = PLACED.filter(function(p){
+    if(!p.auto) return true;
+    return TOUR_MANUAL.indexOf(bare(p.name)) < 0;
+  });
+  TOUR_PARSED.forEach(function(it){
+    if(it.error || !it.date || !it.hits || !it.hits.length) return;
+    var pick = it.hits[it.pick] || it.hits[0];
+    var t = pick.tour || pick.transfer;
+    if(!t) return;
+    var key = planKey(it.date);
+    /* 이미 같은 것이 있으면 건너뜁니다 */
+    if(PLACED.some(function(p){ return p.name === t.n; })) return;
+    PLACED.push({key: key, name: t.n,
+                 group: pick.transfer ? '교통' : '투어',
+                 price: t.p, perRoom: false});
+    n++;
+  });
+  return n;
 }
 
 function applyItinText(){
@@ -5905,9 +6198,13 @@ function applyItinText(){
   }
 
   setTimeout(function(){
-    syncPlan(); renderPlanner(); calc();
+    syncPlan(); renderPlanner();
+    /* 4. 투어 배치 */
+    var placed = applyTourLines();
+    renderPlanner(); calc();
     var total = r.stops.reduce(function(a, y){ return a + y.nights; }, 0);
-    toast(r.stops.length + '개 도시 · ' + total + '박을 입력했습니다');
+    toast(r.stops.length + '개 도시 · ' + total + '박' +
+          (placed ? ' · 투어 ' + placed + '건' : '') + '을 입력했습니다');
     var pv = document.getElementById('itinPreview');
     if(pv) pv.innerHTML = '<div class="ip-done">입력 완료 · ' + r.stops.length + '개 도시 ' + total + '박' +
       '<em>항공 편명과 시각, 귀국편 날짜, 호텔 원가는 아래에서 직접 입력해 주세요</em></div>';
@@ -8756,7 +9053,7 @@ function renderQuoteDoc(){
       if(t.note) h += '<p><strong>투어 내용</strong><br>' + esc(t.note) + '</p>';
       if(t.m) h += '<p><strong>미팅</strong><br>' + esc(t.m) + '</p>';
       if(t.inc) h += '<p><strong>포함</strong><br>' + esc(t.inc) + '</p>';
-      if(t.exc) h += '<div class="warn"><strong>불포함</strong><br>' + esc(t.exc) +
+      if(t.exc) h += '<div class="exclude"><strong>불포함</strong><br>' + esc(t.exc) +
         '<br><br>불포함 항목은 현지에서 가이드에게 직접 지불하시면 됩니다.</div>';
       h += '</div></details>';
     });
