@@ -411,7 +411,8 @@ footer{padding:26px 22px 34px;font-size:13px;color:var(--g400);line-height:1.8;l
 .sidenav{display:none}
 @media(min-width:1100px){
   body.builder{padding-left:210px}
-  .sidenav{display:block;position:fixed;left:0;top:0;bottom:0;width:210px;z-index:45;
+  /* 제작 화면에서만 보입니다 */
+  body.builder .sidenav{display:block;position:fixed;left:0;top:0;bottom:0;width:210px;z-index:45;
     background:var(--g900);color:#fff;overflow-y:auto;padding:20px 0}
   .nv-brand{padding:0 18px 18px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:14px}
   .nv-brand b{display:block;font-size:15px;font-weight:900;letter-spacing:1px;color:#7FB0FF}
@@ -1154,6 +1155,18 @@ var STATE = {
   air: {out:'', back:'', fare:0},          /* 국제선 — fare는 1인 요금(원화) */
   localAir: []                              /* 주내선 [{route, fare}] */
 };
+
+/* 호텔 목록에서 몇 번째인지 */
+function hwHotelIndex(island, name){
+  var list = HOTELS[island] || [];
+  for(var i = 0; i < list.length; i++) if(list[i].n === name) return i;
+  return -1;
+}
+/* 순번으로 되찾기 */
+function hwHotelByIndex(island, idx){
+  var list = HOTELS[island] || [];
+  return (idx >= 0 && idx < list.length) ? list[idx] : null;
+}
 
 function hotelByName(n){
   var out = null;
@@ -1965,8 +1978,10 @@ function packTrip(){
     s: gv('depDate').replace(/-/g, '').slice(2),
     q: [gv('qno'), (gv('qvalid') || '').trim() || defaultValid(), Math.round(m.saleUSD), m.fx,
         expiryKey(), (gv('staff') || '').trim()],
+    /* 호텔은 섬 번호와 목록 순번만 담습니다.
+       상세 정보는 파일 안 HOTELS 목록에 있어 링크가 짧아집니다. */
     h: STATE.hotels.filter(function(x){ return x.nights > 0; }).map(function(x){
-      return [x.island, x.hotel, x.nights];
+      return [ISLANDS.indexOf(x.island), hwHotelIndex(x.island, x.hotel), x.nights];
     }),
     o: STATE.options.slice()
   };
@@ -1999,7 +2014,9 @@ function unpackTrip(){
 
   STATE.pkg = raw.k || 'oahu';
   STATE.hotels = (raw.h || []).map(function(x){
-    return {island: x[0], hotel: x[1], nights: x[2], rate: 0};
+    var island = (typeof x[0] === 'number') ? ISLANDS[x[0]] : x[0];
+    var h = (typeof x[1] === 'number') ? hwHotelByIndex(island, x[1]) : null;
+    return {island: island, hotel: h ? h.n : (x[1] || ''), nights: x[2], rate: 0};
   });
   STATE.options = raw.o || [];
   STATE.air = raw.a ? {out: raw.a[0], back: raw.a[1], fare: raw.a[2]} : {out:'', back:'', fare:0};
