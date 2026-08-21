@@ -6415,6 +6415,7 @@ function onHotelChange(sel){
   var city = row.getAttribute('data-city');
   var link = row.querySelector('.maplink');
   if(link) link.href = mapUrl(city, sel.value);
+  syncMapLinks(row, city, sel.value);
   var hi = hotelInfo(city, sel.value);
   var locEl = row.querySelector('.sd-loc');
   if(locEl) locEl.textContent = (hi && hi.loc) ? hi.loc : '';
@@ -6463,8 +6464,10 @@ function onMealSelect(sel){
 /* 구글맵 검색 주소 — 호텔이 있으면 호텔명으로, 없으면 도시명으로 */
 function mapUrl(city, hotel){
   var q = hotelName(hotel);
+  /* 괄호 앞 영문 이름이 있으면 그걸 씁니다 */
+  var en = q ? q.split(' (')[0].trim() : '';
   return 'https://www.google.com/maps/search/' +
-    encodeURIComponent(q ? (q + ' ' + city) : city);
+    encodeURIComponent(en ? (en + ', ' + city) : city);
 }
 
 /* 호텔명 정리 — 드롭다운 값에서 등급 표기를 뗍니다 */
@@ -6486,7 +6489,8 @@ var LEG_SEQ = 0;
 function newLeg(city, nights){
   return {id: 'L' + (++LEG_SEQ), city: city, nights: Number(nights) || 0,
           hotel: '', hname: '', cost: 0, total: 0, room: '', meal: 'BB',
-          ci: DEFAULT_CI, co: DEFAULT_CO};
+          ci: DEFAULT_CI, co: DEFAULT_CO,
+          pasteOpen: true};   /* 자주 쓰는 기능이라 기본으로 열어둡니다 */
 }
 
 /* 도시 선택 체크박스 ↔ LEGS 동기화
@@ -6693,7 +6697,7 @@ function renderLegs(){
       /* ── 접힘 · 호텔명 직접 입력과 시각 ── */
       h += '<div class="sr-extra">' +
         '<label class="sf wide"><span>호텔명 직접 입력 <i class="sf-hint">목록에 없는 호텔</i></span>' +
-          '<input class="sd-hname" type="text" placeholder="선택 사항" value="' + esc(L.hname || '') + '" oninput="calc()"></label>' +
+          '<input class="sd-hname" type="text" placeholder="선택 사항" value="' + esc(L.hname || '') + '" oninput="onHnameInput(this);calc()"></label>' +
         '<label class="sf"><span>체크인</span>' +
           '<input class="sd-ci" type="time" value="' + (L.ci || DEFAULT_CI) + '" onchange="calc()"></label>' +
         '<label class="sf"><span>체크아웃</span>' +
@@ -6743,6 +6747,7 @@ function renderLegs(){
     if(i >= 0) syncPerNight(r, LEGS[i]);
     var rm = r.querySelector('.sd-room');
     if(rm) checkRoomType(rm);
+    if(i >= 0) syncMapLinks(r, LEGS[i].city, LEGS[i].hotel);
   });
   syncStayLabels();
 }
@@ -6805,6 +6810,7 @@ function onInlinePaste(el, id){
   if(r.ci){ var ci = row.querySelector('.sd-ci'); if(ci && r.ciTime) ci.value = r.ciTime; }
   if(r.co){ var co = row.querySelector('.sd-co'); if(co && r.coTime) co.value = r.coTime; }
   if(matched) onHotelChange(elx[1]);
+  else syncMapLinks(row, row.getAttribute('data-city'), '');
   onTotalInput(elx[2]);
   if(rm) checkRoomType(rm);
 
@@ -6841,11 +6847,61 @@ function checkRoomType(el){
   if(main) main.parentNode.insertBefore(w, main.nextSibling);
 }
 
+/* 호텔명을 직접 적으셔도 지도가 따라갑니다 */
+function onHnameInput(el){
+  var row = el.closest('.stayrow');
+  if(!row) return;
+  var i = legIndex(row.getAttribute('data-leg'));
+  if(i >= 0) LEGS[i].hname = el.value;
+  syncMapLinks(row, row.getAttribute('data-city'), '');
+}
+
+/* 호텔이 바뀌면 지도 버튼도 함께 바꿉니다 */
+function syncMapLinks(row, city, hotel){
+  if(!row) return;
+  var i = legIndex(row.getAttribute('data-leg'));
+  var L = (i >= 0) ? LEGS[i] : null;
+  /* 목록에서 고른 호텔이 없으면 직접 입력한 이름을 씁니다 */
+  var h = hotel || (L ? (L.hotel || L.hname) : '');
+  if(!h && L){
+    var hn = row.querySelector('.sd-hname');
+    if(hn) h = hn.value;
+  }
+  var btns = row.querySelectorAll('.map-btn a');
+  if(btns[0]) btns[0].href = mapUrl(city, h);
+  if(btns[1]) btns[1].href = routeUrl(city, h);
+  /* 호텔이 정해지지 않았으면 안내를 바꿉니다 */
+  if(btns[0]) btns[0].textContent = h ? '호텔 위치 보기' : '도시 지도 보기';
+}
+
+/* 도시별 기준 역 · 공항 — 길찾기 출발지로 씁니다 */
+var CITY_HUB = {
+  "밀라노":"Milano Centrale", "베니스":"Venezia Mestre", "피렌체":"Firenze Santa Maria Novella",
+  "로마":"Roma Termini", "나폴리":"Napoli Centrale",
+  "파리":"Gare de Lyon Paris", "니스":"Nice Ville",
+  "런던":"London St Pancras",
+  "취리히":"Zurich Hauptbahnhof", "루체른":"Luzern Bahnhof",
+  "인터라켄":"Interlaken West", "그린델발트":"Grindelwald Bahnhof",
+  "체르마트":"Zermatt Bahnhof", "몽트뢰":"Montreux Gare", "아델보덴":"Adelboden",
+  "프라하":"Praha hlavni nadrazi", "체스키크롬로프":"Cesky Krumlov",
+  "잘츠부르크":"Salzburg Hauptbahnhof", "할슈타트":"Hallstatt Bahnhof",
+  "비엔나":"Wien Hauptbahnhof", "부다페스트":"Budapest Keleti", "뮌헨":"Munchen Hauptbahnhof",
+  "마드리드":"Madrid Atocha", "바르셀로나":"Barcelona Sants",
+  "세비야":"Sevilla Santa Justa", "그라나다":"Granada Estacion",
+  "말라가":"Malaga Maria Zambrano", "마요르카":"Palma de Mallorca Airport",
+  "테네리페":"Tenerife Sur Airport", "푸에르테벤투라":"Fuerteventura Airport",
+  "리스본":"Lisboa Santa Apolonia", "포르투":"Porto Sao Bento",
+  "나자레":"Nazare", "알부페이라":"Albufeira",
+  "포지타노":"Positano", "아말피":"Amalfi", "코르티나담페초":"Cortina d'Ampezzo"
+};
+
 /* 역에서 호텔까지 길찾기 */
 function routeUrl(city, hotel){
-  var rec = HOTELS[city];
-  var from = (rec && rec.area) ? (city + ' ' + rec.area.split(' · ')[0]) : (city + ' 중앙역');
-  var to = hotelName(hotel) ? (hotelName(hotel) + ' ' + city) : city;
+  var from = CITY_HUB[city] || (city + ' 중앙역');
+  var h = hotelName(hotel);
+  /* 영문 이름이 있으면 그걸 씁니다 — 구글이 더 잘 찾습니다 */
+  var en = h.split(' (')[0].trim();
+  var to = en ? (en + ', ' + city) : city;
   return 'https://www.google.com/maps/dir/' +
     encodeURIComponent(from) + '/' + encodeURIComponent(to);
 }
